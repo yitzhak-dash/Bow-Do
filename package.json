@@ -1,0 +1,28 @@
+{
+  "name": "Bow-Do",
+  "version": "1.0.0",
+  "description": "Raphus cucullatus",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "watchify src/app.js -o public/bundle.js -t [ babelify --presets [ react es2015 ] ]",
+    "server": "cd public && live-server --port=1234 --entry-file=index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yitzhak-dash/Bow-Do.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yitzhak-dash/Bow-Do/issues"
+  },
+  "homepage": "https://github.com/yitzhak-dash/Bow-Do#readme",
+  "dependencies": {
+    "babel-preset-es2015": "^6.14.0",
+    "babel-preset-react": "^6.11.1",
+    "babelify": "^7.3.0",
+    "watchify": "^3.7.0"
+  }
+}
