@@ -1,5 +1,5 @@
 node_modules
-public/bundle.js
+client/public/bundle.js
 .idea
 npm-debug.log
 *.orig
