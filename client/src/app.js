@@ -5,6 +5,6 @@
 /*
  state shape
  {
-    items to search
+    shoppingList:[]
  }
  */
