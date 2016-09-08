@@ -5,7 +5,7 @@ const Sidebar = () => {
     return (<div className="sidebar">
         <ul>
             <li>
-                <Link className="btn" to='shoppingItems'>shopping items</Link>
+                <Link className="btn" to='shoppingList'>shopping list</Link>
             </li>
             <li>
                 <Link className="btn" to='map'>map</Link>

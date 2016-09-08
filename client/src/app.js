@@ -12,7 +12,7 @@ reducers.routing = routerReducer;
 
 import * as reducers from './reducers';
 import App from './components/App';
-import ShoppingItems from "./components/ShoppingItems";
+import ShoppingList from "./components/ShoppingList";
 /*
  state shape
  {
@@ -29,7 +29,7 @@ function run() {
     ReactDOM.render((<Provider store={store}>
             <Router history={history}>
                 <Route path="/" component={App}>
-                    <Route path="/shoppingItems" component={ShoppingItems}/>
+                    <Route path="/shoppingList" component={ShoppingList}/>
                 </Route>
             </Router>
         </Provider>
