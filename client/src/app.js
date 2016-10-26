@@ -7,35 +7,69 @@ import {createStore, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
 import {Router, Route, browserHistory} from 'react-router';
 import {syncHistoryWithStore, routerReducer} from 'react-router-redux';
-reducers.routing = routerReducer;
+import expect from 'expect';
+import deepFreeze from 'deep-freeze';
+
+//reducers.routing = routerReducer;
 
 
-import * as reducers from './reducers';
-import App from './components/App';
-import ShoppingList from "./components/ShoppingList";
-/*
- state shape
- {
- shoppingList:[]
- }
- */
+// import * as reducers from './reducers';
+// import App from './components/App';
+// import ShoppingList from "./components/ShoppingList";
+// /*
+//  state shape
+//  {
+//  shoppingList:[]
+//  }
+//  */
+//
+// const store = createStore(combineReducers(reducers));
+// const history = syncHistoryWithStore(browserHistory, store);
+//
+// function run() {
+//     var state = store.getState();
+//     console.log(state);
+//     ReactDOM.render((<Provider store={store}>
+//             <Router history={history}>
+//                 <Route path="/" component={App}>
+//                     <Route path="/shoppingList" component={ShoppingList}/>
+//                     <Route path="/map" component={MapComponent}/>
+//                 </Route>
+//             </Router>
+//         </Provider>
+//     ), document.getElementById('root'))
+// }
+//
+// run();
+//
+// store.subscribe(run);
 
-const store = createStore(combineReducers(reducers));
-const history = syncHistoryWithStore(browserHistory, store);
+const toggleTodo = (todo) => {
+    return {
+        id: 0,
+        text: "Learn Redux",
+        completed: !todo.completed
+    };
+};
 
-function run() {
-    var state = store.getState();
-    console.log(state);
-    ReactDOM.render((<Provider store={store}>
-            <Router history={history}>
-                <Route path="/" component={App}>
-                    <Route path="/shoppingList" component={ShoppingList}/>
-                </Route>
-            </Router>
-        </Provider>
-    ), document.getElementById('root'))
-}
+const testToggleTodo = () => {
+    const todoBefore = {
+        id: 0,
+        text: "Learn Redux",
+        completed: false
+    };
+    const todoAfter = {
+        id: 0,
+        text: "Learn Redux",
+        completed: true
+    };
 
-run();
+    deepFreeze(todoBefore);
 
-store.subscribe(run);
+    expect(
+        toggleTodo(todoBefore)
+    ).toEqual(todoAfter);
+};
+
+testToggleTodo();
+console.log('All tests passed');
