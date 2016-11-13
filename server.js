@@ -1,5 +1,8 @@
 var express = require('express');
+var path = require('path');
 var app = express();
+
+app.use(express.static(path.join(__dirname, 'client')));
 
 // ======
 // Routes
@@ -17,7 +20,7 @@ app.listen(process.env.PORT || 3000, function () {
 // Function definitions
 // ====================
 function getHomePage(req, res) {
-  res.send('Hi, Welcome to Bow-do');
+  res.sendFile(path.join(__dirname, '/client', 'public', '/index.html'));
 }
 
 function getShopsByCoords(req, res) {
