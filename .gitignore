@@ -1,5 +1,8 @@
+client/node_modules
+server/node_modules
 /node_modules
 npm-debug.log
 .DS_Store
 /*.env
 .idea/**/*.*
+/client/public/bundle.js
