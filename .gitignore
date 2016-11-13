@@ -1,4 +1,7 @@
 /node_modules
+client/node_modules
+/client/public/bundle.js
+
 npm-debug.log
 .DS_Store
 /*.env
