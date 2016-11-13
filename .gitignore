@@ -1,11 +1,7 @@
-client/node_modules
-server/node_modules
 /node_modules
-client/node_modules
-/client/public/bundle.js
-
 npm-debug.log
 .DS_Store
 /*.env
 .idea/**/*.*
 /client/public/bundle.js
+/client/node_modules/
