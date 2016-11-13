@@ -10,3 +10,8 @@ If working on branch other then master type:
 To view the heroku app just type in browser:
 https://bow-do.herokuapp.com/
 or `heroku open` in terminal
+
+
+## Folder and file descriptions
+Procfile - used by Heroku as config file
+server.js - main server side file
