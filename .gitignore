@@ -3,3 +3,5 @@ npm-debug.log
 .DS_Store
 /*.env
 .idea/**/*.*
+/client/public/bundle.js
+/client/node_modules/
