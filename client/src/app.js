@@ -24,7 +24,7 @@ const store = createStore(combineReducers(reducers));
 const history = syncHistoryWithStore(browserHistory, store);
 
 function run() {
-    // using locaction service
+    // using location service
     let s = new LocationService();
     s.getCurrentPosition().subscribe(res => console.log(res));
 
