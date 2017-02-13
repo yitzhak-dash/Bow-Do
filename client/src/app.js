@@ -25,7 +25,7 @@ const history = syncHistoryWithStore(browserHistory, store);
 
 function run() {
     // using location service
-    let s = new LocationService();
+    let s = new LocationService(new Locator());
     s.getCurrentPosition().subscribe(res => console.log(res));
 
     let state = store.getState();

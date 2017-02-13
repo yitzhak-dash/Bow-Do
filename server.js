@@ -1,8 +1,10 @@
-var express = require('express');
-var path = require('path');
-var app = express();
+let express = require('express');
+let path = require('path');
+let bodyParser = ('body-parser');
+let app = express();
 
-app.use(express.static(path.join(__dirname, 'client')));
+app.use(express.static(path.join(__dirname, 'client')))
+    .use(bodyParser.json());
 
 // ======
 // Routes
@@ -13,14 +15,14 @@ app.get('/coordinates', getShopsByCoords);
 
 
 app.listen(process.env.PORT || 3000, function () {
-  console.log('Example app listening on port 3000!');
+    console.log('Bow-Do app is listening on port 3000!');
 });
 
 // ====================
 // Function definitions
 // ====================
 function getHomePage(req, res) {
-  res.sendFile(path.join(__dirname, '/client', 'public', '/index.html'));
+    res.sendFile(path.join(__dirname, '/client', 'public', '/index.html'));
 }
 
 /***
@@ -38,7 +40,10 @@ function getShopsByCoords(req, res) {
     // var lat = req.query.lat;
     // var dateTime = req.query.date_time;
 
-    //*** data shape ****
+    console.log('/coordinates: ' + req);
+    // ====================
+    // === data shape =====
+    // ====================
     let shopA = {
         long: '32.123',
         lat: '21.2111',
