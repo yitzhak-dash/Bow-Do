@@ -1,6 +1,3 @@
-/**
- * Created by Yitzh on 8/28/2016.
- */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {createStore, combineReducers} from 'redux';
@@ -12,10 +9,10 @@ import deepFreeze from 'deep-freeze';
 
 reducers.routing = routerReducer;
 
-
 import * as reducers from './reducers';
 import App from './components/App';
 import ShoppingList from "./components/ShoppingList";
+import {LocationService} from "./services/location.service";
 /*
  state shape
  {
@@ -27,7 +24,11 @@ const store = createStore(combineReducers(reducers));
 const history = syncHistoryWithStore(browserHistory, store);
 
 function run() {
-    var state = store.getState();
+    // using location service
+    let s = new LocationService(new Locator());
+    s.getCurrentPosition().subscribe(res => console.log(res));
+
+    let state = store.getState();
     console.log(state);
     ReactDOM.render((<Provider store={store}>
             <Router history={history}>
