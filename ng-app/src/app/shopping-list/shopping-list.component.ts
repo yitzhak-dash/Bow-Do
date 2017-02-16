@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+//
+import { select, NgRedux } from 'ng2-redux';
+import { Observable } from 'rxjs';
+//
+import { ShoppingListActions } from '../store/shopping-list.actions';
+import { ShoppingItem, AppState } from '../store/app-state';
 
 @Component({
   moduleId: module.id,
@@ -6,29 +12,27 @@ import { Component, OnInit } from '@angular/core';
   template: `<div>
             <h2>Shopping List</h2>
             <ul>
-                    <li  *ngFor="let item of shoppingList">
+                    <li  *ngFor="let item of shoppingList$ | async">
                         <input type="checkbox" value="completed"/>{{item.name}}
                     </li>
             </ul>
-           <input (keypress)="createItem($event)" />
+           <input #itemInput (keypress)="createItem($event,itemInput)" />
         </div>`
 })
 export class ShoppingListComponent implements OnInit {
 
-  shoppingList: any[] = [];
 
-  constructor() {
+  constructor(private actions: ShoppingListActions, private redux: NgRedux<AppState>) {
   }
 
   ngOnInit() {
   }
 
-  createItem(evt: any) {
-    if (evt.which !== 13) return;// wait for ENTER
-    // var name = ReactDOM.findDOMNode(this.refs.add).value;
-    // this.props.addShoppingItem(name);
-    // this.props.hideAddItem();
-    // this.props.showAddItem();
-  }
+  @select() readonly shoppingList$: any;
 
+  createItem(evt: any, input: any) {
+    if (evt.which !== 13) return;// wait for ENTER
+    this.actions.addShoppingItem(input.value);
+    input.value = '';
+  }
 }
