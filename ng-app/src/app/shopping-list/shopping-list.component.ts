@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 //
 import { select, NgRedux } from 'ng2-redux';
-import { Observable } from 'rxjs';
 //
 import { ShoppingListActions } from '../store/shopping-list.actions';
 import { ShoppingItem, AppState } from '../store/app-state';
@@ -21,8 +20,7 @@ import { ShoppingItem, AppState } from '../store/app-state';
 })
 export class ShoppingListComponent implements OnInit {
 
-
-  constructor(private actions: ShoppingListActions, private redux: NgRedux<AppState>) {
+  constructor(private actions: ShoppingListActions) {
   }
 
   ngOnInit() {
@@ -34,5 +32,6 @@ export class ShoppingListComponent implements OnInit {
     if (evt.which !== 13) return;// wait for ENTER
     this.actions.addShoppingItem(input.value);
     input.value = '';
+    this.actions.findExcalibur(input.value);
   }
 }

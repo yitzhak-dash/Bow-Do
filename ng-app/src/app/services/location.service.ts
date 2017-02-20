@@ -1,4 +1,5 @@
 import { Locator } from './locator';
+import { Observable } from 'rxjs';
 
 export class LocationService {
 
@@ -6,9 +7,10 @@ export class LocationService {
 
   }
 
-  sendCurrentLocation() {
+  sendCurrentLocation = () => {
     this.locator.getCurrentLocation()
       .subscribe((res: any) => {
+
       })
   }
 

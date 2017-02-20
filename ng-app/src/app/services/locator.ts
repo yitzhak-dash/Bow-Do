@@ -1,18 +1,21 @@
-import { Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+//
+import { GoeLocation } from './geo-location.model';
 
+
+
+@Injectable()
 export class Locator {
 
-  getCurrentLocation() {
+  getCurrentLocation(): Observable<any> {
     return Observable.create((observer: any) => {
-      navigator.geolocation.getCurrentPosition(function (location) {
+      navigator.geolocation.getCurrentPosition((location) => {
         let geo = location.coords;
-        observer.onNext(
-          {
-            'lat': geo.latitude,
-            'long: ': geo.longitude,
-            'accuracy: ': geo.accuracy
-          });
-        observer.onCompleted();
+        observer.next(
+          new GoeLocation(geo.latitude, geo.longitude, geo.accuracy)
+        );
+        observer.complete();
       });
     });
   }
