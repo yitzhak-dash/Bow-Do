@@ -36,6 +36,7 @@ import { rootReducer } from './store/root-reducer';
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule {
   constructor(redux: NgRedux<AppState>, shoppingListEpics: ShoppingListEpics) {
     redux.configureStore(rootReducer,
