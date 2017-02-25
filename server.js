@@ -1,9 +1,9 @@
 let express = require('express');
 let path = require('path');
-let bodyParser = ('body-parser');
+let bodyParser = require('body-parser');
 let app = express();
 
-app.use(express.static(path.join(__dirname, 'client')))
+app.use(express.static(path.join(__dirname, 'ng-app')))
     .use(bodyParser.json());
 
 // ======
@@ -22,7 +22,7 @@ app.listen(process.env.PORT || 3000, function () {
 // Function definitions
 // ====================
 function getHomePage(req, res) {
-    res.sendFile(path.join(__dirname, '/client', 'public', '/index.html'));
+    res.sendFile(path.join(__dirname, '/ng-app', 'src', '/index.html'));
 }
 
 /***
