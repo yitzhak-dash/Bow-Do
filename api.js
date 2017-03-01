@@ -1,29 +1,21 @@
 const express = require('express');
+//
+const importStores = require('./data/bowdoDb');
+//
 const router = express.Router();
-
 
 /***
  * Receives user's coordinates,
  * Checks if the user isn't far from a stores and then returns list of the stores with items.
  * @param req
  * @param res
+ * TODO: calculate destination
  */
-router.get("/stores/:long/:lat", (req, res) => {
-    throw new Error('BIG ERROR');
-    console.log(`long: ${req.params.long}, lat: ${req.params.lat}`);
-
-    let shopA = {
-        long: '32.123',
-        lat: '21.2111',
-        name: 'Baruch Best',
-        desc: 'The best shop of the year',
-        distance: 12, // meters
-        items: [
-            {name: 'spiders', category: 'food'},
-            {name: 'super hero underwear', category: 'weapon'}
-        ]
-    };
-    res.json({shops: [shopA]});
+router.get("/stores/:long/:lat", (req, res, next) => {
+    importStores.getStores(req.params.long, req.params.lat)
+        .then((stores) => {
+            res.json({stores: stores});
+        }).catch(next);
 });
 
 module.exports = router;

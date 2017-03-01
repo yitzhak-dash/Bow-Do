@@ -15,13 +15,12 @@ app.use(morgan('combined', {stream: accessLogStream}))
     .use(express.static(path.join(__dirname, 'ng-app/src')))
     .use("/api", apiRouter)
     .use(bodyParser.json());
-// custom error handler
+// ****** custom error handler **********
 // .use((err, req, res, next) => {
 //     res.send('ERROR was HERE');
 // })
 
 
-//
 // app.get('/', (req, res) => {
 //     throw new Error('BIG ERROR');
 //     res.render(path.join(__dirname, '/ng-app', '/src', '/index.html'));
@@ -29,4 +28,11 @@ app.use(morgan('combined', {stream: accessLogStream}))
 
 app.listen(process.env.PORT || 3000, function () {
     console.log('Bow-Do app is listening on port 3000!');
+});
+
+process.on('SIGINT', () => {
+    console.log('SIGINT');
+    require('./data/bowdoDb').close(() => {
+        process.exit(0);
+    });
 });
