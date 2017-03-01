@@ -1,4 +1,5 @@
 const express = require('express');
+const geolib = require('geolib');
 //
 const importStores = require('./data/bowdoDb');
 //
@@ -11,11 +12,20 @@ const router = express.Router();
  * @param res
  * TODO: calculate destination
  */
-router.get("/stores/:long/:lat", (req, res, next) => {
-    importStores.getStores(req.params.long, req.params.lat)
+router.get("/stores/:lat/:long", (req, res, next) => {
+    const long = +req.params.long;
+    const lat = +req.params.lat;
+    importStores.getStores(long, lat)
         .then((stores) => {
+            stores.forEach(store => setDistance(store, {lat: lat, long: long}));
             res.json({stores: stores});
         }).catch(next);
 });
+
+const setDistance = (store, coordinates) => {
+    store.distance = geolib.getDistanceSimple(
+        {latitude: +store.coordinates.lat, longitude: +store.coordinates.long},
+        {latitude: coordinates.lat, longitude: coordinates.long})
+};
 
 module.exports = router;
