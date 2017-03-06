@@ -13,7 +13,7 @@ import { Component, OnInit } from '@angular/core';
                 <a class="btn" routerLink="/map">map</a>
             </li>
             <li>
-                <a class="btn" routerLink="/pin-new-place">pin new place</a>
+                <a class="btn" routerLink="/pin-place">pin place</a>
             </li>
         </ul>
     </div>

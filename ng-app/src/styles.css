@@ -8,7 +8,7 @@ html, body, #root, .app {
   overflow: hidden;
 }
 
-.btn, button {
+.btn {
   border: 0;
   background: -webkit-gradient(linear, left top, left bottom, from(#fefefe), to(#f1f1f1));
   padding: 0 13px;

@@ -1,0 +1,29 @@
+<form>
+  <div>
+    <md-input-container>
+      <input mdInput placeholder="name" #placeName>
+    </md-input-container>
+  </div>
+  <div>
+    <md-input-container>
+      <input mdInput placeholder="description" #placeDesc>
+    </md-input-container>
+  </div>
+  <div>
+    <md-input-container>
+      <input mdInput
+             placeholder="category"
+             [mdAutocomplete]="auto"
+             #categoryElement
+             (keypress)="createCategory($event, categoryElement)">
+    </md-input-container>
+
+    <md-autocomplete #auto="mdAutocomplete">
+      <md-option *ngFor="let item of ['one', 'two', 'three']" [value]="item">
+        {{ item }}
+      </md-option>
+    </md-autocomplete>
+
+  </div>
+  <button md-raised-button>pin place</button>
+</form>

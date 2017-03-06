@@ -1,6 +1,9 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule }    from '@angular/http';
+import 'hammerjs';
+import { MaterialModule, MdSelectModule } from '@angular/material';
+
 //
 import { createEpicMiddleware, combineEpics } from 'redux-observable';
 import { NgReduxModule, NgRedux } from 'ng2-redux';
@@ -15,12 +18,17 @@ import { Locator } from './services/locator';
 import { ShoppingListEpics } from './store/shopping-list.epics';
 import { AppState } from './store/app-state';
 import { rootReducer } from './store/root-reducer';
+import { PinPlaceComponent } from './pin-place/pin-place.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
-    AppRoutingModule,
     BrowserModule,
+    FormsModule,
     HttpModule,
+    AppRoutingModule,
+    MaterialModule,
+    MdSelectModule,
     NgReduxModule,
   ],
   providers: [
@@ -32,6 +40,7 @@ import { rootReducer } from './store/root-reducer';
     AppComponent,
     SidebarComponent,
     ShoppingListComponent,
+    PinPlaceComponent,
     PageNotFoundComponent
   ],
   bootstrap: [AppComponent]

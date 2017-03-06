@@ -22,9 +22,11 @@
       '@angular/http': 'npm:@angular/http/bundles/http.umd.js',
       '@angular/router': 'npm:@angular/router/bundles/router.umd.js',
       '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
+      '@angular/material': 'npm:@angular/material/bundles/material.umd.js',
 
       // other libraries
       'rxjs': 'npm:rxjs',
+      'hammerjs': 'npm:hammerjs/hammer.js',
       'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js',
       'ng2-redux': 'npm:ng2-redux',
       'redux': 'npm:redux',

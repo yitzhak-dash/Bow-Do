@@ -10,7 +10,6 @@ const router = express.Router();
  * Checks if the user isn't far from a stores and then returns list of the stores with items.
  * @param req
  * @param res
- * TODO: calculate destination
  */
 router.get("/stores/:lat/:long", (req, res, next) => {
     const long = +req.params.long;
