@@ -3,6 +3,9 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const fs = require('fs');
+const mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
+
 //
 const apiRouter = require('./api');
 //
@@ -13,8 +16,9 @@ let accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {
 app.use(morgan('combined', {stream: accessLogStream}))
     .use(express.static(path.join(__dirname, 'ng-app')))
     .use(express.static(path.join(__dirname, 'ng-app/src')))
-    .use("/api", apiRouter)
-    .use(bodyParser.json());
+    .use(bodyParser.urlencoded())
+    .use(bodyParser.json())
+    .use("/api", apiRouter);
 // ****** custom error handler **********
 // .use((err, req, res, next) => {
 //     res.send('ERROR was HERE');

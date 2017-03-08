@@ -1,29 +1,54 @@
-<form>
-  <div>
-    <md-input-container>
-      <input mdInput placeholder="name" #placeName>
-    </md-input-container>
-  </div>
-  <div>
-    <md-input-container>
-      <input mdInput placeholder="description" #placeDesc>
-    </md-input-container>
-  </div>
-  <div>
-    <md-input-container>
-      <input mdInput
-             placeholder="category"
-             [mdAutocomplete]="auto"
-             #categoryElement
-             (keypress)="createCategory($event, categoryElement)">
-    </md-input-container>
+<div class="container-fluid">
+  <form #pinPlaceForm="ngForm" (ngSubmit)="pinPlace()">
+    <div class="form-group">
+      <div>
+        <md-input-container>
+          <input mdInput
+                 placeholder="name"
+                 required
+                 id="name"
+                 [(ngModel)]="model.name"
+                 name="name"
+                 #name="ngModel">
+        </md-input-container>
+      </div>
+      <div>
+        <md-input-container>
+          <input mdInput
+                 placeholder="description"
+                 id="description"
+                 [(ngModel)]="model.description"
+                 name="description"
+                 #description="ngModel">
+        </md-input-container>
+      </div>
+    </div>
+    <div>
+      <div>
+        Tags
+        <ul>
+          <li *ngFor="let tag of model.tags">
+            {{tag}}
+          </li>
+        </ul>
+      </div>
+      <md-input-container>
+        <input mdInput
+               placeholder="add tags"
+               [mdAutocomplete]="auto"
+               #tagElement
+               (keyup)="filterTags(tagElement.value)"
+               (keypress)="tagPlace(tagElement, $event)">
+      </md-input-container>
 
-    <md-autocomplete #auto="mdAutocomplete">
-      <md-option *ngFor="let item of ['one', 'two', 'three']" [value]="item">
-        {{ item }}
-      </md-option>
-    </md-autocomplete>
+      <md-autocomplete #auto="mdAutocomplete">
+        <md-option *ngFor="let tag of filteredTags$ | async" [value]="tag"
+                   (click)="tagPlace(tagElement)">
+          {{ tag }}
+        </md-option>
+      </md-autocomplete>
 
-  </div>
-  <button md-raised-button>pin place</button>
-</form>
+    </div>
+    <button type="submit" md-raised-button>pin place</button>
+  </form>
+</div>

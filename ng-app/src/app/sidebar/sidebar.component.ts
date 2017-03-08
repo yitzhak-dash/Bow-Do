@@ -4,16 +4,16 @@ import { Component, OnInit } from '@angular/core';
   moduleId: module.id,
   selector: 'sidebar',
   template: `
-<div className="sidebar">
+<div class="sidebar">
         <ul>
             <li>
-                <a class="btn" routerLink="/shopping-list">shopping list</a>
+                <a md-button routerLink="/shopping-list">shopping list</a>
             </li>
             <li>
-                <a class="btn" routerLink="/map">map</a>
+                <a md-button routerLink="/map">map</a>
             </li>
             <li>
-                <a class="btn" routerLink="/pin-place">pin place</a>
+                <a md-button routerLink="/pin-place">pin place</a>
             </li>
         </ul>
     </div>

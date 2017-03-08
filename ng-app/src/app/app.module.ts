@@ -20,6 +20,9 @@ import { AppState } from './store/app-state';
 import { rootReducer } from './store/root-reducer';
 import { PinPlaceComponent } from './pin-place/pin-place.component';
 import { FormsModule } from '@angular/forms';
+import { PinPlaceEpics } from './store/pin-place.epics';
+import { PinPlaceActions } from './store/pin-place.actions';
+import { LocationService } from './services/location.service';
 
 @NgModule({
   imports: [
@@ -32,9 +35,12 @@ import { FormsModule } from '@angular/forms';
     NgReduxModule,
   ],
   providers: [
-    ShoppingListActions,
     Locator,
-    ShoppingListEpics
+    LocationService,
+    ShoppingListActions,
+    ShoppingListEpics,
+    PinPlaceEpics,
+    PinPlaceActions
   ],
   declarations: [
     AppComponent,
@@ -47,11 +53,15 @@ import { FormsModule } from '@angular/forms';
 })
 
 export class AppModule {
-  constructor(redux: NgRedux<AppState>, shoppingListEpics: ShoppingListEpics) {
+  constructor(redux: NgRedux<AppState>,
+              shoppingListEpics: ShoppingListEpics,
+              pinPlaceEpics: PinPlaceEpics) {
     redux.configureStore(rootReducer,
-      {shoppingList: []},
+      {shoppingList: [], pinPlace: {filteredTags: [], place: {}}},
       [
-        createEpicMiddleware(combineEpics(...shoppingListEpics.epics)),
+        createEpicMiddleware(combineEpics(
+          ...shoppingListEpics.epics,
+          ...pinPlaceEpics.epics)),
       ]);
   }
 
