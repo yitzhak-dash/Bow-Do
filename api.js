@@ -29,6 +29,17 @@ router.post("/place", (req, res, next) => {
         .catch((err) => console.log(err));
 });
 
+router.post("/tag", (req, res, next) => {
+    console.log('[*] ' + JSON.stringify(req.body));
+    let tag = new db.Tag(req.body);
+    tag.save()
+        .then(() => res.json(200))
+        .catch((err) => {
+            next(err);
+            console.log(err);
+        });
+});
+
 const placeFromRequestBody = (place, request) => {
     place.name = request.body.name;
 };

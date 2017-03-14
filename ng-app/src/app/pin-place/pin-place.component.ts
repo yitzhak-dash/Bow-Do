@@ -36,8 +36,8 @@ export class PinPlaceComponent implements OnInit {
   }
 
   tagPlace = (tagElement: any, event: any) => {
+    // wait for ENTER
     if (event && event.which !== 13) {
-      // wait for ENTER
       return;
     }
 
