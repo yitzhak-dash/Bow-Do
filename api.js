@@ -23,7 +23,7 @@ router.get("/stores/:lat/:long", (req, res, next) => {
 
 router.post("/place", (req, res, next) => {
     let place = new db.Place(req.body);
-
+    place.inserted = new Date();
     place.save()
         .then(() => res.json(200))
         .catch((err) => console.log(err));

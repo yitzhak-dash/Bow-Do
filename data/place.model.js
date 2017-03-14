@@ -20,6 +20,7 @@ const schema = new mongoose.Schema({
     name: String,
     description: String,
     tags: [String],
+    inserted:Date,
 }, schemaOptions);
 
 schema.index({"loc": "2dsphere"});
