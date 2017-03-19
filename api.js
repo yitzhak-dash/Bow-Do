@@ -11,6 +11,7 @@ const router = express.Router();
  * @param req
  * @param res
  */
+// TODO: change api path to place/:long/:lat/:radius
 router.get("/stores/:lat/:long", (req, res, next) => {
     const long = +req.params.long;
     const lat = +req.params.lat;
