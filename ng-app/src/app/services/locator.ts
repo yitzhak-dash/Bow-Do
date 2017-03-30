@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 //
-import { GoeLocation } from './geo-location.model';
-
+import { GeoPosition } from './geo-location.model';
 
 
 @Injectable()
@@ -13,7 +12,7 @@ export class Locator {
       navigator.geolocation.getCurrentPosition((location) => {
         let geo = location.coords;
         observer.next(
-          new GoeLocation(geo.latitude, geo.longitude, geo.accuracy)
+          new GeoPosition(geo.longitude, geo.latitude, geo.accuracy)
         );
         observer.complete();
       });

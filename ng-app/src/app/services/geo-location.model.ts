@@ -1,5 +1,5 @@
-export class GoeLocation {
-  constructor(public lat: any, public long: any, public accuracy: any) {
+export class GeoPosition {
+  constructor(public long: any, public lat: any, public accuracy: any) {
   }
 
   toString() {

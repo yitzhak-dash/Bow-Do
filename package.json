@@ -9,10 +9,11 @@
   "author": "OST",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.16.1",
+    "body-parser": "^1.17.1",
     "express": "^4.14.0",
     "geolib": "^2.0.22",
-    "mongodb": "latest"
+    "mongodb": "latest",
+    "mongoose": "^4.8.6"
   },
   "engines": {
     "node": "6.5.0"
