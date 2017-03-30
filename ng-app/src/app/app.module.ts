@@ -7,6 +7,7 @@ import { MaterialModule, MdSelectModule } from '@angular/material';
 //
 import { createEpicMiddleware, combineEpics } from 'redux-observable';
 import { NgReduxModule, NgRedux } from 'ng2-redux';
+import { RlTagInputModule } from 'angular2-tag-input';
 //
 import { AppComponent }  from './app.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
@@ -33,6 +34,7 @@ import { LocationService } from './services/location.service';
     MaterialModule,
     MdSelectModule,
     NgReduxModule,
+    RlTagInputModule
   ],
   providers: [
     Locator,

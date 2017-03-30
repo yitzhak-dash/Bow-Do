@@ -31,7 +31,8 @@
       'ng2-redux': 'npm:ng2-redux',
       'redux': 'npm:redux',
       'redux-logger': 'npm:redux-logger',
-      'redux-observable': 'npm:redux-observable'
+      'redux-observable': 'npm:redux-observable',
+      'angular2-tag-input': 'npm:angular2-tag-input'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -55,6 +56,10 @@
       },
       'redux-observable': {
         main: 'dist/redux-observable.min.js',
+        defaultExtension: 'js'
+      },
+      'angular2-tag-input': {
+        main: 'dist/index.js',
         defaultExtension: 'js'
       }
     }

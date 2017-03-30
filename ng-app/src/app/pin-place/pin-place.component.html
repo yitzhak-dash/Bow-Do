@@ -1,53 +1,34 @@
 <div class="container-fluid">
   <form #pinPlaceForm="ngForm" (ngSubmit)="pinPlace()">
     <div class="form-group">
-      <div>
-        <md-input-container>
-          <input mdInput
-                 placeholder="name"
-                 required
-                 id="name"
-                 [(ngModel)]="model.name"
-                 name="name"
-                 #name="ngModel">
-        </md-input-container>
-      </div>
-      <div>
-        <md-input-container>
-          <input mdInput
-                 placeholder="description"
-                 id="description"
-                 [(ngModel)]="model.description"
-                 name="description"
-                 #description="ngModel">
-        </md-input-container>
-      </div>
-    </div>
-    <div>
-      <div>
-        Tags
-        <ul>
-          <li *ngFor="let tag of model.tags">
-            {{tag}}
-          </li>
-        </ul>
-      </div>
       <md-input-container>
         <input mdInput
-               placeholder="add tags"
-               [mdAutocomplete]="auto"
-               #tagElement
-               (keyup)="filterTags(tagElement.value)"
-               (keypress)="tagPlace(tagElement, $event)">
+               placeholder="name"
+               required
+               id="name"
+               [(ngModel)]="model.name"
+               name="name"
+               #name="ngModel">
       </md-input-container>
-
-      <md-autocomplete #auto="mdAutocomplete">
-        <md-option *ngFor="let tag of filteredTags$ | async" [value]="tag"
-                   (click)="tagPlace(tagElement)">
-          {{ tag }}
-        </md-option>
-      </md-autocomplete>
-
+    </div>
+    <div class="form-group">
+      <md-input-container>
+        <input mdInput
+               placeholder="description"
+               id="description"
+               [(ngModel)]="model.description"
+               name="description"
+               #description="ngModel">
+      </md-input-container>
+    </div>
+    <div class="form-group">
+      <rl-tag-input
+        [(ngModel)]="model.tags"
+        [autocomplete]="true"
+        [autocompleteItems]="['one','two','three']"
+        [autocompleteMustMatch]="false"
+        name="tags"
+        placeholder="Add a tags"></rl-tag-input>
     </div>
     <button type="submit" md-raised-button>pin place</button>
   </form>
