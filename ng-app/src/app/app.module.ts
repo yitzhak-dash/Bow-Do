@@ -53,7 +53,6 @@ import { LocationService } from './services/location.service';
   ],
   bootstrap: [AppComponent]
 })
-
 export class AppModule {
   constructor(redux: NgRedux<AppState>,
               shoppingListEpics: ShoppingListEpics,
