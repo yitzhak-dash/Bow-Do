@@ -10,7 +10,7 @@ export const shoppingListReducer: Reducer<IShoppingItem[]> =
     const action = a as ShoppingItemAction;
     switch (action.type) {
       case ShoppingListActions.ADD_ITEM_STARTED:
-        return [...state];
+        return state;
       case ShoppingListActions.ADD_ITEM_SUCCEEDED:
         return [...state, action.payload];
       case ShoppingListActions.ADD_ITEM_FAILED:
