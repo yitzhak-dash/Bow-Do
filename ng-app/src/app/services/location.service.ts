@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 //
 import { Locator } from './locator';
-import { Place } from '../models/place.model';
+import { Place } from './place.model';
 import { GeoPosition } from './geo-location.model';
 
 
