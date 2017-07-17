@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { select } from '@angular-redux/store';
+import { ShoppingListActions } from './actions';
 
 
 @Component({
@@ -13,7 +14,7 @@ export class ShoppingListComponent implements OnInit {
 
   @select() readonly shoppingList$: any;
 
-  constructor() {
+  constructor(private actions: ShoppingListActions) {
   }
 
   ngOnInit() {
@@ -24,7 +25,7 @@ export class ShoppingListComponent implements OnInit {
     if (evt.which !== this.ENTER_KEY) {
       return;
     }
-    // this.actions.addShoppingItem(input.value);
+    this.actions.addShoppingItem(input.value);
     input.value = '';
     // this.actions.findExcalibur(input.value);
   }

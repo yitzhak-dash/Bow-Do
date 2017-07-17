@@ -12,6 +12,9 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { PinPlaceComponent } from './pin-place/pin-place.component';
 import { StoreModule } from './store/store.module';
 import { SideBarComponent } from './side-bar/side-bar.component';
+import { ShoppingListEpic } from './shopping-list/epics';
+import { ShoppingListActions } from './shopping-list/actions';
+import { ShoppingListService } from './shopping-list/service';
 
 @NgModule({
   imports: [
@@ -23,6 +26,10 @@ import { SideBarComponent } from './side-bar/side-bar.component';
     NgReduxRouterModule,
     StoreModule,
   ],
+  providers: [
+    ShoppingListEpic,
+    ShoppingListActions,
+    ShoppingListService],
   declarations: [
     AppComponent,
     PageNotFoundComponent,
@@ -30,7 +37,6 @@ import { SideBarComponent } from './side-bar/side-bar.component';
     PinPlaceComponent,
     SideBarComponent
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {
