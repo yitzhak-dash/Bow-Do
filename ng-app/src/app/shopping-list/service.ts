@@ -13,5 +13,5 @@ export class ShoppingListService {
   }
 
   addShoppingListItem = (item: IShoppingItem): Observable<IShoppingItem> =>
-    of({id: new Date().getMilliseconds(), name: item.name});
+    of({id: new Date().getMilliseconds(), name: item.name})
 }

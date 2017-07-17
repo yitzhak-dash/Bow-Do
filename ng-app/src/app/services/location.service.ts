@@ -24,13 +24,13 @@ export class LocationService {
   };
 
   addNewPlace = (place: Place): Observable<any> => {
-    let headers = new Headers({'Content-Type': 'application/json'});
-    let options = new RequestOptions({headers: headers});
+    const headers = new Headers({'Content-Type': 'application/json'});
+    const options = new RequestOptions({headers: headers});
 
     return this.locator.getCurrentLocation()
       .flatMap((loc: GeoPosition) => {
-        console.info(loc.long, loc.lat);
-        place.loc = {type: "Point", coordinates: [loc.long, loc.lat]};
+        console.log(loc.long, loc.lat);
+        place.loc = {type: 'Point', coordinates: [loc.long, loc.lat]};
         console.log(JSON.stringify(place));
         return this.http.post('api/place', JSON.stringify(place), options);
       })
@@ -40,7 +40,7 @@ export class LocationService {
   };
 
   getTagsByTerm = (term: string): Observable<string[]> => {
-    return Observable.of<string[]>([term, `${term}1`, `${term}2`, `${term}3`])
+    return Observable.of<string[]>([term, `${term}1`, `${term}2`, `${term}3`]);
   };
 
   private handleError(error: Response | any) {

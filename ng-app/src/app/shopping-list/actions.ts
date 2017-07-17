@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 //
-import { Action, Reducer } from 'redux';
-import { dispatch, NgRedux } from '@angular-redux/store';
+import { dispatch } from '@angular-redux/store';
 import { FluxStandardAction } from 'flux-standard-action';
 //
 import { IShoppingItem } from './model';
@@ -46,5 +45,4 @@ export class ShoppingListActions {
       meta: null,
       error
     });
-
 }

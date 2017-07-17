@@ -15,7 +15,7 @@ before_script:
   - npm install
 
 script:
-  - ng lint
+  - ng lint --type-check
   - ng build --prod
 
 notifications:
