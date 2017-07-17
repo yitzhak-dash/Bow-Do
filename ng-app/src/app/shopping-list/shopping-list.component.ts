@@ -3,7 +3,7 @@ import { select } from '@angular-redux/store';
 
 
 @Component({
-  selector: 'shopping-list',
+  selector: 'app-shopping-list',
   templateUrl: './shopping-list.component.html',
   styleUrls: ['./shopping-list.component.css']
 })
@@ -21,7 +21,9 @@ export class ShoppingListComponent implements OnInit {
 
   createItem(evt: any, input: any) {
     // wait for ENTER
-    if (evt.which !== this.ENTER_KEY) return;
+    if (evt.which !== this.ENTER_KEY) {
+      return;
+    }
     // this.actions.addShoppingItem(input.value);
     input.value = '';
     // this.actions.findExcalibur(input.value);

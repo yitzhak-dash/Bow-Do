@@ -10,7 +10,7 @@ import { IAppState } from '../store/root-state.model';
 // TODO: clear auto-complete list after cleaning input
 
 @Component({
-  selector: 'pin-place',
+  selector: 'app-pin-place',
   templateUrl: './pin-place.component.html',
   styleUrls: ['./pin-place.component.css']
 })

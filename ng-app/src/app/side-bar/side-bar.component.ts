@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MenuRoute, MenuRoutes, routes } from '../app-routing.module';
 
 @Component({
-  selector: 'side-bar',
+  selector: 'app-side-bar',
   templateUrl: './side-bar.component.html',
   styleUrls: ['./side-bar.component.css']
 })
@@ -17,7 +17,7 @@ export class SideBarComponent implements OnInit {
   ngOnInit() {
     this.menuItems = routes.filter(route => route.isMenuItem);
     // set default path as selected
-    let defaultPath = routes.find(route => !!route.redirectTo).redirectTo;
+    const defaultPath = routes.find(route => !!route.redirectTo).redirectTo;
     this.selectedMenuItem = this.menuItems.find(item => `/${item.path}` === defaultPath);
   }
 
