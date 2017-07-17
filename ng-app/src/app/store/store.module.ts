@@ -3,8 +3,11 @@ import { NgModule } from '@angular/core';
 import { NgRedux, NgReduxModule } from '@angular-redux/store';
 import { createLogger } from 'redux-logger';
 import { NgReduxRouter, NgReduxRouterModule } from '@angular-redux/router';
+import { provideReduxForms } from '@angular-redux/form';
 //
-import { IAppState } from './root-state.model';
+import { IAppState, INIT_STATE } from './root-state.model';
+import { rootReducer } from './root-reducer';
+import { RootEpics } from './root-epics';
 
 @NgModule({
   imports: [
@@ -16,7 +19,17 @@ import { IAppState } from './root-state.model';
 export class StoreModule {
 
   constructor(public store: NgRedux<IAppState>,
-              ngReduxRouter: NgReduxRouter) {
-    
+              ngReduxRouter: NgReduxRouter,
+              rootEpics: RootEpics) {
+    store.configureStore(
+      rootReducer,
+      INIT_STATE,
+      [createLogger(), ...rootEpics.createEpics()],
+      []
+    );
+    if (ngReduxRouter) {
+      ngReduxRouter.initialize();
+    }
+    provideReduxForms(store);
   }
 }

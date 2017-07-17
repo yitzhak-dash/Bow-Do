@@ -32,3 +32,13 @@ export interface Place {
   tags?: string[],
 }
 
+export const PLACE_INIT_STATE: Place = {};
+
+export const INIT_STATE: IAppState = {
+  shoppingList: [],
+  pinPlace: {
+    place: PLACE_INIT_STATE,
+    filteredTags: []
+  }
+};
+
