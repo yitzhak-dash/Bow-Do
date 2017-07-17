@@ -1,8 +1,7 @@
 <div class="container-fluid">
   <form #pinPlaceForm="ngForm" (ngSubmit)="pinPlace()">
     <div class="form-group">
-      <input mdInput
-             placeholder="name"
+      <input placeholder="name"
              required
              id="name"
              [(ngModel)]="model.name"
@@ -10,8 +9,7 @@
              #name="ngModel">
     </div>
     <div class="form-group">
-      <input mdInput
-             placeholder="description"
+      <input placeholder="description"
              id="description"
              [(ngModel)]="model.description"
              name="description"
@@ -20,9 +18,6 @@
     <div class="form-group">
       <input
         [(ngModel)]="model.tags"
-        [autocomplete]="true"
-        [autocompleteItems]="['one','two','three']"
-        [autocompleteMustMatch]="false"
         name="tags"
         placeholder="Add a tags"/>
     </div>

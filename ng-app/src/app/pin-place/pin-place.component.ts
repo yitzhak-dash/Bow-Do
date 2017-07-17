@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+//
 import { NgRedux } from '@angular-redux/store';
+//
+import { IAppState } from '../store/root-state.model';
 
 // TODO: remove submit by enter
 // TODO: load tags from the server
@@ -13,11 +16,11 @@ import { NgRedux } from '@angular-redux/store';
 })
 export class PinPlaceComponent implements OnInit {
 
-  constructor(private actions: PinPlaceActions, private redux: NgRedux<AppState>) {
-    this.loadFromState(redux.getState().pinPlace.place);
+  constructor(private redux: NgRedux<IAppState>) {
+    // this.loadFromState(redux.getState().pinPlace.place);
 
     redux.subscribe(() => {
-      this.loadFromState(redux.getState().pinPlace.place);
+      // this.loadFromState(redux.getState().pinPlace.place);
     });
   }
 
