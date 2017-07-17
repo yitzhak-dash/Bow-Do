@@ -1,24 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-//
-import { select, NgRedux } from 'ng2-redux';
-//
-import { ShoppingListActions } from '../store/shopping-list.actions';
-import { ShoppingItem, AppState } from '../store/app-state';
+import { select } from '@angular-redux/store';
+import { ShoppingListActions } from './actions';
+
 
 @Component({
-  moduleId: module.id,
-  selector: 'shopping-list',
-  template: `<div>
-            <h2>Shopping List</h2>
-            <ul>
-                    <li  *ngFor="let item of shoppingList$ | async">
-                        <input type="checkbox" value="completed"/>{{item.name}}
-                    </li>
-            </ul>
-           <input #itemInput (keypress)="createItem($event,itemInput)" />
-        </div>`
+  selector: 'app-shopping-list',
+  templateUrl: './shopping-list.component.html',
+  styleUrls: ['./shopping-list.component.css']
 })
 export class ShoppingListComponent implements OnInit {
+
+  readonly ENTER_KEY = 13;
+
+  @select() readonly shoppingList$: any;
 
   constructor(private actions: ShoppingListActions) {
   }
@@ -26,12 +20,14 @@ export class ShoppingListComponent implements OnInit {
   ngOnInit() {
   }
 
-  @select() readonly shoppingList$: any;
-
   createItem(evt: any, input: any) {
-    if (evt.which !== 13) return;// wait for ENTER
+    // wait for ENTER
+    if (evt.which !== this.ENTER_KEY) {
+      return;
+    }
     this.actions.addShoppingItem(input.value);
     input.value = '';
-    this.actions.findExcalibur(input.value);
+    // this.actions.findExcalibur(input.value);
   }
+
 }

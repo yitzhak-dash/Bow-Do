@@ -1,11 +1,8 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 //
-import { Observable } from 'rxjs/Observable';
-import { select, NgRedux } from 'ng2-redux';
+import { NgRedux } from '@angular-redux/store';
 //
-import { PinPlaceActions } from '../store/pin-place.actions';
-import { Place } from '../models/place.model';
-import { AppState } from '../store/app-state';
+import { IAppState } from '../store/root-state.model';
 
 // TODO: remove submit by enter
 // TODO: load tags from the server
@@ -13,53 +10,21 @@ import { AppState } from '../store/app-state';
 // TODO: clear auto-complete list after cleaning input
 
 @Component({
-  moduleId: module.id,
-  selector: 'pin-place',
-  templateUrl: 'pin-place.component.html'
+  selector: 'app-pin-place',
+  templateUrl: './pin-place.component.html',
+  styleUrls: ['./pin-place.component.css']
 })
 export class PinPlaceComponent implements OnInit {
 
-  @select((state: AppState) => state.pinPlace.filteredTags) readonly filteredTags$: Observable<string[]>;
-  model: Place;
-
-  constructor(private actions: PinPlaceActions, private redux: NgRedux<AppState>) {
-
-    this.loadFromState(redux.getState().pinPlace.place);
+  constructor(private redux: NgRedux<IAppState>) {
+    // this.loadFromState(redux.getState().pinPlace.place);
 
     redux.subscribe(() => {
-      this.loadFromState(redux.getState().pinPlace.place);
+      // this.loadFromState(redux.getState().pinPlace.place);
     });
   }
 
   ngOnInit() {
-    this.actions.initPlace();
   }
 
-  tagPlace = (tagElement: any, event: any) => {
-    // wait for ENTER
-    if (event && event.which !== 13) {
-      return;
-    }
-
-    this.actions.tagPlace({place: this.model, tagName: tagElement.value});
-    tagElement.value = '';
-  };
-
-  createTag = () => {
-    // TODO: implement me
-  };
-
-  pinPlace = () => {
-    this.actions.addNewPlace(this.model);
-  };
-
-  filterTags(term: string) {
-    if (term) {
-      this.actions.filterTags(term);
-    }
-  }
-
-  private loadFromState(model: Place) {
-    this.model = model;
-  }
 }

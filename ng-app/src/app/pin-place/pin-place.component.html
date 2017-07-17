@@ -1,35 +1,26 @@
 <div class="container-fluid">
   <form #pinPlaceForm="ngForm" (ngSubmit)="pinPlace()">
     <div class="form-group">
-      <md-input-container>
-        <input mdInput
-               placeholder="name"
-               required
-               id="name"
-               [(ngModel)]="model.name"
-               name="name"
-               #name="ngModel">
-      </md-input-container>
+      <input placeholder="name"
+             required
+             id="name"
+             [(ngModel)]="model.name"
+             name="name"
+             #name="ngModel">
     </div>
     <div class="form-group">
-      <md-input-container>
-        <input mdInput
-               placeholder="description"
-               id="description"
-               [(ngModel)]="model.description"
-               name="description"
-               #description="ngModel">
-      </md-input-container>
+      <input placeholder="description"
+             id="description"
+             [(ngModel)]="model.description"
+             name="description"
+             #description="ngModel">
     </div>
     <div class="form-group">
-      <rl-tag-input
+      <input
         [(ngModel)]="model.tags"
-        [autocomplete]="true"
-        [autocompleteItems]="['one','two','three']"
-        [autocompleteMustMatch]="false"
         name="tags"
-        placeholder="Add a tags"></rl-tag-input>
+        placeholder="Add a tags"/>
     </div>
-    <button type="submit" md-raised-button>pin place</button>
+    <button type="submit">pin place</button>
   </form>
 </div>
