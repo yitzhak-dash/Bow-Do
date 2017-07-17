@@ -10,7 +10,7 @@ export class Locator {
   getCurrentLocation(): Observable<any> {
     return Observable.create((observer: any) => {
       navigator.geolocation.getCurrentPosition((location) => {
-        let geo = location.coords;
+        const geo = location.coords;
         observer.next(
           new GeoPosition(geo.longitude, geo.latitude, geo.accuracy)
         );

@@ -1,12 +1,11 @@
-import { Observable, Observer } from 'rxjs';
-
+import { Observable } from 'rxjs/Observable';
 
 export class LocationSimulator {
 
   getCurrentLocation() {
     return Observable.create((observer: any) => {
       navigator.geolocation.getCurrentPosition(function (location) {
-        let geo = location.coords;
+        const geo = location.coords;
         observer.onNext(
           {
             'lat': geo.latitude,

@@ -9,7 +9,7 @@ import { createEpicMiddleware, Epic } from 'redux-observable';
 //
 import { IAppState } from '../store/root-state.model';
 import { ShoppingItemAction, ShoppingListActions } from './actions';
-import { ShoppingListService } from "./service";
+import { ShoppingListService } from './service';
 
 @Injectable()
 export class ShoppingListEpic {
