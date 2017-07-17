@@ -1,4 +1,5 @@
 import { IShoppingItem } from '../shopping-list/model';
+import { Place } from '../pin-place/model';
 
 export interface  IAppState {
   routes?: any;
@@ -11,25 +12,8 @@ export interface PinPlaceState {
   filteredTags: string[];
 }
 
-export interface Place {
-  loc?: {
-    type: string;
-    coordinates: number[];
-  };
-  address?: {
-    city: string;
-    zip?: string;
-    state?: string;
-    country: string;
-    lines?: string[];
-  };
-  placedIn?: string;
-  name?: string;
-  description?: string;
-  tags?: string[];
-}
 
-export const PLACE_INIT_STATE: Place = {};
+export const PLACE_INIT_STATE: Place = {name: ''};
 
 export const INIT_STATE: IAppState = {
   shoppingList: [],

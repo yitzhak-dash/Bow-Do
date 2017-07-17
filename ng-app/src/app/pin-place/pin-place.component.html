@@ -1,26 +1,31 @@
-<!--<div class="container-fluid">-->
-  <!--<form #pinPlaceForm="ngForm" (ngSubmit)="pinPlace()">-->
-    <!--<div class="form-group">-->
-      <!--<input placeholder="name"-->
-             <!--required-->
-             <!--id="name"-->
-             <!--[(ngModel)]="model.name"-->
-             <!--name="name"-->
-             <!--#name="ngModel">-->
-    <!--</div>-->
-    <!--<div class="form-group">-->
-      <!--<input placeholder="description"-->
-             <!--id="description"-->
-             <!--[(ngModel)]="model.description"-->
-             <!--name="description"-->
-             <!--#description="ngModel">-->
-    <!--</div>-->
-    <!--<div class="form-group">-->
-      <!--<input-->
-        <!--[(ngModel)]="model.tags"-->
-        <!--name="tags"-->
-        <!--placeholder="Add a tags"/>-->
-    <!--</div>-->
-    <!--<button type="submit">pin place</button>-->
-  <!--</form>-->
-<!--</div>-->
+<div class="section">
+  <form #pinPlaceForm="ngForm" (ngSubmit)="pinPlace()">
+    <div class="form-group">
+      <md-input-container>
+        <input placeholder="name"
+               required
+               id="name"
+               [(ngModel)]="model.name"
+               name="name"
+               #name="ngModel"
+               mdInput>
+      </md-input-container>
+    </div>
+    <div class="form-group">
+      <md-input-container>
+        <input placeholder="description"
+               id="description"
+               [(ngModel)]="model.description"
+               name="description"
+               #description="ngModel"
+               mdInput>
+      </md-input-container>
+    </div>
+    <div class="form-group">
+      <tag-input [(ngModel)]="model.tags"
+                 name="tags"
+      placeholder="tag"></tag-input>
+    </div>
+    <button md-raised-button type="submit">pin place</button>
+  </form>
+</div>

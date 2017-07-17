@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgRedux } from '@angular-redux/store';
 //
 import { IAppState } from '../store/root-state.model';
+import { Place } from './model';
 
 // TODO: remove submit by enter
 // TODO: load tags from the server
@@ -15,6 +16,7 @@ import { IAppState } from '../store/root-state.model';
   styleUrls: ['./pin-place.component.css']
 })
 export class PinPlaceComponent implements OnInit {
+  model: Place = {name: ''};
 
   constructor(private redux: NgRedux<IAppState>) {
     // this.loadFromState(redux.getState().pinPlace.place);
