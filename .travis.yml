@@ -8,8 +8,11 @@ branches:
   only:
     - master
 
+before_install:
+  - cd ./ng-app
+
 before_script:
-  - npm install -g @angular/cli
+  - npm install
 
 script:
   - ng lint
