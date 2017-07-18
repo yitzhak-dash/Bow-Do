@@ -1,3 +1,7 @@
 .section {
   margin: 0 10px;
 }
+
+.pin-place-card {
+  width: 400px;
+}
