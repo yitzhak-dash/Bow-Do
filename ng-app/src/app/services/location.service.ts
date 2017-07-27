@@ -20,7 +20,7 @@ export class LocationService {
     this.locator.getCurrentLocation()
       .subscribe((res: any) => {
 
-      })
+      });
   };
 
   addNewPlace = (place: Place): Observable<any> => {
@@ -28,13 +28,12 @@ export class LocationService {
     const options = new RequestOptions({headers: headers});
 
     return this.locator.getCurrentLocation()
-      .flatMap((loc: GeoPosition) => {
+      .switchMap((loc: GeoPosition) => {
         console.log(loc.long, loc.lat);
         place.loc = {type: 'Point', coordinates: [loc.long, loc.lat]};
         console.log(JSON.stringify(place));
         return this.http.post('api/place', JSON.stringify(place), options);
-      })
-      .map((res: Response) => res.json())
+      }).map((res: Response) => res.json())
       .catch(this.handleError);
 
   };

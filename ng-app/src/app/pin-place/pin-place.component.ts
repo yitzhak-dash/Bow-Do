@@ -26,6 +26,10 @@ export class PinPlaceComponent implements OnInit {
     });
   }
 
+  pinPlace() {
+
+  }
+
   ngOnInit() {
   }
 
