@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { select } from '@angular-redux/store';
 import { ShoppingListActions } from './actions';
-
 
 @Component({
   selector: 'app-shopping-list',
   templateUrl: './shopping-list.component.html',
-  styleUrls: ['./shopping-list.component.css']
+  styleUrls: ['./shopping-list.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ShoppingListComponent implements OnInit {
-
+export class ShoppingListComponent implements OnInit, OnDestroy {
   readonly ENTER_KEY = 13;
 
   @select() readonly shoppingList$: any;
@@ -18,6 +17,10 @@ export class ShoppingListComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  ngOnDestroy(): void {
+    console.log('ngOnDestroy');
   }
 
   createItem(evt: any, input: any) {

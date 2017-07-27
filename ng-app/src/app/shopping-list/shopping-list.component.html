@@ -1,9 +1,22 @@
 <div>
-  <h2>Shopping List</h2>
-  <ul>
-    <li *ngFor="let item of shoppingList$ | async">
-      <input type="checkbox" value="completed"/>{{item.name}}
-    </li>
-  </ul>
-  <input #itemInput (keypress)="createItem($event,itemInput)"/>
+  <md-card class="shop-card">
+    <md-card-header>
+      <md-card-title><h3>Shopping List</h3></md-card-title>
+    </md-card-header>
+    <md-card-content>
+      <div *ngFor="let item of shoppingList$ | async">
+        <md-checkbox value="completed">{{item.name}}</md-checkbox>
+      </div>
+      <br>
+      <md-input-container>
+        <input mdInput placeholder="item" #itemInput (keypress)="createItem($event,itemInput)"/>
+      </md-input-container>
+    </md-card-content>
+    <md-card-actions>
+      <button md-button>CLEAR ALL</button>
+      <button md-button>SHARE</button>
+    </md-card-actions>
+  </md-card>
+
+
 </div>
