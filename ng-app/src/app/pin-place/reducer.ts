@@ -13,4 +13,3 @@ export const pinPlaceReducer: Reducer<Place> =
         return state;
     }
   };
-
