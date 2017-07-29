@@ -19,6 +19,7 @@ import { SideBarComponent } from './side-bar/side-bar.component';
 import { ShoppingListEpic } from './shopping-list/epics';
 import { ShoppingListActions } from './shopping-list/actions';
 import { ShoppingListService } from './shopping-list/service';
+import { PinPlaceActions } from './pin-place/actions';
 
 @NgModule({
   imports: [
@@ -41,7 +42,8 @@ import { ShoppingListService } from './shopping-list/service';
   providers: [
     ShoppingListEpic,
     ShoppingListActions,
-    ShoppingListService],
+    ShoppingListService,
+    PinPlaceActions],
   declarations: [
     AppComponent,
     PageNotFoundComponent,

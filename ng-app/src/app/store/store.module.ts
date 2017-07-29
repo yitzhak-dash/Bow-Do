@@ -14,7 +14,8 @@ import { RootEpics } from './root-epics';
     NgReduxModule,
     NgReduxRouterModule
   ],
-  providers: [RootEpics]
+  providers: [
+    RootEpics]
 })
 export class StoreModule {
 

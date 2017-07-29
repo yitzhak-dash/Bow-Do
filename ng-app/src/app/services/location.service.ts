@@ -5,8 +5,8 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 //
 import { Locator } from './locator';
-import { Place } from './place.model';
 import { GeoPosition } from './geo-location.model';
+import { Place } from '../pin-place/model';
 
 
 @Injectable()
@@ -30,7 +30,7 @@ export class LocationService {
     return this.locator.getCurrentLocation()
       .switchMap((loc: GeoPosition) => {
         console.log(loc.long, loc.lat);
-        place.loc = {type: 'Point', coordinates: [loc.long, loc.lat]};
+        place.location = {type: 'Point', coordinates: {long: loc.long, lat: loc.lat}};
         console.log(JSON.stringify(place));
         return this.http.post('api/place', JSON.stringify(place), options);
       }).map((res: Response) => res.json())

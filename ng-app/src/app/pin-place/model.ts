@@ -15,3 +15,7 @@ export interface Place {
   description?: string;
   tags?: string[];
 }
+
+export const PLACE_INIT_STATE: Place = {
+  name: ''
+};
