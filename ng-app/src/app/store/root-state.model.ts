@@ -1,10 +1,10 @@
 import { IShoppingItem } from '../shopping-list/model';
-import { Place, PLACE_INIT_STATE } from '../pin-place/model';
+import { IPlace, PLACE_INIT_STATE } from '../pin-place/model';
 
 export interface IAppState {
   routes?: any;
   shoppingList: IShoppingItem[];
-  pinPlace: Place;
+  pinPlace: IPlace;
 }
 
 

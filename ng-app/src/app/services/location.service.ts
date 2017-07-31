@@ -6,7 +6,7 @@ import 'rxjs/add/observable/of';
 //
 import { Locator } from './locator';
 import { GeoPosition } from './geo-location.model';
-import { Place } from '../pin-place/model';
+import { IPlace } from '../pin-place/model';
 
 
 @Injectable()
@@ -23,7 +23,7 @@ export class LocationService {
       });
   };
 
-  addNewPlace = (place: Place): Observable<any> => {
+  addNewPlace = (place: IPlace): Observable<any> => {
     const headers = new Headers({'Content-Type': 'application/json'});
     const options = new RequestOptions({headers: headers});
 

@@ -1,4 +1,5 @@
-export interface Place {
+export interface IPlace {
+  id?: number;
   location?: {
     type: string;
     coordinates: { lat: number, long: number };
@@ -16,6 +17,6 @@ export interface Place {
   tags?: string[];
 }
 
-export const PLACE_INIT_STATE: Place = {
+export const PLACE_INIT_STATE: IPlace = {
   name: ''
 };

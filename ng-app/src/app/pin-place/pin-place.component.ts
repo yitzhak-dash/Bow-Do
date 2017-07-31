@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { NgRedux } from '@angular-redux/store';
 //
 import { IAppState } from '../store/root-state.model';
-import { Place } from './model';
+import { IPlace } from './model';
 import { PinPlaceActions } from './actions';
 
 // TODO: remove submit by enter
@@ -18,14 +18,9 @@ import { PinPlaceActions } from './actions';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PinPlaceComponent implements OnInit {
-  model: Place = {name: ''};
+  model: IPlace = {name: ''};
 
-  constructor(private redux: NgRedux<IAppState>, private actions: PinPlaceActions) {
-    // this.loadFromState(redux.getState().pinPlace.place);
-
-    redux.subscribe(() => {
-      // this.loadFromState(redux.getState().pinPlace.place);
-    });
+  constructor(private actions: PinPlaceActions) {
   }
 
   pinPlace() {

@@ -20,6 +20,8 @@ import { ShoppingListEpic } from './shopping-list/epics';
 import { ShoppingListActions } from './shopping-list/actions';
 import { ShoppingListService } from './shopping-list/service';
 import { PinPlaceActions } from './pin-place/actions';
+import { PinPlaceEpic } from './pin-place/epics';
+import { PinPlaceService } from './pin-place/service';
 
 @NgModule({
   imports: [
@@ -43,7 +45,9 @@ import { PinPlaceActions } from './pin-place/actions';
     ShoppingListEpic,
     ShoppingListActions,
     ShoppingListService,
-    PinPlaceActions],
+    PinPlaceActions,
+    PinPlaceEpic,
+    PinPlaceService],
   declarations: [
     AppComponent,
     PageNotFoundComponent,
