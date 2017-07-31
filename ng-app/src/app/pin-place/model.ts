@@ -1,9 +1,8 @@
+import * as GeoJSON from 'geojson';
+
 export interface IPlace {
   id?: number;
-  location?: {
-    type: string;
-    coordinates: { lat: number, long: number };
-  };
+  location?: GeoJSON.Point;
   address?: {
     city: string;
     zip?: string;

@@ -1,10 +1,10 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 //
-import { NgRedux } from '@angular-redux/store';
+import { Subscription } from 'rxjs/Subscription';
 //
-import { IAppState } from '../store/root-state.model';
 import { IPlace } from './model';
 import { PinPlaceActions } from './actions';
+import { Locator } from '../services/locator';
 
 // TODO: remove submit by enter
 // TODO: load tags from the server
@@ -17,17 +17,28 @@ import { PinPlaceActions } from './actions';
   styleUrls: ['./pin-place.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PinPlaceComponent implements OnInit {
-  model: IPlace = {name: ''};
+export class PinPlaceComponent implements OnInit, OnDestroy {
 
-  constructor(private actions: PinPlaceActions) {
+  model: IPlace = {name: ''};
+  private currentLocationSubscription: Subscription;
+
+  constructor(private actions: PinPlaceActions,
+              private locator: Locator) {
   }
 
   pinPlace() {
-    this.actions.addNewPlace(this.model);
+    this.currentLocationSubscription = this.locator.getCurrentLocation()
+      .subscribe(loc => {
+        this.model.location = loc;
+        this.actions.addNewPlace(this.model);
+      });
   }
 
   ngOnInit() {
+  }
+
+  ngOnDestroy(): void {
+    this.currentLocationSubscription.unsubscribe();
   }
 
 }
