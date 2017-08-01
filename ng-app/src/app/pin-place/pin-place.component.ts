@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 //
 import { Subscription } from 'rxjs/Subscription';
 //
@@ -19,6 +19,7 @@ import { Locator } from '../services/locator';
 })
 export class PinPlaceComponent implements OnInit, OnDestroy {
 
+  @ViewChild('pinPlaceForm') form;
   model: IPlace = {name: ''};
   private currentLocationSubscription: Subscription;
 
@@ -31,6 +32,7 @@ export class PinPlaceComponent implements OnInit, OnDestroy {
       .subscribe(loc => {
         this.model.location = loc;
         this.actions.addNewPlace(this.model);
+        this.form.reset()
       });
   }
 

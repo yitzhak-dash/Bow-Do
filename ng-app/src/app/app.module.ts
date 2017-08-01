@@ -23,6 +23,8 @@ import { PinPlaceActions } from './pin-place/actions';
 import { PinPlaceEpic } from './pin-place/epics';
 import { PinPlaceService } from './pin-place/service';
 import { Locator } from './services/locator';
+import { LocationEpic } from './common/location.epic';
+import { LocationActions } from './common/location.actions';
 
 @NgModule({
   imports: [
@@ -44,6 +46,8 @@ import { Locator } from './services/locator';
   ],
   providers: [
     Locator,
+    LocationEpic,
+    LocationActions,
     ShoppingListEpic,
     ShoppingListActions,
     ShoppingListService,
