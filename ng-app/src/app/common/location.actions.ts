@@ -1,15 +1,11 @@
 import { Injectable } from '@angular/core';
 import { dispatch } from '@angular-redux/store';
-import * as GeoJSON from 'geojson';
 import { FluxStandardAction } from 'flux-standard-action';
+//
+import { ICurrentLocation } from './location.model';
 
-type Payload = GeoJSON.Point;
+type Payload = ICurrentLocation;
 export type LocationAction = FluxStandardAction<Payload, string>;
-
-export const LOCATION_INIT_STATE: GeoJSON.Point = {
-  type: 'Point',
-  coordinates: [0, 0]
-};
 
 @Injectable()
 export class LocationActions {
@@ -25,7 +21,7 @@ export class LocationActions {
     meta: null
   });
 
-  locationTaken = (location: GeoJSON.Point): LocationAction => ({
+  locationTaken = (location: ICurrentLocation): LocationAction => ({
     type: LocationActions.TAKE_LOCATION_COMPLETED,
     payload: location,
     meta: null
@@ -38,5 +34,3 @@ export class LocationActions {
     error
   });
 }
-
-

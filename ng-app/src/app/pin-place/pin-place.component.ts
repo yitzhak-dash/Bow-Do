@@ -28,12 +28,9 @@ export class PinPlaceComponent implements OnInit, OnDestroy {
   }
 
   pinPlace() {
-    this.currentLocationSubscription = this.locator.getCurrentLocation()
-      .subscribe(loc => {
-        this.model.location = loc;
-        this.actions.addNewPlace(this.model);
-        this.form.reset()
-      });
+    this.actions.addNewPlace(this.model);
+    // TODO: clear after completed
+    //this.form.reset()
   }
 
   ngOnInit() {

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { createEpicMiddleware, Epic, EpicMiddleware } from 'redux-observable';
+import { createEpicMiddleware, Epic } from 'redux-observable';
 import { of } from 'rxjs/observable/of';
 //
 import { EpicFactory } from './epic.factory';
@@ -21,7 +21,10 @@ export class LocationEpic implements EpicFactory {
   private locationEpic: Epic<LocationAction, IAppState> = (action$, state) =>
     action$.ofType(LocationActions.TAKE_LOCATION)
       .switchMap(action => this.locator.getCurrentLocation()
-        .map(location => this.actions.locationTaken(location))
+        .map(location => this.actions.locationTaken({
+          date: new Date(),
+          location
+        }))
         .catch(error => of(this.actions.locationFailed(error))));
 
 }
