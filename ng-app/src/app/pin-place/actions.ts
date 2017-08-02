@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { dispatch } from '@angular-redux/store';
 //
-import { IPlace } from './model';
+import { IPinPlace, IPlace } from './model';
 import { FluxStandardAction } from 'flux-standard-action';
 
-type Payload = IPlace;
+type Payload = IPinPlace;
 export type PinPlaceAction = FluxStandardAction<Payload, string>;
 
 @Injectable()
@@ -19,11 +19,11 @@ export class PinPlaceActions {
   @dispatch()
   addNewPlace = (place: IPlace): PinPlaceAction => ({
     type: PinPlaceActions.ADD_NEW_PLACE,
-    payload: place,
+    payload: {addedPlace: place, loading: false},
     meta: null
   });
 
-  pinPlaceCompleted = (place: IPlace): PinPlaceAction => ({
+  pinPlaceCompleted = (place: Payload): PinPlaceAction => ({
     type: PinPlaceActions.ADD_NEW_PLACE_COMPLETED,
     payload: place,
     meta: null,

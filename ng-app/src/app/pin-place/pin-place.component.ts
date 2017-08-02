@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 //
 import { Subscription } from 'rxjs/Subscription';
+import { select } from '@angular-redux/store';
 //
 import { IPlace } from './model';
 import { PinPlaceActions } from './actions';
-import { Locator } from '../services/locator';
+import { IAppState } from '../store/root-state.model';
+import { Observable } from 'rxjs/Observable';
 
 // TODO: remove submit by enter
 // TODO: load tags from the server
@@ -18,26 +20,31 @@ import { Locator } from '../services/locator';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PinPlaceComponent implements OnInit, OnDestroy {
-
   @ViewChild('pinPlaceForm') form;
-  model: IPlace = {name: ''};
-  private currentLocationSubscription: Subscription;
+  private model: IPlace = {name: ''};
+  private loadingIndicatorSubscription: Subscription;
+  @select((state: IAppState) => state.pinPlace.loading) isLoadingIndicator$: Observable<boolean>;
 
-  constructor(private actions: PinPlaceActions,
-              private locator: Locator) {
+  constructor(private actions: PinPlaceActions) {
   }
+
 
   pinPlace() {
     this.actions.addNewPlace(this.model);
-    // TODO: clear after completed
-    //this.form.reset()
+  }
+
+  private subscribe() {
+    this.loadingIndicatorSubscription = this.isLoadingIndicator$.subscribe(isLoading => {
+      if (!isLoading)
+        this.form.reset();
+    });
   }
 
   ngOnInit() {
+    this.subscribe();
   }
 
   ngOnDestroy(): void {
-    this.currentLocationSubscription.unsubscribe();
+    this.loadingIndicatorSubscription.unsubscribe();
   }
-
 }

@@ -27,7 +27,7 @@ export class PinPlaceEpic implements EpicFactory {
       .switchMap(action => this.locator.getCurrentLocation()
         .map(location => ({location, action}))
         .mergeMap(({location, action}) =>
-          this.service.pinPlace({...action.payload, location})
-            .map(res => this.actions.pinPlaceCompleted(res))
+          this.service.pinPlace({...action.payload.addedPlace, location})
+            .map(res => this.actions.pinPlaceCompleted({addedPlace: res, loading: false}))
             .catch(err => of(this.actions.pinPlaceFailed(err)))));
 }
