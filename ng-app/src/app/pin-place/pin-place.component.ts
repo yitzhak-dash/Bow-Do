@@ -21,9 +21,12 @@ import { Observable } from 'rxjs/Observable';
 })
 export class PinPlaceComponent implements OnInit, OnDestroy {
   @ViewChild('pinPlaceForm') form;
-  private model: IPlace = {name: ''};
-  private loadingIndicatorSubscription: Subscription;
-  @select((state: IAppState) => state.pinPlace.loading) isLoadingIndicator$: Observable<boolean>;
+  model: IPlace = {name: ''};
+  loadingIndicatorSubscription: Subscription;
+  // TODO: find way to change to something like this.
+  // @select((state: IAppState) => state.pinPlace.loading) isLoadingIndicator$: Observable<boolean>;
+  @select(['state', 'pinPlace', 'loading']) isLoadingIndicator$: Observable<boolean>;
+
 
   constructor(private actions: PinPlaceActions) {
   }
@@ -35,8 +38,9 @@ export class PinPlaceComponent implements OnInit, OnDestroy {
 
   private subscribe() {
     this.loadingIndicatorSubscription = this.isLoadingIndicator$.subscribe(isLoading => {
-      if (!isLoading)
+      if (!isLoading) {
         this.form.reset();
+      }
     });
   }
 
