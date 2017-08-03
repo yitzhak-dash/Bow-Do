@@ -5,8 +5,6 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 //
 import { Locator } from './locator';
-import { Place } from './place.model';
-import { GeoPosition } from './geo-location.model';
 
 
 @Injectable()
@@ -21,21 +19,6 @@ export class LocationService {
       .subscribe((res: any) => {
 
       });
-  };
-
-  addNewPlace = (place: Place): Observable<any> => {
-    const headers = new Headers({'Content-Type': 'application/json'});
-    const options = new RequestOptions({headers: headers});
-
-    return this.locator.getCurrentLocation()
-      .switchMap((loc: GeoPosition) => {
-        console.log(loc.long, loc.lat);
-        place.loc = {type: 'Point', coordinates: [loc.long, loc.lat]};
-        console.log(JSON.stringify(place));
-        return this.http.post('api/place', JSON.stringify(place), options);
-      }).map((res: Response) => res.json())
-      .catch(this.handleError);
-
   };
 
   getTagsByTerm = (term: string): Observable<string[]> => {

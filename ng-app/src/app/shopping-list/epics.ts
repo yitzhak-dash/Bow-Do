@@ -10,9 +10,10 @@ import { createEpicMiddleware, Epic } from 'redux-observable';
 import { IAppState } from '../store/root-state.model';
 import { ShoppingItemAction, ShoppingListActions } from './actions';
 import { ShoppingListService } from './service';
+import { EpicFactory } from '../common/epic.factory';
 
 @Injectable()
-export class ShoppingListEpic {
+export class ShoppingListEpic implements EpicFactory {
   constructor(private actions: ShoppingListActions,
               private service: ShoppingListService) {
   }
@@ -31,7 +32,7 @@ export class ShoppingListEpic {
         .catch(response => of(this.actions.addShoppingItemFailed({
           status: '' + response.status,
         })))
-        .startWith(this.actions.addShoppingItemStarted()))
+        .startWith(this.actions.addShoppingItemStarted()));
 }
 
 // .catch(err => of({ type: 'ERROR', payload: { error: err } }));

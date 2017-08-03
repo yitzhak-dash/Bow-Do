@@ -1,25 +1,22 @@
+//
 import { IShoppingItem } from '../shopping-list/model';
-import { Place } from '../pin-place/model';
+import { IPlace, PIN_PLACE_INIT_STATE } from '../pin-place/model';
+import { CURRENT_LOCATION_INIT_STATE, ICurrentLocation } from '../common/location.model';
 
-export interface  IAppState {
+export interface IAppState {
   routes?: any;
   shoppingList: IShoppingItem[];
-  // pinPlace: PinPlaceState;
+  pinPlace: {
+    loading: boolean,
+    addedPlace: IPlace
+  };
+  location: ICurrentLocation
 }
 
-export interface PinPlaceState {
-  place: Place;
-  filteredTags: string[];
-}
-
-
-export const PLACE_INIT_STATE: Place = {name: ''};
 
 export const INIT_STATE: IAppState = {
   shoppingList: [],
-  // pinPlace: {
-  //   place: PLACE_INIT_STATE,
-  //   filteredTags: []
-  // }
+  pinPlace: PIN_PLACE_INIT_STATE,
+  location: CURRENT_LOCATION_INIT_STATE
 };
 

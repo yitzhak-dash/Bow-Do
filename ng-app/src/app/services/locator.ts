@@ -1,19 +1,21 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 //
-import { GeoPosition } from './geo-location.model';
-
+import { Observable } from 'rxjs/Observable';
+import * as GeoJSON from 'geojson';
 
 @Injectable()
 export class Locator {
 
-  getCurrentLocation(): Observable<any> {
+  getCurrentLocation(): Observable<GeoJSON.Point> {
     return Observable.create((observer: any) => {
       navigator.geolocation.getCurrentPosition((location) => {
+        // contains these -> (geo.longitude, geo.latitude, geo.accuracy)
         const geo = location.coords;
-        observer.next(
-          new GeoPosition(geo.longitude, geo.latitude, geo.accuracy)
-        );
+        const result: GeoJSON.Point = {
+          type: 'Point',
+          coordinates: [geo.latitude, geo.longitude],
+        };
+        observer.next(result);
         observer.complete();
       });
     });

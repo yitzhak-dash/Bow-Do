@@ -19,6 +19,12 @@ import { SideBarComponent } from './side-bar/side-bar.component';
 import { ShoppingListEpic } from './shopping-list/epics';
 import { ShoppingListActions } from './shopping-list/actions';
 import { ShoppingListService } from './shopping-list/service';
+import { PinPlaceActions } from './pin-place/actions';
+import { PinPlaceEpic } from './pin-place/epics';
+import { PinPlaceService } from './pin-place/service';
+import { Locator } from './services/locator';
+import { LocationEpic } from './common/location.epic';
+import { LocationActions } from './common/location.actions';
 
 @NgModule({
   imports: [
@@ -39,9 +45,15 @@ import { ShoppingListService } from './shopping-list/service';
     StoreModule,
   ],
   providers: [
+    Locator,
+    LocationEpic,
+    LocationActions,
     ShoppingListEpic,
     ShoppingListActions,
-    ShoppingListService],
+    ShoppingListService,
+    PinPlaceActions,
+    PinPlaceEpic,
+    PinPlaceService],
   declarations: [
     AppComponent,
     PageNotFoundComponent,

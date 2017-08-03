@@ -7,7 +7,7 @@ import { PinPlaceComponent } from './pin-place/pin-place.component';
 
 export const routes: MenuRoutes = [
   {path: '', redirectTo: '/shopping-list', pathMatch: 'full'},
-  {path: 'shopping-list', component: ShoppingListComponent, title: 'shopping list', isMenuItem: true},
+  {path: 'shopping-list', component: ShoppingListComponent, title: 'wish list', isMenuItem: true},
   {path: 'pin-place', component: PinPlaceComponent, title: 'pin place', isMenuItem: true},
   {path: '**', component: PageNotFoundComponent}
 ];
