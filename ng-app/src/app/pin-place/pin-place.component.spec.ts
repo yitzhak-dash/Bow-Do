@@ -4,10 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { NgReduxTestingModule } from '@angular-redux/store/testing';
 import { TagInputModule } from 'ngx-chips';
 import { MdButtonModule, MdCardModule, MdCheckboxModule, MdInputModule } from '@angular/material';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 //
 import { PinPlaceComponent } from './pin-place.component';
 import { PinPlaceActions } from './actions';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('PinPlaceComponent', () => {
   let component: PinPlaceComponent;
@@ -17,7 +17,7 @@ describe('PinPlaceComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         NgReduxTestingModule,
-        BrowserAnimationsModule,
+        NoopAnimationsModule,
         FormsModule,
         MdButtonModule,
         MdCheckboxModule,
