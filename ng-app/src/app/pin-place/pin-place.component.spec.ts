@@ -1,6 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { FormsModule } from '@angular/forms';
+//
+import { NgReduxTestingModule } from '@angular-redux/store/testing';
+import { TagInputModule } from 'ngx-chips';
+import { MdButtonModule, MdCardModule, MdCheckboxModule, MdInputModule } from '@angular/material';
+//
 import { PinPlaceComponent } from './pin-place.component';
+import { PinPlaceActions } from './actions';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('PinPlaceComponent', () => {
   let component: PinPlaceComponent;
@@ -8,9 +15,24 @@ describe('PinPlaceComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PinPlaceComponent ]
+      imports: [
+        NgReduxTestingModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        MdButtonModule,
+        MdCheckboxModule,
+        MdInputModule,
+        MdCardModule,
+        TagInputModule,
+      ],
+      providers: [
+        PinPlaceActions
+      ],
+      declarations: [
+        PinPlaceComponent
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
