@@ -17,6 +17,7 @@ before_script:
 script:
   - ng lint --type-check
   - ng build --prod
+  - ng test
 
 notifications:
   email:
