@@ -9,15 +9,17 @@ branches:
     - master
 
 before_install:
+  - export CHROME_BIN=chromium-browser
+  - export DISPLAY=:99.0
   - cd ./ng-app
 
 before_script:
   - npm install
 
 script:
+  - ng test --single-run
   - ng lint --type-check
   - ng build --prod
-  - ng test
 
 notifications:
   email:
