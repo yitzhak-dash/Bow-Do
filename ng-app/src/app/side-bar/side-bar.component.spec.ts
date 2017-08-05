@@ -10,12 +10,12 @@ describe('SideBarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports:[
+      imports: [
         RouterTestingModule
       ],
-      declarations: [ SideBarComponent ]
+      declarations: [SideBarComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
