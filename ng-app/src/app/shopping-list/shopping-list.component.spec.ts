@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+//
+import { MdButtonModule, MdCardModule, MdCheckboxModule, MdInputModule } from '@angular/material';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+//
 import { ShoppingListComponent } from './shopping-list.component';
+import { ShoppingListActions } from './actions';
 
 describe('ShoppingListComponent', () => {
   let component: ShoppingListComponent;
@@ -8,9 +12,21 @@ describe('ShoppingListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ShoppingListComponent ]
+      imports: [
+        MdButtonModule,
+        MdCheckboxModule,
+        MdInputModule,
+        MdCardModule,
+        NoopAnimationsModule,
+      ],
+      providers: [
+        ShoppingListActions
+      ],
+      declarations: [
+        ShoppingListComponent
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

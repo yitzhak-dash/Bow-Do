@@ -2,19 +2,24 @@
 
 language: node_js
 node_js:
-  - "7.1.0"
+  - "8.2.1"
 
 branches:
   only:
     - master
 
 before_install:
+  - export CHROME_BIN=chromium-browser
+  - sh -e /etc/init.d/xvfb start
+  - export DISPLAY=:99.0
   - cd ./ng-app
 
 before_script:
   - npm install
 
 script:
+#  - ng test --browsers Firefox --single-run
+#  - ng test --single-run
   - ng lint --type-check
   - ng build --prod
 
