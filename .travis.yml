@@ -18,7 +18,7 @@ before_script:
   - npm install
 
 script:
-#  - ng test --browsers Firefox --single-run
+  - ng test --browsers Firefox --single-run
 #  - ng test --single-run
   - ng lint --type-check
   - ng build --prod
