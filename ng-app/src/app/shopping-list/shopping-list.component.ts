@@ -9,7 +9,7 @@ import { ShoppingListActions } from './actions';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ShoppingListComponent implements OnInit, OnDestroy {
-  readonly ENTER_KEY = 13;
+  readonly ENTER_KEY = 'Enter';
 
   @select() readonly shoppingList$: any;
 
@@ -25,12 +25,12 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
 
   createItem(evt: any, input: any) {
     // wait for ENTER
-    if (evt.which !== this.ENTER_KEY) {
+    console.log(evt);
+    if (evt.key !== this.ENTER_KEY) {
       return;
     }
     this.actions.addShoppingItem(input.value);
+    // clear user input
     input.value = '';
-    // this.actions.findExcalibur(input.value);
   }
-
 }
