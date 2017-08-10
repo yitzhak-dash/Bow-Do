@@ -17,6 +17,7 @@ export class ShoppingListActions {
   static readonly ADD_ITEM_STARTED = 'ADD_ITEM_STARTED';
   static readonly ADD_ITEM_SUCCEEDED = 'ADD_ITEM_SUCCEEDED';
   static readonly ADD_ITEM_FAILED = 'ADD_ITEM_FAILED';
+  static readonly REMOVE_ITEM = 'REMOVE_ITEM';
 
   @dispatch()
   addShoppingItem = (name: string): ShoppingItemAction =>
@@ -45,4 +46,11 @@ export class ShoppingListActions {
       meta: null,
       error
     });
+
+  @dispatch()
+  removeWishItem = (item: IShoppingItem): ShoppingItemAction => ({
+    type: ShoppingListActions.REMOVE_ITEM,
+    payload: item,
+    meta: null
+  });
 }

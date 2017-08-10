@@ -15,6 +15,15 @@ export const shoppingListReducer: Reducer<IShoppingItem[]> =
         return [...state, action.payload];
       case ShoppingListActions.ADD_ITEM_FAILED:
         return state;
+      case ShoppingListActions.REMOVE_ITEM:
+        const index = state.findIndex(item => item === action.payload);
+        if (index < 0) {
+          return state;
+        }
+        return [
+          ...state.slice(0, index),
+          ...state.slice(index + 1)
+        ];
       default:
         return state;
     }

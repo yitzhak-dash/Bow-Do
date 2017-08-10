@@ -1,3 +1,11 @@
 .shop-card {
   width: 400px;
 }
+
+.remove-btn {
+  display: none;
+}
+
+.item-container:hover .remove-btn {
+  display: inline-block;
+}

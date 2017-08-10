@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { select } from '@angular-redux/store';
 import { ShoppingListActions } from './actions';
+import { IShoppingItem } from './model';
 
 @Component({
   selector: 'app-shopping-list',
@@ -32,5 +33,9 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
     this.actions.addShoppingItem(input.value);
     // clear user input
     input.value = '';
+  }
+
+  removeItem(item: IShoppingItem) {
+    this.actions.removeWishItem(item);
   }
 }
