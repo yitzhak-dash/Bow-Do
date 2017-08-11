@@ -42,5 +42,5 @@ export class WishListEpic implements EpicFactory {
       .switchMap(action => this.service.removeWishItem(action.payload)
         .map(data => this.actions.removeWishItemSucceeded(data))
         .catch(response => of(this.actions.removeWishItemFailed({status: '' + response.status})))
-      );
+        .startWith(this.actions.removeWishItemStarted()));
 }

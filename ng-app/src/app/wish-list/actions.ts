@@ -21,6 +21,8 @@ export class WishListActions {
   static readonly REMOVE_ITEM = 'REMOVE_ITEM';
   static readonly REMOVE_ITEM_SUCCEEDED = 'REMOVE_ITEM_SUCCEEDED';
   static readonly REMOVE_ITEM_FAILED = 'REMOVE_ITEM_FAILED';
+  static readonly REMOVE_ITEM_STARTED = 'REMOVE_ITEM_STARTED';
+
 
   @dispatch()
   addWishItem = (name: string): WishItemAction =>
@@ -62,6 +64,13 @@ export class WishListActions {
     payload: item,
     meta: null
   });
+
+  removeWishItemStarted = (): WishItemAction => ({
+    type: WishListActions.REMOVE_ITEM_STARTED,
+    payload: null,
+    meta: null
+  });
+
 
   removeWishItemFailed = (error): WishItemAction =>
     ({

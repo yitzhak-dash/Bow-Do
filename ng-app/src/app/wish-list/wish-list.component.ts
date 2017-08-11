@@ -13,6 +13,7 @@ export class WishListComponent implements OnInit, OnDestroy {
   readonly ENTER_KEY = 'Enter';
 
   @select(['wishes','wishList']) readonly wishList$: any;
+  @select(['wishes','isLoading']) readonly isLoading: boolean;
 
   constructor(private actions: WishListActions) {
   }

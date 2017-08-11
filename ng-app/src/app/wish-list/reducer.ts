@@ -1,6 +1,6 @@
 import { Action, Reducer } from 'redux';
 //
-import { IWishItem, IWishListState, WISH_LIST_INIT_STATE } from './model';
+import { IWishListState, WISH_LIST_INIT_STATE } from './model';
 import { WishItemAction, WishListActions } from './actions';
 
 
@@ -9,7 +9,10 @@ export const wishesReducer: Reducer<IWishListState> =
     const action = a as WishItemAction;
     switch (action.type) {
       case WishListActions.ADD_ITEM_STARTED:
-        return state;
+        return {
+          ...state,
+          isLoading: true
+        };
       case WishListActions.ADD_ITEM_SUCCEEDED:
         return {
           ...state,
@@ -17,7 +20,15 @@ export const wishesReducer: Reducer<IWishListState> =
           wishList: [...state.wishList, action.payload]
         };
       case WishListActions.ADD_ITEM_FAILED:
-        return state;
+        return {
+          ...state,
+          isLoading: false
+        };
+      case WishListActions.REMOVE_ITEM_STARTED:
+        return {
+          ...state,
+          isLoading: true
+        };
       case WishListActions.REMOVE_ITEM_SUCCEEDED:
         const index = state.wishList.findIndex(item => item.id === action.payload.id);
         if (index < 0) {
@@ -32,7 +43,10 @@ export const wishesReducer: Reducer<IWishListState> =
           ]
         };
       case WishListActions.REMOVE_ITEM_FAILED:
-        return state;
+        return {
+          ...state,
+          isLoading: false
+        };
       default:
         return state;
     }
