@@ -1,20 +1,20 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { select } from '@angular-redux/store';
-import { ShoppingListActions } from './actions';
-import { IShoppingItem } from './model';
+import { WishListActions } from './actions';
+import { IWishItem } from './model';
 
 @Component({
-  selector: 'app-shopping-list',
-  templateUrl: './shopping-list.component.html',
-  styleUrls: ['./shopping-list.component.css'],
+  selector: 'app-wish-list',
+  templateUrl: './wish-list.component.html',
+  styleUrls: ['./wish-list.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ShoppingListComponent implements OnInit, OnDestroy {
+export class WishListComponent implements OnInit, OnDestroy {
   readonly ENTER_KEY = 'Enter';
 
-  @select() readonly shoppingList$: any;
+  @select(['wishes','wishList']) readonly wishList$: any;
 
-  constructor(private actions: ShoppingListActions) {
+  constructor(private actions: WishListActions) {
   }
 
   ngOnInit() {
@@ -29,12 +29,12 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
     if (evt.key !== this.ENTER_KEY) {
       return;
     }
-    this.actions.addShoppingItem(input.value);
+    this.actions.addWishItem(input.value);
     // clear user input
     input.value = '';
   }
 
-  removeItem(item: IShoppingItem) {
+  removeItem(item: IWishItem) {
     this.actions.removeWishItem(item);
   }
 }

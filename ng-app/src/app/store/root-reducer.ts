@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import { composeReducers, defaultFormReducer } from '@angular-redux/form';
 import { routerReducer } from '@angular-redux/router';
 //
-import { shoppingListReducer } from '../shopping-list/reducer';
+import { wishesReducer } from '../wish-list/reducer';
 import { pinPlaceReducer } from '../pin-place/reducer';
 import { locationReducer } from '../common/location.reducer';
 
@@ -13,7 +13,7 @@ export const rootReducer = composeReducers(
   defaultFormReducer(),
   combineReducers({
     pinPlace: pinPlaceReducer,
-    shoppingList: shoppingListReducer,
+    wishes: wishesReducer,
     location: locationReducer,
     router: routerReducer,
   }));

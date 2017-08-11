@@ -3,16 +3,16 @@ import { Injectable } from '@angular/core';
 import { dispatch } from '@angular-redux/store';
 import { FluxStandardAction } from 'flux-standard-action';
 //
-import { IShoppingItem } from './model';
+import { IWishItem } from './model';
 
 // Flux-standard-action gives us stronger typing of our actions.
-type Payload = IShoppingItem;
+type Payload = IWishItem;
 
-export type ShoppingItemAction = FluxStandardAction<Payload, string>;
+export type WishItemAction = FluxStandardAction<Payload, string>;
 
 
 @Injectable()
-export class ShoppingListActions {
+export class WishListActions {
   static readonly ADD_ITEM = 'ADD_ITEM';
   static readonly ADD_ITEM_STARTED = 'ADD_ITEM_STARTED';
   static readonly ADD_ITEM_SUCCEEDED = 'ADD_ITEM_SUCCEEDED';
@@ -23,49 +23,49 @@ export class ShoppingListActions {
   static readonly REMOVE_ITEM_FAILED = 'REMOVE_ITEM_FAILED';
 
   @dispatch()
-  addShoppingItem = (name: string): ShoppingItemAction =>
+  addWishItem = (name: string): WishItemAction =>
     ({
-      type: ShoppingListActions.ADD_ITEM,
+      type: WishListActions.ADD_ITEM,
       payload: {name},
       meta: name
     });
 
-  addShoppingItemStarted = (): ShoppingItemAction => ({
-    type: ShoppingListActions.ADD_ITEM_STARTED,
+  addWishItemStarted = (): WishItemAction => ({
+    type: WishListActions.ADD_ITEM_STARTED,
     payload: null,
     meta: null
   });
 
-  addShoppingItemSucceeded = (payload: Payload): ShoppingItemAction => ({
-    type: ShoppingListActions.ADD_ITEM_SUCCEEDED,
+  addWishItemSucceeded = (payload: Payload): WishItemAction => ({
+    type: WishListActions.ADD_ITEM_SUCCEEDED,
     payload,
     meta: null
   });
 
-  addShoppingItemFailed = (error): ShoppingItemAction =>
+  addWishItemFailed = (error): WishItemAction =>
     ({
-      type: ShoppingListActions.ADD_ITEM_FAILED,
+      type: WishListActions.ADD_ITEM_FAILED,
       payload: null,
       meta: null,
       error
     });
 
   @dispatch()
-  removeWishItem = (item: IShoppingItem): ShoppingItemAction => ({
-    type: ShoppingListActions.REMOVE_ITEM,
+  removeWishItem = (item: IWishItem): WishItemAction => ({
+    type: WishListActions.REMOVE_ITEM,
     payload: item,
     meta: null
   });
 
-  removeWishItemSucceeded = (item: IShoppingItem): ShoppingItemAction => ({
-    type: ShoppingListActions.REMOVE_ITEM_SUCCEEDED,
+  removeWishItemSucceeded = (item: IWishItem): WishItemAction => ({
+    type: WishListActions.REMOVE_ITEM_SUCCEEDED,
     payload: item,
     meta: null
   });
 
-  removeWishItemFailed = (error): ShoppingItemAction =>
+  removeWishItemFailed = (error): WishItemAction =>
     ({
-      type: ShoppingListActions.ADD_ITEM_FAILED,
+      type: WishListActions.ADD_ITEM_FAILED,
       payload: null,
       meta: null,
       error

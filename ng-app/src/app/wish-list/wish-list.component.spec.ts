@@ -7,7 +7,7 @@ import { NgReduxTestingModule, MockNgRedux } from '@angular-redux/store/testing'
 import 'rxjs/add/observable/of';
 //
 import { ShoppingListComponent } from './shopping-list.component';
-import { ShoppingListActions } from './actions';
+import { WishListActions } from './actions';
 
 describe('ShoppingListComponent', () => {
   let component: ShoppingListComponent;
@@ -25,7 +25,7 @@ describe('ShoppingListComponent', () => {
         NgReduxTestingModule
       ],
       providers: [
-        ShoppingListActions
+        WishListActions
       ],
       declarations: [
         ShoppingListComponent

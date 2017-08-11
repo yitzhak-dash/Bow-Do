@@ -6,16 +6,16 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/delay';
 import { Observable } from 'rxjs/Observable';
 //
-import { IShoppingItem } from './model';
+import { IWishItem } from './model';
 
 @Injectable()
 export class ShoppingListService {
   constructor(private http: Http) {
   }
 
-  addShoppingListItem = (item: IShoppingItem): Observable<IShoppingItem> =>
+  addWishListItem = (item: IWishItem): Observable<IWishItem> =>
     of({id: new Date().getMilliseconds(), name: item.name}).delay(500);
 
-  removeWishItem = (item: IShoppingItem): Observable<IShoppingItem> =>
+  removeWishItem = (item: IWishItem): Observable<IWishItem> =>
     of({...item}).delay(500);
 }

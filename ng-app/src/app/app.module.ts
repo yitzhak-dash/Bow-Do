@@ -12,13 +12,13 @@ import { MdButtonModule, MdCheckboxModule, MdInputModule, MdCardModule } from '@
 import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './page-not-found.component';
 import { AppRoutingModule } from './app-routing.module';
-import { ShoppingListComponent } from './shopping-list/shopping-list.component';
+import { WishListComponent } from './wish-list/wish-list.component';
 import { PinPlaceComponent } from './pin-place/pin-place.component';
 import { StoreModule } from './store/store.module';
 import { SideBarComponent } from './side-bar/side-bar.component';
-import { ShoppingListEpic } from './shopping-list/epics';
-import { ShoppingListActions } from './shopping-list/actions';
-import { ShoppingListService } from './shopping-list/service';
+import { WishListEpic } from './wish-list/epics';
+import { WishListActions } from './wish-list/actions';
+import { ShoppingListService } from './wish-list/service';
 import { PinPlaceActions } from './pin-place/actions';
 import { PinPlaceEpic } from './pin-place/epics';
 import { PinPlaceService } from './pin-place/service';
@@ -48,8 +48,8 @@ import { LocationActions } from './common/location.actions';
     Locator,
     LocationEpic,
     LocationActions,
-    ShoppingListEpic,
-    ShoppingListActions,
+    WishListEpic,
+    WishListActions,
     ShoppingListService,
     PinPlaceActions,
     PinPlaceEpic,
@@ -57,7 +57,7 @@ import { LocationActions } from './common/location.actions';
   declarations: [
     AppComponent,
     PageNotFoundComponent,
-    ShoppingListComponent,
+    WishListComponent,
     PinPlaceComponent,
     SideBarComponent
   ],
