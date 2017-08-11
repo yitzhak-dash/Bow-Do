@@ -5,7 +5,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/startWith';
-import { createEpicMiddleware, Epic } from 'redux-observable';
+import { combineEpics, createEpicMiddleware, Epic } from 'redux-observable';
 //
 import { IAppState } from '../store/root-state.model';
 import { ShoppingItemAction, ShoppingListActions } from './actions';
@@ -19,20 +19,28 @@ export class ShoppingListEpic implements EpicFactory {
   }
 
   public createEpic() {
-    return createEpicMiddleware(this.createAddShoppingItemEpic);
+    return createEpicMiddleware(
+      combineEpics(
+        this.createRemoveWishItemEpic,
+        this.createAddShoppingItemEpic));
   }
 
 
   private createAddShoppingItemEpic: Epic<ShoppingItemAction, IAppState> = (action$, store) =>
     action$
       .ofType(ShoppingListActions.ADD_ITEM)
-      // .filter(() => animalsNotAlreadyFetched(animalType, store.getState()))
       .switchMap(action => this.service.addShoppingListItem(action.payload)
         .map(data => this.actions.addShoppingItemSucceeded(data))
         .catch(response => of(this.actions.addShoppingItemFailed({
           status: '' + response.status,
         })))
         .startWith(this.actions.addShoppingItemStarted()));
-}
 
-// .catch(err => of({ type: 'ERROR', payload: { error: err } }));
+  private createRemoveWishItemEpic: Epic<ShoppingItemAction, IAppState> = (action$, store) =>
+    action$
+      .ofType(ShoppingListActions.REMOVE_ITEM)
+      .switchMap(action => this.service.removeWishItem(action.payload)
+        .map(data => this.actions.removeWishItemSucceeded(data))
+        .catch(response => of(this.actions.removeWishItemFailed({status: '' + response.status})))
+      );
+}

@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 //
 import { of } from 'rxjs/observable/of';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/delay';
 import { Observable } from 'rxjs/Observable';
 //
 import { IShoppingItem } from './model';
@@ -13,5 +14,8 @@ export class ShoppingListService {
   }
 
   addShoppingListItem = (item: IShoppingItem): Observable<IShoppingItem> =>
-    of({id: new Date().getMilliseconds(), name: item.name})
+    of({id: new Date().getMilliseconds(), name: item.name}).delay(500);
+
+  removeWishItem = (item: IShoppingItem): Observable<IShoppingItem> =>
+    of({...item}).delay(500);
 }

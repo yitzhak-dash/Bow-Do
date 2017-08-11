@@ -26,7 +26,6 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
 
   createItem(evt: any, input: any) {
     // wait for ENTER
-    console.log(evt);
     if (evt.key !== this.ENTER_KEY) {
       return;
     }
