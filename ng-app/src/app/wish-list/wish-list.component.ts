@@ -19,6 +19,7 @@ export class WishListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.actions.loadWishItems();
   }
 
   ngOnDestroy(): void {

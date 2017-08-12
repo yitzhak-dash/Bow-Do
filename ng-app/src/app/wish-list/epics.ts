@@ -22,25 +22,34 @@ export class WishListEpic implements EpicFactory {
     return createEpicMiddleware(
       combineEpics(
         this.createRemoveWishItemEpic,
-        this.createAddWishItemEpic));
+        this.createAddWishItemEpic,
+        this.createGetWishItemsEpic));
   }
 
 
   private createAddWishItemEpic: Epic<WishItemAction, IAppState> = (action$, store) =>
     action$
       .ofType(WishListActions.ADD_ITEM)
-      .switchMap(action => this.service.addWishListItem(action.payload)
+      .switchMap(action => this.service.addWishItems(action.payload)
         .map(data => this.actions.addWishItemSucceeded(data))
         .catch(response => of(this.actions.addWishItemFailed({
           status: '' + response.status,
         })))
-        .startWith(this.actions.addWishItemStarted()));
+        .startWith(this.actions.workOnWishItemListStarted()));
 
   private createRemoveWishItemEpic: Epic<WishItemAction, IAppState> = (action$, store) =>
     action$
       .ofType(WishListActions.REMOVE_ITEM)
-      .switchMap(action => this.service.removeWishItem(action.payload)
+      .switchMap(action => this.service.removeWishItems(action.payload)
         .map(data => this.actions.removeWishItemSucceeded(data))
         .catch(response => of(this.actions.removeWishItemFailed({status: '' + response.status})))
-        .startWith(this.actions.removeWishItemStarted()));
+        .startWith(this.actions.workOnWishItemListStarted()));
+
+  private createGetWishItemsEpic: Epic<WishItemAction, IAppState> = (action$, store) =>
+    action$
+      .ofType(WishListActions.LOAD_ITEMS)
+      .switchMap(action => this.service.getWishItems()
+        .map(data => this.actions.loadWishItemsSucceeded(data))
+        .catch(response => of(this.actions.loadWishItemsFailed({status: '' + response.status})))
+        .startWith(this.actions.workOnWishItemListStarted()));
 }

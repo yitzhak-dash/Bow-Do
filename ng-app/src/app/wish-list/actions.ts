@@ -6,34 +6,37 @@ import { FluxStandardAction } from 'flux-standard-action';
 import { IWishItem } from './model';
 
 // Flux-standard-action gives us stronger typing of our actions.
-type Payload = IWishItem;
+type Payload = IWishItem[];
 
 export type WishItemAction = FluxStandardAction<Payload, string>;
 
 
 @Injectable()
 export class WishListActions {
+  static readonly LOAD_ITEMS = 'LOAD_ITEMS';
+  static readonly LOAD_ITEMS_SUCCEEDED = 'LOAD_ITEMS_SUCCEEDED';
+  static readonly LOAD_ITEMS_FAILED = 'LOAD_ITEMS_FAILED';
+  //
   static readonly ADD_ITEM = 'ADD_ITEM';
-  static readonly ADD_ITEM_STARTED = 'ADD_ITEM_STARTED';
+  static readonly WORK_ON_ITEM_LIST_STARTED = 'WORK_ON_ITEM_LIST_STARTED';
   static readonly ADD_ITEM_SUCCEEDED = 'ADD_ITEM_SUCCEEDED';
   static readonly ADD_ITEM_FAILED = 'ADD_ITEM_FAILED';
   //
   static readonly REMOVE_ITEM = 'REMOVE_ITEM';
   static readonly REMOVE_ITEM_SUCCEEDED = 'REMOVE_ITEM_SUCCEEDED';
   static readonly REMOVE_ITEM_FAILED = 'REMOVE_ITEM_FAILED';
-  static readonly REMOVE_ITEM_STARTED = 'REMOVE_ITEM_STARTED';
 
 
   @dispatch()
   addWishItem = (name: string): WishItemAction =>
     ({
       type: WishListActions.ADD_ITEM,
-      payload: {name},
+      payload: [{name}],
       meta: name
     });
 
-  addWishItemStarted = (): WishItemAction => ({
-    type: WishListActions.ADD_ITEM_STARTED,
+  workOnWishItemListStarted = (): WishItemAction => ({
+    type: WishListActions.WORK_ON_ITEM_LIST_STARTED,
     payload: null,
     meta: null
   });
@@ -55,22 +58,15 @@ export class WishListActions {
   @dispatch()
   removeWishItem = (item: IWishItem): WishItemAction => ({
     type: WishListActions.REMOVE_ITEM,
-    payload: item,
+    payload: [item],
     meta: null
   });
 
-  removeWishItemSucceeded = (item: IWishItem): WishItemAction => ({
+  removeWishItemSucceeded = (items: IWishItem[]): WishItemAction => ({
     type: WishListActions.REMOVE_ITEM_SUCCEEDED,
-    payload: item,
+    payload: items,
     meta: null
   });
-
-  removeWishItemStarted = (): WishItemAction => ({
-    type: WishListActions.REMOVE_ITEM_STARTED,
-    payload: null,
-    meta: null
-  });
-
 
   removeWishItemFailed = (error): WishItemAction =>
     ({
@@ -79,4 +75,24 @@ export class WishListActions {
       meta: null,
       error
     });
+
+  @dispatch()
+  loadWishItems = (): WishItemAction => ({
+    type: WishListActions.LOAD_ITEMS,
+    payload: null,
+    meta: null
+  });
+
+  loadWishItemsSucceeded = (items: IWishItem[]): WishItemAction => ({
+    type: WishListActions.LOAD_ITEMS_SUCCEEDED,
+    payload: items,
+    meta: null
+  });
+
+  loadWishItemsFailed = (error): WishItemAction => ({
+    type: WishListActions.LOAD_ITEMS_FAILED,
+    payload: null,
+    meta: null,
+    error
+  });
 }

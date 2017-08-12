@@ -1,14 +1,15 @@
 import { Action, Reducer } from 'redux';
 //
-import { IWishListState, WISH_LIST_INIT_STATE } from './model';
+import { IWishItem, IWishListState, WISH_LIST_INIT_STATE } from './model';
 import { WishItemAction, WishListActions } from './actions';
+import { removeItems } from '../common/reducer-helpers';
 
 
 export const wishesReducer: Reducer<IWishListState> =
   (state: IWishListState = WISH_LIST_INIT_STATE, a: Action): IWishListState => {
     const action = a as WishItemAction;
     switch (action.type) {
-      case WishListActions.ADD_ITEM_STARTED:
+      case WishListActions.WORK_ON_ITEM_LIST_STARTED:
         return {
           ...state,
           isLoading: true
@@ -17,32 +18,36 @@ export const wishesReducer: Reducer<IWishListState> =
         return {
           ...state,
           isLoading: false,
-          wishList: [...state.wishList, action.payload]
+          wishList: [...state.wishList, ...action.payload]
         };
       case WishListActions.ADD_ITEM_FAILED:
         return {
           ...state,
           isLoading: false
         };
-      case WishListActions.REMOVE_ITEM_STARTED:
-        return {
-          ...state,
-          isLoading: true
-        };
       case WishListActions.REMOVE_ITEM_SUCCEEDED:
-        const index = state.wishList.findIndex(item => item.id === action.payload.id);
-        if (index < 0) {
-          return state;
-        }
         return {
           ...state,
           isLoading: false,
           wishList: [
-            ...state.wishList.slice(0, index),
-            ...state.wishList.slice(index + 1)
+            ...removeItems(
+              state.wishList,
+              action.payload.map(item => item.id),
+              (item: IWishItem) => item.id)
           ]
         };
       case WishListActions.REMOVE_ITEM_FAILED:
+        return {
+          ...state,
+          isLoading: false
+        };
+      case WishListActions.LOAD_ITEMS_SUCCEEDED:
+        return {
+          ...state,
+          wishList: action.payload,
+          isLoading: false
+        };
+      case WishListActions.LOAD_ITEMS_FAILED:
         return {
           ...state,
           isLoading: false
@@ -51,3 +56,4 @@ export const wishesReducer: Reducer<IWishListState> =
         return state;
     }
   };
+
