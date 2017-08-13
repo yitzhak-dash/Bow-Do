@@ -23,7 +23,8 @@ export class WishListEpic implements EpicFactory {
       combineEpics(
         this.createRemoveWishItemEpic,
         this.createAddWishItemEpic,
-        this.createGetWishItemsEpic));
+        this.createGetWishItemsEpic,
+        this.createCompleteWishItemsEpic));
   }
 
 
@@ -51,5 +52,13 @@ export class WishListEpic implements EpicFactory {
       .switchMap(action => this.service.getWishItems()
         .map(data => this.actions.loadWishItemsSucceeded(data))
         .catch(response => of(this.actions.loadWishItemsFailed({status: '' + response.status})))
+        .startWith(this.actions.workOnWishItemListStarted()));
+
+  private createCompleteWishItemsEpic: Epic<WishItemAction, IAppState> = (action$, store) =>
+    action$
+      .ofType(WishListActions.COMPLETE_ITEMS)
+      .switchMap(action => this.service.completeWishItems(action.payload)
+        .map(data => this.actions.completeWishItemSucceeded(data))
+        .catch(response => of(this.actions.completeWishItemFailed({status: '' + response.status})))
         .startWith(this.actions.workOnWishItemListStarted()));
 }

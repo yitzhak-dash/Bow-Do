@@ -6,12 +6,12 @@
       </md-card-title>
     </md-card-header>
     <md-card-content>
-      <div *ngFor="let item of wishList$ | async">
+      <div *ngFor="let item of uncompletedItems$ | async">
         <div class="item-container">
-          <md-checkbox value="completed">
+          <md-checkbox [(ngModel)]="item.checked" (change)="completeItem(item)">
             <div>
               <span>{{item.name}}</span>
-              <button class="remove-btn" (click)="removeItem(item)">x</button>
+              <button class="remove-btn" (click)="removeItem(item)">&#10006;</button>
             </div>
           </md-checkbox>
         </div>
@@ -25,6 +25,16 @@
                (keypress)="createItem($event,itemInput)"/>
       </md-input-container>
     </md-card-content>
+    <div *ngFor="let item of completedItems$ | async">
+      <div class="item-container">
+        <md-checkbox [(ngModel)]="item.checked" (change)="completeItem(item)">
+          <div>
+            <span [class.line]="item.checked">{{item.name}}</span>
+            <button class="remove-btn" type="reset" (click)="removeItem(item)">&#10006;</button>
+          </div>
+        </md-checkbox>
+      </div>
+    </div>
     <md-card-actions>
       <button md-button>CLEAR ALL</button>
       <button md-button>SHARE</button>

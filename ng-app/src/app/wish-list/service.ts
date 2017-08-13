@@ -22,28 +22,38 @@ export class ShoppingListService {
         id: new Date().getMilliseconds(),
         name: 'one',
         created: new Date(),
-        indexNum: this.count++
+        indexNum: this.count++,
+        checked: false
       },
       {
-        id: 1 + new Date().getMilliseconds(),
+        id: this.count + new Date().getMilliseconds(),
         name: 'two',
         created: new Date(),
-        indexNum: this.count++
+        indexNum: this.count++,
+        checked: false
       }
     ]);
 
   addWishItems = (items: IWishItem[]): Observable<IWishItem[]> =>
-    of([
-      {
+    of(items.map(i =>
+      ({
         id: new Date().getMilliseconds(),
-        name: items[0].name,
+        name: i.name,
         created: new Date(),
-        indexNum: this.count++
-      }
-    ]).delay(100);
+        indexNum: this.count++,
+        checked: false
+      })
+    )).delay(100);
 
   removeWishItems = (items: IWishItem[]): Observable<IWishItem[]> => {
     this.count -= items.length;
     return of([...items]).delay(100);
   };
+
+  completeWishItems = (items: IWishItem[]): Observable<IWishItem[]> =>
+    of(items.map((item: IWishItem) => ({
+      ...item,
+      checked: true,
+    })))
+      .delay(100);
 }
