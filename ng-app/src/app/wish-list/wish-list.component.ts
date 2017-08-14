@@ -54,7 +54,7 @@ export class WishListComponent implements OnInit, OnDestroy {
     this.actions.removeWishItem(item);
   }
 
-  completeItem(item: IWishItem) {
-    this.actions.completeWishItem(item);
+  changeItemStatus(item: IWishItem) {
+    this.actions.changeWishItemStatus(item);
   }
 }

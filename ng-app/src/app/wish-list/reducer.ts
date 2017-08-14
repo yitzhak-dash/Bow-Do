@@ -52,7 +52,7 @@ export const wishesReducer: Reducer<IWishListState> =
           ...state,
           isLoading: false
         };
-      case WishListActions.COMPLETE_ITEM_SUCCEEDED:
+      case WishListActions.CHANGE_ITEMS_STATUS_SUCCEEDED:
         return {
           ...state,
           wishList: [
@@ -63,7 +63,7 @@ export const wishesReducer: Reducer<IWishListState> =
           ],
           isLoading: false
         };
-      case WishListActions.COMPLETE_ITEM_FAILED:
+      case WishListActions.CHANGE_ITEMS_STATUS_FAILED:
         return {
           ...state,
           isLoading: false

@@ -31,6 +31,13 @@ export class ShoppingListService {
         created: new Date(),
         indexNum: this.count++,
         checked: false
+      },
+      {
+        id: this.count + new Date().getMilliseconds(),
+        name: 'three',
+        created: new Date(),
+        indexNum: this.count++,
+        checked: true
       }
     ]);
 
@@ -53,7 +60,6 @@ export class ShoppingListService {
   completeWishItems = (items: IWishItem[]): Observable<IWishItem[]> =>
     of(items.map((item: IWishItem) => ({
       ...item,
-      checked: true,
-    })))
-      .delay(100);
+      checked: !item.checked,
+    }))).delay(100);
 }

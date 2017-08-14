@@ -3,7 +3,7 @@ export interface IWishItem {
   name: string;
   created?: Date;
   indexNum?: number;
-  checked?:boolean;
+  checked?: boolean;
 }
 
 export interface IWishListState {

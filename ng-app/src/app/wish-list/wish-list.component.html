@@ -8,7 +8,7 @@
     <md-card-content>
       <div *ngFor="let item of uncompletedItems$ | async">
         <div class="item-container">
-          <md-checkbox [(ngModel)]="item.checked" (change)="completeItem(item)">
+          <md-checkbox [checked]="item.checked" (change)="changeItemStatus(item)">
             <div>
               <span>{{item.name}}</span>
               <button class="remove-btn" (click)="removeItem(item)">&#10006;</button>
@@ -20,14 +20,14 @@
       <md-input-container>
         <input class="wish-name"
                mdInput
-               placeholder="item"
+               placeholder="add item"
                #itemInput
                (keypress)="createItem($event,itemInput)"/>
       </md-input-container>
     </md-card-content>
     <div *ngFor="let item of completedItems$ | async">
       <div class="item-container">
-        <md-checkbox [(ngModel)]="item.checked" (change)="completeItem(item)">
+        <md-checkbox [checked]="item.checked" (change)="changeItemStatus(item)">
           <div>
             <span [class.line]="item.checked">{{item.name}}</span>
             <button class="remove-btn" type="reset" (click)="removeItem(item)">&#10006;</button>

@@ -6,17 +6,19 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NgReduxTestingModule, MockNgRedux } from '@angular-redux/store/testing';
 import 'rxjs/add/observable/of';
 //
-import { ShoppingListComponent } from './shopping-list.component';
 import { WishListActions } from './actions';
+import { WishListComponent } from './wish-list.component';
+import { FormsModule } from '@angular/forms';
 
 describe('ShoppingListComponent', () => {
-  let component: ShoppingListComponent;
-  let fixture: ComponentFixture<ShoppingListComponent>;
+  let component: WishListComponent;
+  let fixture: ComponentFixture<WishListComponent>;
 
   // async beforeEach
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
+        FormsModule,
         MdButtonModule,
         MdCheckboxModule,
         MdInputModule,
@@ -28,7 +30,7 @@ describe('ShoppingListComponent', () => {
         WishListActions
       ],
       declarations: [
-        ShoppingListComponent
+        WishListComponent
       ]
     }).compileComponents(); // compile template and css
     MockNgRedux.reset();
@@ -36,7 +38,7 @@ describe('ShoppingListComponent', () => {
 
   // synchronous beforeEach
   beforeEach(() => {
-    fixture = TestBed.createComponent(ShoppingListComponent);
+    fixture = TestBed.createComponent(WishListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -57,13 +59,13 @@ describe('ShoppingListComponent', () => {
     const itemName_2 = 'new added name #2';
 
     configMockRedux([
-        {id: 0, name: itemName},
-        {id: 0, name: itemName_2}],
-      'shoppingList');
+        {id: 0, name: itemName, checked: false},
+        {id: 1, name: itemName_2, checked: false}],
+      'wishList');
 
     fixture.detectChanges();
 
-    component.shoppingList$.subscribe(items => {
+    component.uncompletedItems$.subscribe(items => {
       fixture.detectChanges();
       const addedItem = items[0];
       const addedItem2 = items[1];

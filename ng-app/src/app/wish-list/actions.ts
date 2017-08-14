@@ -27,10 +27,9 @@ export class WishListActions {
   static readonly REMOVE_ITEM_SUCCEEDED = 'REMOVE_ITEM_SUCCEEDED';
   static readonly REMOVE_ITEM_FAILED = 'REMOVE_ITEM_FAILED';
   //
-  static readonly COMPLETE_ITEMS = 'COMPLETE_ITEM';
-  static readonly COMPLETE_ITEM_SUCCEEDED = 'COMPLETE_ITEM_SUCCEEDED';
-  static readonly COMPLETE_ITEM_FAILED = 'COMPLETE_ITEM_FAILED';
-
+  static readonly CHANGE_ITEMS_STATUS = 'CHANGE_ITEMS_STATUS';
+  static readonly CHANGE_ITEMS_STATUS_SUCCEEDED = 'CHANGE_ITEMS_STATUS_SUCCEEDED';
+  static readonly CHANGE_ITEMS_STATUS_FAILED = 'CHANGE_ITEMS_STATUS_FAILED';
 
   @dispatch()
   addWishItem = (name: string): WishItemAction =>
@@ -102,20 +101,20 @@ export class WishListActions {
   });
 
   @dispatch()
-  completeWishItem = (item: IWishItem): WishItemAction => ({
-    type: WishListActions.COMPLETE_ITEMS,
+  changeWishItemStatus = (item: IWishItem): WishItemAction => ({
+    type: WishListActions.CHANGE_ITEMS_STATUS,
     payload: [item],
     meta: null
   });
 
-  completeWishItemSucceeded = (items: IWishItem[]): WishItemAction => ({
-    type: WishListActions.COMPLETE_ITEM_SUCCEEDED,
+  changeWishItemStatusSucceeded = (items: IWishItem[]): WishItemAction => ({
+    type: WishListActions.CHANGE_ITEMS_STATUS_SUCCEEDED,
     payload: items,
     meta: null
   });
 
-  completeWishItemFailed = (error): WishItemAction => ({
-    type: WishListActions.COMPLETE_ITEM_FAILED,
+  changeWishItemStatusFailed = (error): WishItemAction => ({
+    type: WishListActions.CHANGE_ITEMS_STATUS_FAILED,
     payload: null,
     meta: null,
     error
