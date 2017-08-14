@@ -49,12 +49,4 @@ export class WishListComponent implements OnInit, OnDestroy {
     // clear user input
     input.value = '';
   }
-
-  removeItem(item: IWishItem) {
-    this.actions.removeWishItem(item);
-  }
-
-  changeItemStatus(item: IWishItem) {
-    this.actions.changeWishItemStatus(item);
-  }
 }

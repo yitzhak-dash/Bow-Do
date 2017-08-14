@@ -25,6 +25,7 @@ import { PinPlaceService } from './pin-place/service';
 import { Locator } from './services/locator';
 import { LocationEpic } from './common/location.epic';
 import { LocationActions } from './common/location.actions';
+import { WishItemListComponent } from './wish-list/wish-item-list/wish-item-list.component';
 
 @NgModule({
   imports: [
@@ -59,7 +60,8 @@ import { LocationActions } from './common/location.actions';
     PageNotFoundComponent,
     WishListComponent,
     PinPlaceComponent,
-    SideBarComponent
+    SideBarComponent,
+    WishItemListComponent
   ],
   bootstrap: [AppComponent]
 })

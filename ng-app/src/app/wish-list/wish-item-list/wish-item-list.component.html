@@ -1,0 +1,10 @@
+<div *ngFor="let item of items$ | async">
+  <div class="item-container">
+    <md-checkbox [checked]="item.checked" (change)="changeItemStatus(item)">
+      <div>
+        <span>{{item.name}}</span>
+        <button class="remove-btn" (click)="removeItem(item)">&#10006;</button>
+      </div>
+    </md-checkbox>
+  </div>
+</div>
