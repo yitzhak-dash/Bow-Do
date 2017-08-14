@@ -27,10 +27,8 @@ export class PinPlaceComponent implements OnInit, OnDestroy {
   // @select((state: IAppState) => state.pinPlace.loading) isLoadingIndicator$: Observable<boolean>;
   @select(['pinPlace', 'loading']) isLoadingIndicator$: Observable<boolean>;
 
-
   constructor(private actions: PinPlaceActions) {
   }
-
 
   pinPlace() {
     this.actions.addNewPlace(this.model);

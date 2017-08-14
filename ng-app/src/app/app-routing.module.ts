@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
 //
-import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { PageNotFoundComponent } from './page-not-found.component';
 import { PinPlaceComponent } from './pin-place/pin-place.component';
+import { WishListComponent } from './wish-list/wish-list.component';
 
 export const routes: MenuRoutes = [
   {path: '', redirectTo: '/shopping-list', pathMatch: 'full'},
-  {path: 'shopping-list', component: ShoppingListComponent, title: 'wish list', isMenuItem: true},
+  {path: 'shopping-list', component: WishListComponent, title: 'wish list', isMenuItem: true},
   {path: 'pin-place', component: PinPlaceComponent, title: 'pin place', isMenuItem: true},
   {path: '**', component: PageNotFoundComponent}
 ];

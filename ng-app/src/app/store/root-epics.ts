@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 //
-import { ShoppingListEpic } from '../shopping-list/epics';
+import { WishListEpic } from '../wish-list/epics';
 import { PinPlaceEpic } from '../pin-place/epics';
 import { LocationEpic } from '../common/location.epic';
 
 @Injectable()
 export class RootEpics {
-  constructor(private shoppingListEpic: ShoppingListEpic,
+  constructor(private shoppingListEpic: WishListEpic,
               private pinPlaceEpic: PinPlaceEpic,
               private locationEpic: LocationEpic) {
   }

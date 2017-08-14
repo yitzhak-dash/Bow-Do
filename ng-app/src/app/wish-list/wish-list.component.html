@@ -1,0 +1,27 @@
+<div>
+  <md-card class="shop-card">
+    <md-card-header>
+      <md-card-title>
+        <h3>Wish list</h3>
+      </md-card-title>
+    </md-card-header>
+    <md-card-content>
+      <app-wish-item-list [items$]="uncompletedItems$"></app-wish-item-list>
+      <br>
+      <md-input-container>
+        <input class="wish-name"
+               mdInput
+               placeholder="add item"
+               #itemInput
+               (keypress)="createItem($event,itemInput)"/>
+      </md-input-container>
+    </md-card-content>
+    <app-wish-item-list [items$]="completedItems$"></app-wish-item-list>
+    <md-card-actions>
+      <button md-button>CLEAR ALL</button>
+      <button md-button>SHARE</button>
+    </md-card-actions>
+  </md-card>
+  <div *ngIf="isLoading | async">loading</div>
+
+</div>
