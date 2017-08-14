@@ -6,7 +6,6 @@ import { NgRedux, select } from '@angular-redux/store';
 import { WishListActions } from './actions';
 import { IWishItem } from './model';
 import { IAppState } from '../store/root-state.model';
-import { zip } from 'rxjs/observable/zip';
 
 @Component({
   selector: 'app-wish-list',
@@ -33,7 +32,6 @@ export class WishListComponent implements OnInit, OnDestroy {
       .map(item => item.filter(x => x.checked));
 
     this.actions.loadWishItems();
-
   }
 
   ngOnDestroy(): void {

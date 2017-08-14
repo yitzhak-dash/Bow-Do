@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 //
+import { MdCheckboxModule } from '@angular/material';
+//
 import { WishItemListComponent } from './wish-item-list.component';
+import { WishListActions } from '../actions';
 
 
 describe('WishItemListComponent', () => {
@@ -9,7 +12,13 @@ describe('WishItemListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WishItemListComponent ]
+      imports:[
+        MdCheckboxModule
+      ],
+      declarations: [ WishItemListComponent ],
+      providers: [
+        WishListActions
+      ],
     })
     .compileComponents();
   }));

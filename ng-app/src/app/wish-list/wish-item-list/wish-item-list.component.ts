@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 //
 import { Observable } from 'rxjs/Observable';
 //
@@ -8,7 +8,8 @@ import { WishListActions } from '../actions';
 @Component({
   selector: 'wish-item-list',
   templateUrl: './wish-item-list.component.html',
-  styleUrls: ['./wish-item-list.component.css']
+  styleUrls: ['./wish-item-list.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WishItemListComponent implements OnInit {
 
