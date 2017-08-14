@@ -6,7 +6,7 @@ import { IWishItem } from '../model';
 import { WishListActions } from '../actions';
 
 @Component({
-  selector: 'wish-item-list',
+  selector: 'app-wish-item-list',
   templateUrl: './wish-item-list.component.html',
   styleUrls: ['./wish-item-list.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,

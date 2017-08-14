@@ -12,15 +12,14 @@ describe('WishItemListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports:[
+      imports: [
         MdCheckboxModule
       ],
-      declarations: [ WishItemListComponent ],
+      declarations: [WishItemListComponent],
       providers: [
         WishListActions
       ],
-    })
-    .compileComponents();
+    }).compileComponents();
   }));
 
   beforeEach(() => {
