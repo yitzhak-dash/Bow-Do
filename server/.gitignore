@@ -61,6 +61,7 @@ typings/
 
 # js files
 *.js
+*.map
 
 !gulpfile.js
 
