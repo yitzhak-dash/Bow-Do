@@ -59,6 +59,9 @@ typings/
 # dotenv environment variables file
 .env
 
+# dist folder - compiler output
+dist/
+
 # js files
 *.js
 *.map

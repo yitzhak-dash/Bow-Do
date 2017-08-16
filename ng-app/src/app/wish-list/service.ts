@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, RequestOptions, Headers } from '@angular/http';
 //
 import { of } from 'rxjs/observable/of';
 import 'rxjs/add/operator/map';
@@ -16,30 +16,14 @@ export class ShoppingListService {
     this.count = 0;
   }
 
+  private getHeaders(): RequestOptions {
+    const headers = new Headers({'Content-Type': 'application/json'});
+    return new RequestOptions({headers: headers});
+  }
+
   getWishItems = (): Observable<IWishItem[]> =>
-    of([
-      {
-        id: new Date().getMilliseconds(),
-        name: 'one',
-        created: new Date(),
-        indexNum: this.count++,
-        checked: false
-      },
-      {
-        id: this.count + new Date().getMilliseconds(),
-        name: 'two',
-        created: new Date(),
-        indexNum: this.count++,
-        checked: false
-      },
-      {
-        id: this.count + new Date().getMilliseconds(),
-        name: 'three',
-        created: new Date(),
-        indexNum: this.count++,
-        checked: true
-      }
-    ]);
+    this.http.get('http://localhost:4300/api/wish', this.getHeaders())
+      .map(response => response.json());
 
   addWishItems = (items: IWishItem[]): Observable<IWishItem[]> =>
     of(items.map(i =>

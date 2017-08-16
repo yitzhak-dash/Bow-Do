@@ -1,7 +1,9 @@
 import * as restify from 'restify';
-import { Controller, Get, interfaces } from 'inversify-restify-utils';
+import { Controller, Get, interfaces, Post } from 'inversify-restify-utils';
 import { injectable, inject } from 'inversify';
-import { ITestService, TYPES } from '../services/test.service';
+//
+import { ITestService } from '../services/test.service';
+import { TYPES } from '../inversify.identifiers';
 
 @Controller('/api')
 @injectable()
@@ -12,9 +14,8 @@ export class WishListController implements interfaces.Controller {
 
     @Get('/wish')
     getWishes(req: restify.Request, res: restify.Response, next: restify.Next) {
-        res.send(200, {
-            message: this.service.saySomething()
-        });
+        res.send(200,
+            this.service.getWishItems());
         next();
     }
 
@@ -22,6 +23,17 @@ export class WishListController implements interfaces.Controller {
     getWishById(req: restify.Request, res: restify.Response, next: restify.Next) {
         res.send(200, {
             message: this.service.saySomething() + ' ' + req.params['id']
+        });
+        next();
+    }
+
+    @Post('/wish')
+    addWishItems(req: restify.Request, res: restify.Response, next: restify.Next) {
+        console.log(req.body);
+        res.send(200, {
+            error: null,
+            succeeded: true,
+            model: req.body
         });
         next();
     }

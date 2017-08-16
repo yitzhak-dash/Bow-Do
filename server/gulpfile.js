@@ -1,10 +1,11 @@
 const gulp = require('gulp');
 const ts = require('gulp-typescript');
 const tslint = require("gulp-tslint");
+const runSequence = require("run-sequence");
 const JSON_FILES = ['./src/*.json', './src/**/*.json'];
 
-gulp.task('default', function () {
-    // place code for your default task here
+gulp.task('default', function (cb) {
+    runSequence("tslint", "build", cb);
 });
 
 // TypeScript build for /src folder

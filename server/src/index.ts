@@ -1,26 +1,29 @@
 import * as restify from 'restify';
 import 'reflect-metadata';
-import { Container } from 'inversify';
-import { ITestService, TestService, TYPES } from './services/test.service';
-import { interfaces, InversifyRestifyServer, TYPE } from 'inversify-restify-utils';
-import { WishListController } from './controllers/wish-list.controller';
+import { InversifyRestifyServer } from 'inversify-restify-utils';
+import { createContainer } from './inversify.config';
+import * as corsMiddleware from 'restify-cors-middleware';
 
 
-const container = new Container();
-container.bind<ITestService>(TYPES.ITestService).to(TestService);
-container.bind<interfaces.Controller>(TYPE.Controller).to(WishListController).whenTargetNamed('WishListController');
-
-let server = new InversifyRestifyServer(container, {
+const container = createContainer();
+const server = new InversifyRestifyServer(container, {
     name: 'Bow-Do REST API',
     version: '1.0.0'
+}).setConfig((app) => {
+    const cors = corsMiddleware({
+        preflightMaxAge: 600, //Optional
+        origins: ['*'],
+        allowHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'x-access-token'],
+        exposeHeaders: ['API-Token-Expiry'],
+    });
+
+    app.use(cors.actual);
+    app.pre(cors.preflight);
+    app.use(restify.plugins.acceptParser(app.acceptable));
+    app.use(restify.plugins.queryParser());
+    app.use(restify.plugins.bodyParser());
+    app.pre(restify.pre.sanitizePath());
 }).build();
-
-
-//parsing settings
-server.use(restify.plugins.acceptParser(server.acceptable));
-server.use(restify.plugins.queryParser());
-server.use(restify.plugins.bodyParser());
-server.pre(restify.pre.sanitizePath());
 
 server.listen(4300, function () {
     console.log('%s listening at %s', server.name, server.url);
