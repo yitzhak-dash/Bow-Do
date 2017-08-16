@@ -1,13 +1,11 @@
 import { injectable } from 'inversify';
 
-export interface ITestService {
-    saySomething(): string;
-
+export interface IWishService {
     getWishItems(): any[];
 }
 
 @injectable()
-export class TestService implements ITestService {
+export class WishService implements IWishService {
     count: number;
 
     getWishItems(): any[] {
@@ -34,9 +32,5 @@ export class TestService implements ITestService {
                 checked: true
             }
         ];
-    }
-
-    saySomething(): string {
-        return 'something...';
     }
 }

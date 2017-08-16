@@ -1,3 +1,3 @@
 export const TYPES = {
-    ITestService: Symbol('ITestService'),
+    IWishService: Symbol('IWishService'),
 };
