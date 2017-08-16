@@ -10,20 +10,27 @@ const server = new InversifyRestifyServer(container, {
     name: 'Bow-Do REST API',
     version: '1.0.0'
 }).setConfig((app) => {
-    const cors = corsMiddleware({
-        preflightMaxAge: 600, //Optional
-        origins: ['*'],
-        allowHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'x-access-token'],
-        exposeHeaders: ['API-Token-Expiry'],
-    });
+    config(app);
+}).build();
 
+function config(app: restify.Server) {
+    const cors = configCORS();
     app.use(cors.actual);
     app.pre(cors.preflight);
     app.use(restify.plugins.acceptParser(app.acceptable));
     app.use(restify.plugins.queryParser());
     app.use(restify.plugins.bodyParser());
     app.pre(restify.pre.sanitizePath());
-}).build();
+}
+
+function configCORS() {
+    return corsMiddleware({
+        preflightMaxAge: 600, // Optional
+        origins: ['*'],
+        allowHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'x-access-token'],
+        exposeHeaders: ['API-Token-Expiry'],
+    });
+}
 
 server.listen(4300, function () {
     console.log('%s listening at %s', server.name, server.url);

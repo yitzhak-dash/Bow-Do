@@ -6,13 +6,13 @@ export interface IWishService {
 
 @injectable()
 export class WishService implements IWishService {
-    count: number;
+    count = 0;
 
     getWishItems(): any[] {
         return [
             {
                 id: new Date().getMilliseconds(),
-                name: 'one',
+                name: 'one + one',
                 created: new Date(),
                 indexNum: this.count++,
                 checked: false
