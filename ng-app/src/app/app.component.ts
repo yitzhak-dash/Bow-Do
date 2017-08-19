@@ -3,7 +3,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/interval';
 import { Subscription } from 'rxjs/Subscription';
+import { NgRedux } from '@angular-redux/store';
 //
+import { IAppState } from './store/root-state.model';
 import { LocationActions } from './common/location.actions';
 
 @Component({

@@ -3,7 +3,7 @@ import { IPlace, PIN_PLACE_INIT_STATE } from '../pin-place/model';
 import { CURRENT_LOCATION_INIT_STATE, ICurrentLocation } from '../common/location.model';
 
 export interface IAppState {
-  routes?: any;
+  router?: string;
   wishes: IWishListState;
   pinPlace: {
     loading: boolean,

@@ -1,3 +1,4 @@
 <div class="app">
+  <app-side-bar *ngIf="currentRoute !== '/home'"></app-side-bar>
   <router-outlet></router-outlet>
 </div>
