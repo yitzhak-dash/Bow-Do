@@ -1,0 +1,45 @@
+@import "../../styles/vars";
+
+#content-holder {
+  background-color: lightgrey;
+  #header {
+    height: 45vh;
+    background-color: transparent;
+    text-align: center;
+    padding: 33px;
+
+    .btn {
+      background: transparent;
+      color:$clouds;
+      font-weight: bold;
+      font-size: $double;
+      cursor: pointer;
+      &:hover {
+        color: white;
+      }
+    }
+  }
+
+  #seperator {
+    height: 10vh;
+    .col:nth-child(1) {
+      border-top-right-radius: 50%;
+      background-color: $greenSea;
+
+    }
+    .col:nth-child(2) {
+      border-top-left-radius: 50%;
+      background-color: $greenSea;
+    }
+  }
+
+  #body {
+    height: 45vh;
+    background-color: $greenSea;
+    overflow-y: auto;
+    .col {
+      text-align: center;
+      color: $clouds;
+    }
+  }
+}
