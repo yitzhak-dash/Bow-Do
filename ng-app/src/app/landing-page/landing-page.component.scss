@@ -7,13 +7,10 @@
     background-color: transparent;
     text-align: center;
     padding: 33px;
-
-    .btn {
-      background: transparent;
+    button {
       color:$clouds;
       font-weight: bold;
-      font-size: $double;
-      cursor: pointer;
+      font-size: $big;
       &:hover {
         color: white;
       }

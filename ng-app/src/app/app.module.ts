@@ -27,6 +27,9 @@ import { LocationEpic } from './common/location.epic';
 import { LocationActions } from './common/location.actions';
 import { WishItemListComponent } from './wish-list/wish-item-list/wish-item-list.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { LoginComponent } from './shared/login/login.component';
+import { BlockScreenComponent } from './shared/block-screen/block-screen.component';
+import { LoginActions } from './shared/login/actions';
 
 @NgModule({
   imports: [
@@ -55,7 +58,8 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
     ShoppingListService,
     PinPlaceActions,
     PinPlaceEpic,
-    PinPlaceService],
+    PinPlaceService,
+    LoginActions],
   declarations: [
     AppComponent,
     PageNotFoundComponent,
@@ -63,7 +67,9 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
     PinPlaceComponent,
     SideBarComponent,
     WishItemListComponent,
-    LandingPageComponent
+    LandingPageComponent,
+    LoginComponent,
+    BlockScreenComponent
   ],
   bootstrap: [AppComponent]
 })
