@@ -26,6 +26,7 @@ import { Locator } from './services/locator';
 import { LocationEpic } from './common/location.epic';
 import { LocationActions } from './common/location.actions';
 import { WishItemListComponent } from './wish-list/wish-item-list/wish-item-list.component';
+import { LandingPageComponent } from './src/app/landing-page/landing-page.component';
 
 @NgModule({
   imports: [
@@ -61,7 +62,8 @@ import { WishItemListComponent } from './wish-list/wish-item-list/wish-item-list
     WishListComponent,
     PinPlaceComponent,
     SideBarComponent,
-    WishItemListComponent
+    WishItemListComponent,
+    LandingPageComponent
   ],
   bootstrap: [AppComponent]
 })
