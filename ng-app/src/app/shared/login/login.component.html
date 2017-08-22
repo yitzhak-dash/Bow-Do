@@ -1,0 +1,20 @@
+<app-block-screen></app-block-screen>
+<div class="login-container">
+  <md-card>
+    <i class="fa fa-times" aria-hidden="true" (click)="cancel()"></i>
+    <md-card-title>Login/Sign up</md-card-title>
+    <md-input-container>
+      <input mdInput type="email" required placeholder="Email address">
+      <md-error></md-error>
+    </md-input-container>
+    <md-input-container>
+      <input mdInput type="password" required placeholder="Password">
+      <md-error></md-error>
+    </md-input-container>
+    <md-card-actions>
+      <button md-raised-button (click)="loginCompleted()">login</button>
+    </md-card-actions>
+  </md-card>
+</div>
+
+

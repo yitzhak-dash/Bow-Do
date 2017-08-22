@@ -1,4 +1,5 @@
 <div class="app">
-  <app-side-bar></app-side-bar>
+  <app-side-bar *ngIf="currentRoute !== '/home'"></app-side-bar>
   <router-outlet></router-outlet>
+  <app-login *ngIf="authRequired"></app-login>
 </div>
