@@ -1,0 +1,38 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "REST API Bow-Do",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "node dist/index.js",
+    "build": "gulp build",
+    "lint": "gulp tslint",
+    "develop": "gulp develop",
+    "create-db": "psql -U postgres postgres -f ./db_create.sql",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/inversify": "^2.0.33",
+    "@types/restify": "^5.0.1",
+    "@types/restify-cors-middleware": "^1.0.0",
+    "gulp": "^3.9.1",
+    "gulp-nodemon": "^2.2.1",
+    "gulp-tslint": "^8.1.2",
+    "gulp-typescript": "^3.2.1",
+    "run-sequence": "^2.1.0",
+    "tslint": "^5.6.0",
+    "typescript": "^2.4.2"
+  },
+  "dependencies": {
+    "inversify": "^4.3.0",
+    "inversify-restify-utils": "^3.2.0",
+    "pg": "^7.1.2",
+    "reflect-metadata": "^0.1.10",
+    "restify": "^5.1.0",
+    "restify-cors-middleware": "^1.0.1",
+    "typeorm": "0.1.0-alpha.34"
+  }
+}
