@@ -17,6 +17,6 @@ export class WishItem {
     @Column()
     completed: boolean;
 
-    @Column()
+    @Column('simple-array')
     tags: string[];
 }

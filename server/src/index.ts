@@ -3,6 +3,8 @@ import 'reflect-metadata';
 import { InversifyRestifyServer } from 'inversify-restify-utils';
 import { createContainer } from './inversify.config';
 import * as corsMiddleware from 'restify-cors-middleware';
+import { WishItem } from './models/wish-item.model';
+import { connect } from './helpers/db-connector';
 
 
 const container = createContainer();
@@ -31,6 +33,12 @@ function configCORS() {
         exposeHeaders: ['API-Token-Expiry'],
     });
 }
+
+//
+// connect([]).then(connection => {
+//     console.log('connected');
+//     connection.close();
+// }).catch(err => console.log('error:', err));
 
 server.listen(4300, function () {
     console.log('%s listening at %s', server.name, server.url);

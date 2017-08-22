@@ -26,15 +26,17 @@ export class ShoppingListService {
       .map(response => response.json());
 
   addWishItems = (items: IWishItem[]): Observable<IWishItem[]> =>
-    of(items.map(i =>
-      ({
-        id: new Date().getMilliseconds(),
-        name: i.name,
-        created: new Date(),
-        indexNum: this.count++,
-        checked: false
-      })
-    )).delay(100);
+    this.http.post('http://localhost:4300/api/wish', items, this.getHeaders())
+      .map(response => response.json().model);
+  // of(items.map(i =>
+  //   ({
+  //     id: new Date().getMilliseconds(),
+  //     name: i.name,
+  //     created: new Date(),
+  //     indexNum: this.count++,
+  //     checked: false
+  //   })
+  // )).delay(100);
 
   removeWishItems = (items: IWishItem[]): Observable<IWishItem[]> => {
     this.count -= items.length;

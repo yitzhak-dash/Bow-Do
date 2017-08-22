@@ -29,12 +29,13 @@ export class WishListController implements interfaces.Controller {
 
     @Post('/wish')
     addWishItems(req: restify.Request, res: restify.Response, next: restify.Next) {
-        console.log(req.body);
-        res.send(200, {
-            error: null,
-            succeeded: true,
-            model: req.body
-        });
+        this.service.addWishItems(req.body)
+            .then(res.send(200, {
+                error: null,
+                succeeded: true,
+                model: req.body
+            }))
+            .catch(err => next(err));
         next();
     }
 }

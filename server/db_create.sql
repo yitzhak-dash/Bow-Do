@@ -1,0 +1,8 @@
+CREATE DATABASE bowdo_db
+   WITH OWNER bowdo
+   TEMPLATE template0
+   ENCODING 'UTF8'
+   TABLESPACE  pg_default
+   LC_COLLATE  'C'
+   LC_CTYPE  'en_US.UTF-8'
+   CONNECTION LIMIT  -1;
