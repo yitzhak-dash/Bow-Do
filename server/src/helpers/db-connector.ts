@@ -1,14 +1,15 @@
 import { Connection, createConnection } from 'typeorm';
+import * as config from 'config';
 
-// TODO: use config to get these constants
 export function connect(entities: any[]): Promise<Connection> {
+    const connectionConfig = config.get<any>('db_connection');
     return createConnection({
-        type: 'postgres',
-        host: 'localhost',
-        port: 5432,
-        username: 'bowdo',
-        password: 'Aa123',
-        database: 'bowdo_db',
+        type: connectionConfig.type,
+        host: connectionConfig.host,
+        port: connectionConfig.port,
+        username: connectionConfig.username,
+        password: connectionConfig.password,
+        database: connectionConfig.database,
         entities: entities,
         autoSchemaSync: true,
     });

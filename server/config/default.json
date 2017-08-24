@@ -1,0 +1,10 @@
+{
+  "db_connection": {
+    "type": "postgres",
+    "host": "localhost",
+    "port": 5432,
+    "username": "bowdo",
+    "password": "Aa123",
+    "database": "bowdo_db"
+  }
+}
