@@ -13,5 +13,5 @@ export interface IWishListState {
 
 export const WISH_LIST_INIT_STATE: IWishListState = {
   isLoading: false,
-  wishList: []
+  wishList: [],
 };
