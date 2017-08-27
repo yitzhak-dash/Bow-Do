@@ -1,51 +1,41 @@
-import { injectable } from 'inversify';
+import { inject, injectable } from 'inversify';
+//
 import { WishItem } from '../models/wish-item.model';
-import { connect } from '../helpers/db-connector';
+import { Connection } from 'typeorm';
+import { IDbConnector } from '../helpers/db-connector';
+import { TYPES } from '../inversify.identifiers';
 
 export interface IWishService {
-    getWishItems(): WishItem[];
+    getWishItems(): Promise<WishItem[]>;
+
     addWishItems(items: WishItem[]): Promise<any>;
 }
 
 
 @injectable()
 export class WishService implements IWishService {
-    count = 0;
 
-    addWishItems(items: WishItem[]): Promise<any> {
-        return new Promise((resolve, reject) => {
-            connect([WishItem])
-                .then(connection => connection.manager.save(items)
-                    .then(result => resolve(result)))
-                .catch(error => reject(error));
-        });
+    constructor(@inject(TYPES.IDbConnector) private dbConnector: IDbConnector) {
     }
 
-    getWishItems(): WishItem[] {
-        return [];
-        // return [
-        //     {
-        //         id: new Date().getMilliseconds(),
-        //         name: 'one + one',
-        //         created: new Date(),
-        //         indexNum: this.count++,
-        //         checked: false,
-        //         tags:[]
-        //     },
-        //     {
-        //         id: this.count + new Date().getMilliseconds(),
-        //         name: 'two',
-        //         created: new Date(),
-        //         indexNum: this.count++,
-        //         checked: false
-        //     },
-        //     {
-        //         id: this.count + new Date().getMilliseconds(),
-        //         name: 'three',
-        //         created: new Date(),
-        //         indexNum: this.count++,
-        //         checked: true
-        //     }
-        // ];
+    async addWishItems(items: WishItem[]): Promise<any> {
+        let connection: Connection;
+        try {
+            connection = this.dbConnector.getConnection();
+            const addItem = new WishItem();
+            addItem.name = 'test';
+            addItem.indexNum = 1;
+            addItem.created = new Date();
+            addItem.completed = false;
+            addItem.tags = ['one', 'two'];
+
+            return await connection.manager.save(addItem);
+        } catch (err) {
+            throw new Error(err.message);
+        }
+    }
+
+   async getWishItems(): Promise<WishItem[]> {
+        return this.dbConnector.getConnection().manager.find(WishItem);
     }
 }

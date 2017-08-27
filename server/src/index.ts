@@ -1,21 +1,56 @@
 import * as restify from 'restify';
 import 'reflect-metadata';
 import { InversifyRestifyServer } from 'inversify-restify-utils';
-import { createContainer } from './inversify.config';
 import * as corsMiddleware from 'restify-cors-middleware';
-import { WishItem } from './models/wish-item.model';
-import { connect } from './helpers/db-connector';
+import * as bunyan from 'bunyan';
+import * as config from 'config';
+//
+import { createContainer } from './inversify.config';
+import { IDbConnector } from './helpers/db-connector';
+import { TYPES } from './inversify.identifiers';
 
+
+const generalConfig = config.get<any>('general');
 
 const container = createContainer();
+const connector = container.get<IDbConnector>(TYPES.IDbConnector);
+
 const server = new InversifyRestifyServer(container, {
-    name: 'Bow-Do REST API',
-    version: '1.0.0'
+    name: generalConfig.serverName,
+    version: '1.0.0',
+    log: createLogger()
 }).setConfig((app) => {
-    config(app);
+    configure(app);
 }).build();
 
-function config(app: restify.Server) {
+function createLogger() {
+    const pretty = require('bunyan-prettystream');
+
+    const prettyStream = new pretty();
+    prettyStream.pipe(process.stdout);
+
+    return bunyan.createLogger({
+        name: 'Bow-Do logger',
+        stream: prettyStream,
+        // stream: process.stdout,
+
+        serializers: {
+            req: (req) => ({
+                method: req.method,
+                url: req.url,
+                // headers: req.headers,
+            }),
+            res: (req) => ({
+                method: req.method,
+                url: req.url,
+                // headers: req.headers,
+            }),
+            err: bunyan.stdSerializers.err
+        }
+    });
+}
+
+function configure(app: restify.Server) {
     const cors = configCORS();
     app.use(cors.actual);
     app.pre(cors.preflight);
@@ -23,6 +58,10 @@ function config(app: restify.Server) {
     app.use(restify.plugins.queryParser());
     app.use(restify.plugins.bodyParser());
     app.pre(restify.pre.sanitizePath());
+    app.pre((request, response, next) => {
+        request.log.info({req: request}, 'REQUEST');
+        next();
+    });
 }
 
 function configCORS() {
@@ -34,12 +73,11 @@ function configCORS() {
     });
 }
 
-//
-// connect([]).then(connection => {
-//     console.log('connected');
-//     connection.close();
-// }).catch(err => console.log('error:', err));
+Promise.all([connector.init()])
+    .then(() => {
+        server.listen(4300, function () {
+            console.log('%s listening at %s', server.name, server.url);
+        });
+    });
 
-server.listen(4300, function () {
-    console.log('%s listening at %s', server.name, server.url);
-});
+

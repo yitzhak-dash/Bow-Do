@@ -4,6 +4,7 @@ import { injectable, inject } from 'inversify';
 //
 import { IWishService } from '../services/wish.service';
 import { TYPES } from '../inversify.identifiers';
+import { WishItem } from '../models/wish-item.model';
 
 @Controller('/api')
 @injectable()
@@ -13,10 +14,15 @@ export class WishListController implements interfaces.Controller {
     }
 
     @Get('/wish')
-    getWishes(req: restify.Request, res: restify.Response, next: restify.Next) {
-        res.send(200,
-            this.service.getWishItems());
-        next();
+    async getWishes(req: restify.Request, res: restify.Response, next: restify.Next) {
+        let result: WishItem[];
+        try {
+            result = await this.service.getWishItems();
+            res.send(200, result);
+            next();
+        } catch (err) {
+            next(err);
+        }
     }
 
     @Get('/wish/:id')
@@ -28,15 +34,20 @@ export class WishListController implements interfaces.Controller {
     }
 
     @Post('/wish')
-    addWishItems(req: restify.Request, res: restify.Response, next: restify.Next) {
-        this.service.addWishItems(req.body)
-            .then(res.send(200, {
+    async addWishItems(req: restify.Request, res: restify.Response, next: restify.Next) {
+        try {
+            const dbRes = await this.service.addWishItems(req.body);
+            req.log.info(dbRes);
+            res.send(200, {
                 error: null,
                 succeeded: true,
-                model: req.body
-            }))
-            .catch(err => next(err));
-        next();
+                model: dbRes
+            });
+            next();
+        } catch (err) {
+            console.log(err.message);
+            next(err);
+        }
     }
 }
 
