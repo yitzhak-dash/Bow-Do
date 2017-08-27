@@ -9,13 +9,13 @@ export class WishItem {
     name: string;
 
     @Column()
-    created: Date;
+    created: Date = new Date();
 
     @Column()
     indexNum: number;
 
     @Column()
-    completed: boolean;
+    completed: boolean = false;
 
     @Column('simple-array')
     tags: string[];
