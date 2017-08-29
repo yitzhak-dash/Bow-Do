@@ -4,40 +4,27 @@ import { WishItem } from '../models/wish-item.model';
 import { Connection } from 'typeorm';
 import { IDbConnector } from '../helpers/db-connector';
 import { TYPES } from '../inversify.identifiers';
-import * as Joi from 'joi';
 
 export interface IWishService {
     getWishItems(): Promise<WishItem[]>;
 
     addWishItems(items: WishItem[]): Promise<any>;
+
+    deleteWishes(items: WishItem[]): Promise<any> ;
 }
 
 
 @injectable()
 export class WishService implements IWishService {
 
+    deleteWishes(items: WishItem[]): Promise<any> {
+        throw new Error('Method not implemented.');
+    }
+
     constructor(@inject(TYPES.IDbConnector) private dbConnector: IDbConnector) {
     }
 
     async addWishItems(items: WishItem[]): Promise<any> {
-
-        const objectSchema = Joi.object({
-            name: Joi.string().required(),
-            indexNum: Joi.number()
-        });
-
-        const arraySchema = Joi.array().items(objectSchema).min(1).required();
-
-        const DEFAULT_OPTIONS = {
-            abortEarly: false,
-            stripUnknown: {objects: true}
-        };
-
-        const valRes = Joi.validate(items, arraySchema, DEFAULT_OPTIONS);
-        if (valRes.error) {
-            throw new Error(valRes.error.message);
-        }
-
         try {
             const connection = this.dbConnector.getConnection();
             const res = [];
@@ -50,7 +37,6 @@ export class WishService implements IWishService {
                 addItem.tags = [];
                 res.push(addItem);
             });
-
 
             return await connection.manager.save(res);
         } catch (err) {

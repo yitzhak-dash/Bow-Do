@@ -1,16 +1,23 @@
 import * as restify from 'restify';
-import { Controller, Get, interfaces, Post } from 'inversify-restify-utils';
+import { Controller, Delete, Get, interfaces, Post } from 'inversify-restify-utils';
 import { injectable, inject } from 'inversify';
+import { ValidationResult } from 'joi';
 //
 import { IWishService } from '../services/wish.service';
 import { TYPES } from '../inversify.identifiers';
 import { WishItem } from '../models/wish-item.model';
+import { validateAddWishItems } from '../helpers/request-body.validator';
 
 @Controller('/api')
 @injectable()
 export class WishListController implements interfaces.Controller {
 
     constructor(@inject(TYPES.IWishService) private service: IWishService) {
+    }
+
+    @Delete('/wish')
+    async deleteWishes(req: restify.Request, res: restify.Response, next: restify.Next) {
+        await this.service.deleteWishes(req.body);
     }
 
     @Get('/wish')
@@ -33,10 +40,24 @@ export class WishListController implements interfaces.Controller {
         next();
     }
 
+
     @Post('/wish')
     async addWishItems(req: restify.Request, res: restify.Response, next: restify.Next) {
+        const validationResult = validateAddWishItems(req);
+
+        if (validationResult.error) {
+            status_400(res, next, validationResult);
+        }
+
+        const items: WishItem[] = validationResult.value.map(item => ({
+            ...new WishItem(),
+            indexNum: item.indexNum,
+            name: item.name,
+            created: new Date()
+        }));
+
         try {
-            const dbRes = await this.service.addWishItems(req.body);
+            const dbRes = await this.service.addWishItems(items);
             req.log.info(dbRes);
             res.send(200, {
                 error: null,
@@ -51,3 +72,10 @@ export class WishListController implements interfaces.Controller {
     }
 }
 
+export function status_400<T>(res: restify.Response, next: restify.Next, validationResult: ValidationResult<T>) {
+    res.send(400, {
+        message: validationResult.error.message,
+        errors: validationResult.error.details.map(error => error.type)
+    });
+    next(new Error(validationResult.error.message));
+}
