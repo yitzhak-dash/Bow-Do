@@ -26,4 +26,11 @@ describe('Parser tests', () => {
         expect(parseRes.indexNum).to.equals(source.indexNum);
         expect(parseRes.created).instanceof(Date);
     });
+    it('should throw error', () => {
+        initParserMap();
+        const source = new WishItem();
+        source.name = 'name';
+        source.indexNum = 666;
+        expect(() => parse(source).to<WishItem>()).to.throw();
+    });
 });

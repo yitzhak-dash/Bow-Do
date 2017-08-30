@@ -32,7 +32,7 @@ export function parse<T extends ParseSource>(obj: T) {
             if (dict[typeName]) {
                 return <U>(dict[typeName])(obj);
             } else {
-                throw new Error(`There's no parser for type <${typeName}>.`);
+                throw new Error(`There's no parser for type <${typeName}>`);
             }
         }
     };
