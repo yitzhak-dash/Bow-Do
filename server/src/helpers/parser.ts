@@ -11,41 +11,43 @@ function parseAddWishItemRequest(obj: AddWishItemRequest): WishItem {
     };
 }
 
-export interface Parser {
+export interface ParserFn {
     (o: ParseSource): ParseTarget;
 }
-
-export const dict: { [id: string]: Parser } = {};
 
 declare type ParseSource = AddWishItemRequest ;
 declare type ParseTarget = WishItem;
 
-export function initParserMap() {
-    dict[getName(AddWishItemRequest)] = parseAddWishItemRequest;
-}
+export class Parser {
+    private readonly dict: { [id: string]: ParserFn } = {};
 
+    constructor() {
+        this.initParserMap();
+    }
 
-export function parse<T extends ParseSource>(obj: T) {
-    return {
-        to: function <U extends ParseTarget>(): U {
+    private initParserMap() {
+        this.dict[this.getInstanceName(AddWishItemRequest)] = parseAddWishItemRequest;
+    }
+
+    parse = <T extends ParseSource>(obj: T) => ({
+        to: <U extends ParseTarget>(): U => {
             const typeName = obj.constructor.name;
-            if (dict[typeName]) {
-                return <U>(dict[typeName])(obj);
+            if (this.dict[typeName]) {
+                return <U>(this.dict[typeName])(obj);
             } else {
                 throw new Error(`There's no parser for type <${typeName}>`);
             }
         }
-    };
-}
+    });
 
-export function parseArr<T extends ParseSource>(obj: T[]) {
-    return {
-        to: function <U extends ParseTarget>(): U[] {
-            return obj.map(item => parse(item).to<U>());
-        }
+    parseArr = <T extends ParseSource>(arr: T[]) => {
+        return {
+            to: <U extends ParseTarget>(): U[] =>
+                arr.map(item => this.parse(item).to<U>())
+        };
     };
-}
 
-export function getName<T>(c: new() => T): string {
-    return c.name;
+    getInstanceName<T>(c: new() => T): string {
+        return c.name;
+    }
 }
