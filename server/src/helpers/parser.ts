@@ -1,24 +1,46 @@
 import { WishItem } from '../models/wish-item.model';
-import { AddWishItemRequest } from './request-body.validator';
+import { WishItemRequest } from './request-body.validator';
+import 'reflect-metadata';
+import { injectable } from 'inversify';
+import { extend } from 'joi';
 
 
-function parseAddWishItemRequest(obj: AddWishItemRequest): WishItem {
+function parseAddWishItemRequest(obj: WishItemRequest): WishItem {
     return {
         ...new WishItem(),
         indexNum: obj.indexNum,
         name: obj.name,
-        created: new Date()
     };
 }
 
-export interface ParserFn {
-    (o: ParseSource): ParseTarget;
-}
+type ParserFn = (o: ParseSource) => ParseTarget;
 
-declare type ParseSource = AddWishItemRequest ;
+declare type ParseSource = WishItemRequest ;
 declare type ParseTarget = WishItem;
 
-export class Parser {
+export interface IParserFactory {
+
+    getParserFor<T>(ctor: new() => T): IParse;
+
+    getTypeName<T>(ctor: new() => T): string;
+}
+
+interface IParse {
+    parse<T extends ParseSource>(obj: T): ITo;
+
+    parseArr<T extends ParseSource>(obj: T[]): IToArr;
+}
+
+interface ITo {
+    to<U extends ParseTarget>(): U;
+}
+
+interface IToArr {
+    to<U extends ParseTarget>(): U[];
+}
+
+@injectable()
+export class ParserFactory implements IParserFactory {
     private readonly dict: { [id: string]: ParserFn } = {};
 
     constructor() {
@@ -26,28 +48,28 @@ export class Parser {
     }
 
     private initParserMap() {
-        this.dict[this.getInstanceName(AddWishItemRequest)] = parseAddWishItemRequest;
+        this.dict[this.getTypeName(WishItemRequest)] = parseAddWishItemRequest;
     }
 
-    parse = <T extends ParseSource>(obj: T) => ({
-        to: <U extends ParseTarget>(): U => {
-            const typeName = obj.constructor.name;
-            if (this.dict[typeName]) {
-                return <U>(this.dict[typeName])(obj);
-            } else {
-                throw new Error(`There's no parser for type <${typeName}>`);
+
+    getParserFor = <T>(ctor: new() => T): IParse => ({
+        parseArr: <T extends ParseSource>(arr: T[]): IToArr => ({
+            to: <U extends ParseTarget>(): U[] =>
+                arr.map((item: T) => {
+                    return this.getParserFor(ctor).parse<T>(item).to<U>();
+                })
+        }),
+        parse: <T extends ParseSource>(obj: T): ITo => ({
+            to: <U extends ParseTarget>(): U => {
+                const typeName = this.getTypeName(ctor);
+                if (this.dict[typeName]) {
+                    return <U>(this.dict[typeName])(obj);
+                } else {
+                    throw new Error(`There's no parser for type <${typeName}>`);
+                }
             }
-        }
+        })
     });
 
-    parseArr = <T extends ParseSource>(arr: T[]) => {
-        return {
-            to: <U extends ParseTarget>(): U[] =>
-                arr.map(item => this.parse(item).to<U>())
-        };
-    };
-
-    getInstanceName<T>(c: new() => T): string {
-        return c.name;
-    }
+    getTypeName = <T>(ctor: new() => T): string => ctor.name;
 }

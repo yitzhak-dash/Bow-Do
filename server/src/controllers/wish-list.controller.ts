@@ -6,7 +6,7 @@ import { ValidationResult } from 'joi';
 import { IWishService } from '../services/wish.service';
 import { TYPES } from '../inversify.identifiers';
 import { WishItem } from '../models/wish-item.model';
-import { validateAddWishItems } from '../helpers/request-body.validator';
+import { WishItemRequest, validateAddWishItems } from '../helpers/request-body.validator';
 
 @Controller('/api')
 @injectable()
@@ -15,9 +15,20 @@ export class WishListController implements interfaces.Controller {
     constructor(@inject(TYPES.IWishService) private service: IWishService) {
     }
 
-    @Delete('/wish')
+    @Post('/wish/delete')
     async deleteWishes(req: restify.Request, res: restify.Response, next: restify.Next) {
-        await this.service.deleteWishes(req.body);
+        try {
+            await this.service.deleteWishes(req.body);
+            console.log('finish deleting');
+            res.send(200, {
+                error: null,
+                succeeded: true,
+                model: req.body
+            });
+        } catch (err) {
+            console.log('deleting failed', err.message);
+            next(err);
+        }
     }
 
     @Get('/wish')
@@ -44,21 +55,12 @@ export class WishListController implements interfaces.Controller {
     @Post('/wish')
     async addWishItems(req: restify.Request, res: restify.Response, next: restify.Next) {
         const validationResult = validateAddWishItems(req);
-
         if (validationResult.error) {
             status_400(res, next, validationResult);
+            return;
         }
-
-        const items: WishItem[] = validationResult.value.map(item => ({
-            ...new WishItem(),
-            indexNum: item.indexNum,
-            name: item.name,
-            created: new Date()
-        }));
-
         try {
-            const dbRes = await this.service.addWishItems(items);
-            req.log.info(dbRes);
+            const dbRes = await this.service.addWishItems(validationResult.value);
             res.send(200, {
                 error: null,
                 succeeded: true,
@@ -66,7 +68,6 @@ export class WishListController implements interfaces.Controller {
             });
             next();
         } catch (err) {
-            console.log(err.message);
             next(err);
         }
     }

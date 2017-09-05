@@ -10,6 +10,9 @@ import { IWishItem } from './model';
 
 @Injectable()
 export class ShoppingListService {
+
+  private readonly baseUrl = 'http://localhost:4300/api/wish';
+
   count: number;
 
   constructor(private http: Http) {
@@ -22,25 +25,16 @@ export class ShoppingListService {
   }
 
   getWishItems = (): Observable<IWishItem[]> =>
-    this.http.get('http://localhost:4300/api/wish', this.getHeaders())
+    this.http.get(this.baseUrl, this.getHeaders())
       .map(response => response.json());
 
   addWishItems = (items: IWishItem[]): Observable<IWishItem[]> =>
-    this.http.post('http://localhost:4300/api/wish', items, this.getHeaders())
+    this.http.post(this.baseUrl, items, this.getHeaders())
       .map(response => response.json().model);
-  // of(items.map(i =>
-  //   ({
-  //     id: new Date().getMilliseconds(),
-  //     name: i.name,
-  //     created: new Date(),
-  //     indexNum: this.count++,
-  //     checked: false
-  //   })
-  // )).delay(100);
 
   removeWishItems = (items: IWishItem[]): Observable<IWishItem[]> => {
-    this.count -= items.length;
-    return of([...items]).delay(100);
+    return this.http.post(this.baseUrl + '/delete', items)
+      .map(response => response.json().model);
   };
 
   completeWishItems = (items: IWishItem[]): Observable<IWishItem[]> =>

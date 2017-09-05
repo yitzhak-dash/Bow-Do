@@ -24,19 +24,19 @@
     "@types/inversify": "^2.0.33",
     "@types/joi": "^10.4.1",
     "@types/mocha": "^2.2.42",
-    "@types/restify": "^5.0.1",
+    "@types/restify": "^5.0.2",
     "@types/restify-cors-middleware": "^1.0.0",
     "assert": "^1.4.1",
-    "chai": "^4.1.1",
+    "chai": "^4.1.2",
     "gulp": "^3.9.1",
     "gulp-nodemon": "^2.2.1",
     "gulp-tslint": "^8.1.2",
-    "gulp-typescript": "^3.2.1",
+    "gulp-typescript": "^3.2.2",
     "mocha": "^3.5.0",
     "run-sequence": "^2.1.0",
     "ts-node": "^3.3.0",
-    "tslint": "^5.6.0",
-    "typescript": "^2.4.2"
+    "tslint": "^5.7.0",
+    "typescript": "^2.5.2"
   },
   "dependencies": {
     "bunyan": "^1.8.12",
@@ -45,9 +45,9 @@
     "inversify": "^4.3.0",
     "inversify-restify-utils": "^3.2.0",
     "joi": "^10.6.0",
-    "pg": "^7.1.2",
+    "pg": "^7.3.0",
     "reflect-metadata": "^0.1.10",
-    "restify": "^5.1.0",
+    "restify": "^5.2.0",
     "restify-cors-middleware": "^1.0.1",
     "typeorm": "0.1.0-alpha.34"
   }

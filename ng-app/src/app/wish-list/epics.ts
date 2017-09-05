@@ -27,7 +27,6 @@ export class WishListEpic implements EpicFactory {
         this.createCompleteWishItemsEpic));
   }
 
-
   private createAddWishItemEpic: Epic<WishItemAction, IAppState> = (action$, store) =>
     action$
       .ofType(WishListActions.ADD_ITEM)

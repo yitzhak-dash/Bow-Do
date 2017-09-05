@@ -7,17 +7,18 @@ const DEFAULT_OPTIONS = {
     stripUnknown: {objects: true}
 };
 
-export function validateAddWishItems(req: Request): ValidationResult<AddWishItemRequest[]> {
+export function validateAddWishItems(req: Request): ValidationResult<WishItemRequest[]> {
     const items = req.body;
     const objectSchema = Joi.object({
         name: Joi.string().required(),
         indexNum: Joi.number()
     });
     const arraySchema = Joi.array().items(objectSchema).min(1).required();
-    return Joi.validate(items, arraySchema, DEFAULT_OPTIONS);
+    return Joi.validate<WishItemRequest[]>(items, arraySchema, DEFAULT_OPTIONS);
 }
 
-export class AddWishItemRequest {
+export class WishItemRequest {
+    id?: number;
     name: string;
     indexNum: number;
 }

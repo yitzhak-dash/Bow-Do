@@ -1,6 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
+@Entity('wishes')
 export class WishItem {
     @PrimaryGeneratedColumn()
     id: number;
@@ -18,5 +18,5 @@ export class WishItem {
     completed: boolean = false;
 
     @Column('simple-array')
-    tags: string[];
+    tags: string[] = [];
 }

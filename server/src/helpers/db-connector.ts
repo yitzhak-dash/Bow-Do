@@ -10,7 +10,6 @@ export class DbConnector {
     readonly connectionConfig = config.get<any>('dbConnection');
 
     constructor() {
-        console.log('DbConnector created');
     }
 
     createConnectionOptions = (): ConnectionOptions => {
@@ -32,7 +31,6 @@ export class DbConnector {
             throw new Error('Can not recreate connection');
         }
         this.connection = await createConnection(this.createConnectionOptions());
-        console.log('DbConnector: connection created');
         return this.connection.isConnected;
     };
 
