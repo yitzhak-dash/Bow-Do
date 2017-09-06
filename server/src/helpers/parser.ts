@@ -55,13 +55,13 @@ export class ParserFactory implements IParserFactory {
 
 
     getParserFor = <T>(ctor: new() => T): IParse => ({
-        parseArr: <T extends ParseSource>(arr: T[]): IToArr => ({
+        parseArr: <S extends ParseSource>(arr: S[]): IToArr => ({
             to: <U extends ParseTarget>(): U[] =>
-                arr.map((item: T) => {
-                    return this.getParserFor(ctor).parse<T>(item).to<U>();
+                arr.map((item: S) => {
+                    return this.getParserFor(ctor).parse<S>(item).to<U>();
                 })
         }),
-        parse: <T extends ParseSource>(obj: T): ITo => ({
+        parse: <S extends ParseSource>(obj: S): ITo => ({
             to: <U extends ParseTarget>(): U => {
                 const typeName = this.getTypeName(ctor);
                 if (this.dict[typeName]) {

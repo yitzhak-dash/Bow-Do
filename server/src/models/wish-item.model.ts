@@ -15,7 +15,7 @@ export class WishItem {
     indexNum: number;
 
     @Column()
-    completed: boolean = false;
+    completed: boolean;
 
     @Column('simple-array')
     tags: string[] = [];
