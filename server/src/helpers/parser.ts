@@ -8,6 +8,8 @@ import { extend } from 'joi';
 function parseAddWishItemRequest(obj: WishItemRequest): WishItem {
     return {
         ...new WishItem(),
+        completed: obj.completed || false,
+        id: obj.id,
         indexNum: obj.indexNum,
         name: obj.name,
     };

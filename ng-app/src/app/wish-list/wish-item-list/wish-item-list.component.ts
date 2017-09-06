@@ -23,7 +23,10 @@ export class WishItemListComponent implements OnInit {
   }
 
   changeItemStatus(item: IWishItem) {
-    this.actions.changeWishItemStatus(item);
+    this.actions.changeWishItemStatus({
+      ...item,
+      completed: !item.completed
+    });
   }
 
   removeItem(item: IWishItem) {

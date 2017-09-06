@@ -1,12 +1,12 @@
 import * as restify from 'restify';
-import { Controller, Delete, Get, interfaces, Post } from 'inversify-restify-utils';
+import { Controller, Delete, Get, interfaces, Post, Put } from 'inversify-restify-utils';
 import { injectable, inject } from 'inversify';
 import { ValidationResult } from 'joi';
 //
 import { IWishService } from '../services/wish.service';
 import { TYPES } from '../inversify.identifiers';
 import { WishItem } from '../models/wish-item.model';
-import { WishItemRequest, validateAddWishItems } from '../helpers/request-body.validator';
+import { WishItemRequest, validateAddWishItems, validateUpdateWishItems } from '../helpers/request-body.validator';
 
 @Controller('/api')
 @injectable()
@@ -27,6 +27,26 @@ export class WishListController implements interfaces.Controller {
             });
         } catch (err) {
             console.log('deleting failed', err.message);
+            next(err);
+        }
+    }
+
+    @Put('/wish')
+    async updateWishes(req: restify.Request, res: restify.Response, next: restify.Next) {
+        const validationResult = validateUpdateWishItems(req);
+        if (validationResult.error) {
+            status_400(res, next, validationResult);
+            return;
+        }
+        try {
+            const dbRes = await this.service.updateWishes(validationResult.value);
+            res.send(200, {
+                error: null,
+                succeeded: true,
+                model: dbRes
+            });
+            next();
+        } catch (err) {
             next(err);
         }
     }

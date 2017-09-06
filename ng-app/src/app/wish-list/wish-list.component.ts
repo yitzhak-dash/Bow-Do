@@ -27,10 +27,10 @@ export class WishListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.uncompletedItems$ = this.ngRedux.select(state => state.wishes.wishList)
-      .map(item => item.filter(x => !x.checked));
+      .map(item => item.filter(x => !x.completed));
 
     this.completedItems$ = this.ngRedux.select(state => state.wishes.wishList)
-      .map(item => item.filter(x => x.checked));
+      .map(item => item.filter(x => x.completed));
 
     this.ngRedux.select(state => state.wishes.wishList).subscribe(state => this.listLength = state.length);
 

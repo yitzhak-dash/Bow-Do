@@ -38,8 +38,11 @@ export class ShoppingListService {
   };
 
   completeWishItems = (items: IWishItem[]): Observable<IWishItem[]> =>
-    of(items.map((item: IWishItem) => ({
-      ...item,
-      checked: !item.checked,
-    }))).delay(100);
+    this.http.put(this.baseUrl, items)
+      .map(response => response.json().model)
+      .catch(err => {
+        console.error(err.message);
+        return Observable.throw(err);
+      });
+
 }

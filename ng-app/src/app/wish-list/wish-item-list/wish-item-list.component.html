@@ -1,8 +1,8 @@
 <div *ngFor="let item of items$ | async">
   <div class="item-container">
-    <md-checkbox [checked]="item.checked" (change)="changeItemStatus(item)">
+    <md-checkbox [checked]="item.completed" (change)="changeItemStatus(item)">
       <div>
-        <span [class.line]="item.checked">{{item.name}}</span>
+        <span [class.line]="item.completed">{{item.name}}</span>
         <button class="remove-btn" (click)="removeItem(item)">&#10006;</button>
       </div>
     </md-checkbox>

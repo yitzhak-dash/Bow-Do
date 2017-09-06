@@ -13,14 +13,35 @@ export interface IWishService {
     addWishItems(items: WishItemRequest[]): Promise<any>;
 
     deleteWishes(items: WishItemRequest[]): Promise<any> ;
+
+    updateWishes(items: WishItemRequest[]): Promise<any>;
 }
 
 
 @injectable()
 export class WishService implements IWishService {
-
     constructor(@inject(TYPES.IDbConnector) private dbConnector: IDbConnector,
                 @inject(TYPES.IParserFactory) private parserFactory: IParserFactory) {
+    }
+
+    async updateWishes(items: WishItemRequest[]): Promise<any> {
+        try {
+            console.log(JSON.stringify(items));
+            const parsed =
+                this.parserFactory.getParserFor(WishItemRequest)
+                    .parseArr(items)
+                    .to<WishItem>();
+
+            console.log(JSON.stringify(parsed));
+
+            const connection = this.dbConnector.getConnection();
+
+            const repo = connection.getRepository(WishItem);
+            return await repo.persist(parsed);
+        } catch (err) {
+            console.log(err);
+            throw err;
+        }
     }
 
     async deleteWishes(items: WishItemRequest[]): Promise<any> {
