@@ -27,7 +27,6 @@ export class WishListEpic implements EpicFactory {
         this.createCompleteWishItemsEpic));
   }
 
-
   private createAddWishItemEpic: Epic<WishItemAction, IAppState> = (action$, store) =>
     action$
       .ofType(WishListActions.ADD_ITEM)
@@ -59,6 +58,9 @@ export class WishListEpic implements EpicFactory {
       .ofType(WishListActions.CHANGE_ITEMS_STATUS)
       .switchMap(action => this.service.completeWishItems(action.payload)
         .map(data => this.actions.changeWishItemStatusSucceeded(data))
-        .catch(response => of(this.actions.changeWishItemStatusFailed({status: '' + response.status})))
+        .catch(response => of(this.actions.changeWishItemStatusFailed({
+          status: '' + response.status,
+          error: response.body
+        })))
         .startWith(this.actions.workOnWishItemListStarted()));
 }

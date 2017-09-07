@@ -19,6 +19,7 @@ export class WishListComponent implements OnInit, OnDestroy {
   @select(['wishes', 'isLoading']) readonly isLoading: boolean;
   uncompletedItems$: Observable<IWishItem[]>;
   completedItems$: Observable<IWishItem[]>;
+  private listLength: number;
 
   constructor(private ngRedux: NgRedux<IAppState>,
               private actions: WishListActions) {
@@ -26,10 +27,12 @@ export class WishListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.uncompletedItems$ = this.ngRedux.select(state => state.wishes.wishList)
-      .map(item => item.filter(x => !x.checked));
+      .map(item => item.filter(x => !x.completed));
 
     this.completedItems$ = this.ngRedux.select(state => state.wishes.wishList)
-      .map(item => item.filter(x => x.checked));
+      .map(item => item.filter(x => x.completed));
+
+    this.ngRedux.select(state => state.wishes.wishList).subscribe(state => this.listLength = state.length);
 
     this.actions.loadWishItems();
   }
@@ -43,7 +46,7 @@ export class WishListComponent implements OnInit, OnDestroy {
     if (evt.key !== this.ENTER_KEY) {
       return;
     }
-    this.actions.addWishItem(input.value);
+    this.actions.addWishItem(input.value, this.listLength);
     // clear user input
     input.value = '';
   }

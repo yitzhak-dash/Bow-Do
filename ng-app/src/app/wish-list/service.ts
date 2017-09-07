@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, RequestOptions, Headers } from '@angular/http';
 //
 import { of } from 'rxjs/observable/of';
 import 'rxjs/add/operator/map';
@@ -10,56 +10,39 @@ import { IWishItem } from './model';
 
 @Injectable()
 export class ShoppingListService {
+
+  private readonly baseUrl = 'http://localhost:4300/api/wish';
+
   count: number;
 
   constructor(private http: Http) {
     this.count = 0;
   }
 
+  private getHeaders(): RequestOptions {
+    const headers = new Headers({'Content-Type': 'application/json'});
+    return new RequestOptions({headers: headers});
+  }
+
   getWishItems = (): Observable<IWishItem[]> =>
-    of([
-      {
-        id: new Date().getMilliseconds(),
-        name: 'one',
-        created: new Date(),
-        indexNum: this.count++,
-        checked: false
-      },
-      {
-        id: this.count + new Date().getMilliseconds(),
-        name: 'two',
-        created: new Date(),
-        indexNum: this.count++,
-        checked: false
-      },
-      {
-        id: this.count + new Date().getMilliseconds(),
-        name: 'three',
-        created: new Date(),
-        indexNum: this.count++,
-        checked: true
-      }
-    ]);
+    this.http.get(this.baseUrl, this.getHeaders())
+      .map(response => response.json());
 
   addWishItems = (items: IWishItem[]): Observable<IWishItem[]> =>
-    of(items.map(i =>
-      ({
-        id: new Date().getMilliseconds(),
-        name: i.name,
-        created: new Date(),
-        indexNum: this.count++,
-        checked: false
-      })
-    )).delay(100);
+    this.http.post(this.baseUrl, items, this.getHeaders())
+      .map(response => response.json().model);
 
   removeWishItems = (items: IWishItem[]): Observable<IWishItem[]> => {
-    this.count -= items.length;
-    return of([...items]).delay(100);
+    return this.http.post(this.baseUrl + '/delete', items)
+      .map(response => response.json().model);
   };
 
   completeWishItems = (items: IWishItem[]): Observable<IWishItem[]> =>
-    of(items.map((item: IWishItem) => ({
-      ...item,
-      checked: !item.checked,
-    }))).delay(100);
+    this.http.put(this.baseUrl, items)
+      .map(response => response.json().model)
+      .catch(err => {
+        console.error(err.message);
+        return Observable.throw(err);
+      });
+
 }

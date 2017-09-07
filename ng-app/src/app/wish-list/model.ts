@@ -3,7 +3,7 @@ export interface IWishItem {
   name: string;
   created?: Date;
   indexNum?: number;
-  checked?: boolean;
+  completed?: boolean;
 }
 
 export interface IWishListState {
@@ -13,5 +13,5 @@ export interface IWishListState {
 
 export const WISH_LIST_INIT_STATE: IWishListState = {
   isLoading: false,
-  wishList: []
+  wishList: [],
 };

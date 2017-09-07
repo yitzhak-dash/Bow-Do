@@ -13,15 +13,27 @@ before_install:
   - export CHROME_BIN=chromium-browser
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
-  - cd ./ng-app
 
 before_script:
+  - cd ./ng-app/
   - npm install
+  # server
+  - cd ./../server/
+  - npm install
+  - npm install -g gulp
+  - npm install -g mocha chai
 
 script:
+  - cd ./../ng-app/
   - ng test --single-run
   - ng lint --type-check
   - ng build --prod
+  # server
+  - cd ./../server/
+  - npm run build
+  - npm run lint
+  - npm run test
+
 
 notifications:
   email:

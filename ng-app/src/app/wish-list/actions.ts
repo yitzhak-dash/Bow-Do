@@ -32,10 +32,10 @@ export class WishListActions {
   static readonly CHANGE_ITEMS_STATUS_FAILED = 'CHANGE_ITEMS_STATUS_FAILED';
 
   @dispatch()
-  addWishItem = (name: string): WishItemAction =>
+  addWishItem = (name, indexNum): WishItemAction =>
     ({
       type: WishListActions.ADD_ITEM,
-      payload: [{name}],
+      payload: [{name, indexNum}],
       meta: name
     });
 
