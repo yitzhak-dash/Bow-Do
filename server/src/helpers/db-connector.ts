@@ -30,8 +30,13 @@ export class DbConnector {
         if (this.connection) {
             throw new Error('Can not recreate connection');
         }
-        this.connection = await createConnection(this.createConnectionOptions());
-        return this.connection.isConnected;
+        try {
+            this.connection = await createConnection(this.createConnectionOptions());
+            return this.connection.isConnected;
+        } catch (err) {
+            console.log(err.message);
+        }
+        return null;
     };
 
     getConnection = (): Connection => this.connection;
