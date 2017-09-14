@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  angular:
+    build: ./ng-app
+    ports:
+      - "4200:4200"
+    links:
+      - server:server
+  server:
+    build: ./server
+    ports:
+      - "4300:4300"
+    depends_on:
+      - database
+    links:
+      - database:database
+  database:
+    image: postgres:latest
+    container_name: "postgres"
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - PGDATA=/pg
+      - POSTGRES_PASSWORD=123
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=bowdo_db

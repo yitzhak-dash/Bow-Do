@@ -3,6 +3,7 @@ import * as config from 'config';
 //
 import { getDbModels } from './db-models.provider';
 import { injectable } from 'inversify';
+import { setTimeout } from 'timers';
 
 @injectable()
 export class DbConnector {
@@ -30,8 +31,27 @@ export class DbConnector {
         if (this.connection) {
             throw new Error('Can not recreate connection');
         }
-        this.connection = await createConnection(this.createConnectionOptions());
-        return this.connection.isConnected;
+        try {
+            this.connection = await createConnection(this.createConnectionOptions());
+            return this.connection.isConnected;
+        } catch (err) {
+            console.log(err);
+        }
+        try {
+            console.log('waiting ...');
+            return new Promise(resolve => {
+                setTimeout(() => resolve(), 1000);
+            }).then(async () => {
+                console.log('trying to reconnect...');
+                this.connection = await createConnection(this.createConnectionOptions());
+                console.log(`connection's successful`);
+                return this.connection.isConnected;
+            });
+        } catch (err) {
+            console.log('connection failed');
+            console.log(err);
+            throw err;
+        }
     };
 
     getConnection = (): Connection => this.connection;
