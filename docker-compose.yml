@@ -5,6 +5,8 @@ services:
     build: ./ng-app
     ports:
       - "4200:4200"
+    links:
+      - server:server
   server:
     build: ./server
     ports:
@@ -16,6 +18,7 @@ services:
   database:
     image: postgres:latest
     container_name: "postgres"
+    restart: always
     ports:
       - "5432:5432"
     environment:
