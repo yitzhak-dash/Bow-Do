@@ -15,6 +15,16 @@ export class WishListController implements interfaces.Controller {
     constructor(@inject(TYPES.IWishService) private service: IWishService) {
     }
 
+    /**
+     * @api {post} /wish/delete delete wishes
+     * @apiName deleteWishes
+     * @apiGroup Wish
+     *
+     * @apiParam {Number} id Users unique ID.
+     *
+     * @apiSuccess {String} firstname Firstname of the User.
+     * @apiSuccess {String} lastname  Lastname of the User.
+     */
     @Post('/wish/delete')
     async deleteWishes(req: restify.Request, res: restify.Response, next: restify.Next) {
         try {
@@ -51,6 +61,13 @@ export class WishListController implements interfaces.Controller {
         }
     }
 
+    /**
+     * @api {get} /wish get all wishes
+     * @apiName getWishes
+     * @apiGroup Wish
+     *
+     * @apiSuccess {Array} data list of the WishItem.
+     */
     @Get('/wish')
     async getWishes(req: restify.Request, res: restify.Response, next: restify.Next) {
         let result: WishItem[];

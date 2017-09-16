@@ -1,8 +1,20 @@
 {
-  "name": "server",
+  "name": "BowDo-REST-API-server",
   "version": "1.0.0",
   "description": "REST API Bow-Do",
   "main": "dist/index.js",
+  "apidoc": {
+    "url": "http://localhost:4300/api",
+    "sampleUrl": "http://localhost:4300/api",
+    "header": {
+      "title": "header title",
+      "filename": "doc-config/header.md"
+    },
+    "footer": {
+      "title": "footer title",
+      "filename": "doc-config/footer.md"
+    }
+  },
   "scripts": {
     "start": "node dist/index.js",
     "build": "gulp build",
