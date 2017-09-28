@@ -6,7 +6,7 @@ export class Place {
     id: number;
 
     @Column('point')
-    location: { lat: number, long: number };
+    location: string;
 
 
     address?: {
