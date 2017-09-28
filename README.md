@@ -31,3 +31,8 @@ print logs of your service
 ```cmd
 docker logs YOUR_SERVER_NAME
 ```
+
+## API DOC
+```cmd
+apidoc -i src/ -o doc/
+```

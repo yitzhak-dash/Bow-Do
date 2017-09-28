@@ -4,3 +4,4 @@ npm-debug.log
 /*.env
 .idea/**/*.*
 /access.log
+server/doc

@@ -1,3 +1,8 @@
+run db server:
+```cmd
+pg_ctl -D /usr/local/var/postgres start
+```
+
 **create user:**
 ```cmd
 psql -c "CREATE USER bowdo WITH PASSWORD 'Aa123';"

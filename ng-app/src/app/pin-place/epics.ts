@@ -23,11 +23,9 @@ export class PinPlaceEpic implements EpicFactory {
   }
 
   private pinPlaceEpic: Epic<PinPlaceAction, IAppState> = (action$, state) =>
-    action$.ofType(PinPlaceActions.ADD_NEW_PLACE)
-      .switchMap(action => this.locator.getCurrentLocation()
-        .map(location => ({location, action}))
-        .mergeMap((obj) =>
-          this.service.pinPlace({...obj.action.payload.addedPlace, location: obj.location})
-            .map(res => this.actions.pinPlaceCompleted({addedPlace: res, loading: false}))
-            .catch(err => of(this.actions.pinPlaceFailed(err)))));
+    action$
+      .ofType(PinPlaceActions.ADD_NEW_PLACE)
+      .switchMap(action => this.service.pinPlace(action.payload.addedPlace)
+        .map(res => this.actions.pinPlaceCompleted(res))
+        .catch(err => of(this.actions.pinPlaceFailed(err))));
 }

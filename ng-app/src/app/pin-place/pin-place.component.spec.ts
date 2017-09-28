@@ -8,6 +8,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 //
 import { PinPlaceComponent } from './pin-place.component';
 import { PinPlaceActions } from './actions';
+import { LocationActions } from '../common/location.actions';
 
 describe('PinPlaceComponent', () => {
   let component: PinPlaceComponent;
@@ -26,7 +27,8 @@ describe('PinPlaceComponent', () => {
         TagInputModule,
       ],
       providers: [
-        PinPlaceActions
+        PinPlaceActions,
+        LocationActions
       ],
       declarations: [
         PinPlaceComponent

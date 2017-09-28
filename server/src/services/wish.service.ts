@@ -26,7 +26,6 @@ export class WishService implements IWishService {
 
     async updateWishes(items: WishItemRequest[]): Promise<any> {
         try {
-            console.log(JSON.stringify(items));
             const parsed =
                 this.parserFactory.getParserFor(WishItemRequest)
                     .parseArr(items)

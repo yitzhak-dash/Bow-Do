@@ -1,24 +1,14 @@
 import { WishItem } from '../models/wish-item.model';
-import { WishItemRequest } from './request-body.validator';
+import { PinPlaceRequest, WishItemRequest } from './request-body.validator';
 import 'reflect-metadata';
 import { injectable } from 'inversify';
-import { extend } from 'joi';
+import { Place } from '../models/place.model';
+import { parseAddPlaceRequest, parseAddWishItemRequest } from './parsers';
 
+export type ParserFn = (o: ParseSource) => ParseTarget;
 
-function parseAddWishItemRequest(obj: WishItemRequest): WishItem {
-    return {
-        ...new WishItem(),
-        completed: obj.completed || false,
-        id: obj.id,
-        indexNum: obj.indexNum,
-        name: obj.name,
-    };
-}
-
-type ParserFn = (o: ParseSource) => ParseTarget;
-
-declare type ParseSource = WishItemRequest ;
-declare type ParseTarget = WishItem;
+declare type ParseSource = WishItemRequest | PinPlaceRequest;
+declare type ParseTarget = WishItem | Place;
 
 export interface IParserFactory {
 
@@ -46,13 +36,13 @@ export class ParserFactory implements IParserFactory {
     private readonly dict: { [id: string]: ParserFn } = {};
 
     constructor() {
-        this.initParserMap();
+        this.registerParser();
     }
 
-    private initParserMap() {
+    private registerParser() {
         this.dict[this.getTypeName(WishItemRequest)] = parseAddWishItemRequest;
+        this.dict[this.getTypeName(PinPlaceRequest)] = parseAddPlaceRequest;
     }
-
 
     getParserFor = <T>(ctor: new() => T): IParse => ({
         parseArr: <S extends ParseSource>(arr: S[]): IToArr => ({

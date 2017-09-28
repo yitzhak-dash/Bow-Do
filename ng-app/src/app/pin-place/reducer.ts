@@ -10,7 +10,9 @@ export const pinPlaceReducer: Reducer<IPinPlace> =
       case PinPlaceActions.ADD_NEW_PLACE:
         return {...action.payload, loading: true};
       case PinPlaceActions.ADD_NEW_PLACE_COMPLETED:
-        return {...action.payload};
+        return {...action.payload, loading: false};
+      case PinPlaceActions.TURN_ON_LOADING:
+        return {...state, loading: true};
       default:
         return state;
     }
