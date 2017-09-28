@@ -17,7 +17,6 @@ export class PlacesService implements IPlacesService {
     }
 
     // todo: check if location exists.
-    // todo: insert tags
     async addPlace(request: PinPlaceRequest): Promise<any> {
         try {
             const connection = this.dbConnector.getConnection();
