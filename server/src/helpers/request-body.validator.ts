@@ -36,7 +36,8 @@ export function validatePinPlace(req: Request): ValidationResult<PinPlaceRequest
     const objectSchema = Joi.object({
         location: Joi.required(),
         name: Joi.required(),
-        description: Joi.required()
+        description: Joi.required(),
+        tags: Joi.array().required()
     });
     return Joi.validate<PinPlaceRequest>(place, objectSchema, DEFAULT_OPTIONS);
 }
@@ -60,5 +61,5 @@ export class PinPlaceRequest {
     placedIn?: string;
     name: string;
     description?: string;
-    tags?: string[];
+    tags: string[];
 }

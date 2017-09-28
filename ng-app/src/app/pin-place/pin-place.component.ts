@@ -43,6 +43,8 @@ export class PinPlaceComponent implements OnInit, OnDestroy {
       .subscribe(loc => {
         if (loc.date >= sendingDate) {
           this.model.location = loc.location;
+          // normalize tags to model
+          this.model.tags = this.model.tags.map((i: any) => i.value);
           this.actions.addNewPlace({...this.model});
           subscription.unsubscribe();
         }
