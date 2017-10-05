@@ -12,7 +12,7 @@ export class LocationActions {
 
   static readonly TAKE_LOCATION = 'TAKE_LOCATION';
   static readonly TAKE_LOCATION_COMPLETED = 'TAKE_LOCATION_COMPLETED';
-  static readonly TALE_LOCATION_FAILED = 'TAKE_LOCATION_FAILED';
+  static readonly TAKE_LOCATION_FAILED = 'TAKE_LOCATION_FAILED';
 
   @dispatch()
   takeLocation = (): LocationAction => ({
@@ -28,7 +28,7 @@ export class LocationActions {
   });
 
   locationFailed = (error): LocationAction => ({
-    type: LocationActions.TALE_LOCATION_FAILED,
+    type: LocationActions.TAKE_LOCATION_FAILED,
     payload: null,
     meta: null,
     error
