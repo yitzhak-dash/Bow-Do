@@ -20,7 +20,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // TODO: take the magic number from state/service
-    const source = Observable.interval(20000);
+    const source = Observable.interval(2000);
     this.intervalSubscription = source.subscribe(() => this.locationActions.takeLocation());
   }
 

@@ -26,6 +26,7 @@ import { Locator } from './services/locator';
 import { WishItemListComponent } from './wish-list/wish-item-list/wish-item-list.component';
 import { LocationEpic } from './location/location.epic';
 import { LocationActions } from './location/location.actions';
+import { LocationService } from './location/location.service';
 
 @NgModule({
   imports: [
@@ -49,6 +50,7 @@ import { LocationActions } from './location/location.actions';
     Locator,
     LocationEpic,
     LocationActions,
+    LocationService,
     WishListEpic,
     WishListActions,
     ShoppingListService,
