@@ -3,8 +3,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/interval';
 import { Subscription } from 'rxjs/Subscription';
+import { LocationActions } from './location/location.actions';
 //
-import { LocationActions } from './common/location.actions';
 
 @Component({
   selector: 'app-root',

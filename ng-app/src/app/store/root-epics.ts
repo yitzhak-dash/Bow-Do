@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 //
 import { WishListEpic } from '../wish-list/epics';
 import { PinPlaceEpic } from '../pin-place/epics';
-import { LocationEpic } from '../common/location.epic';
+import { LocationEpic } from '../location/location.epic';
 
 @Injectable()
 export class RootEpics {

@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
+//
 import { createEpicMiddleware, Epic } from 'redux-observable';
 import { of } from 'rxjs/observable/of';
 //
-import { EpicFactory } from './epic.factory';
 import { LocationAction, LocationActions } from './location.actions';
 import { IAppState } from '../store/root-state.model';
 import { Locator } from '../services/locator';
+import { EpicFactory } from '../common/epic.factory';
 
 @Injectable()
 export class LocationEpic implements EpicFactory {
