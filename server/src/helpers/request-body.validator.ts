@@ -34,9 +34,9 @@ export function validateUpdateWishItems(req: Request): ValidationResult<WishItem
 export function validatePinPlace(req: Request): ValidationResult<PinPlaceRequest> {
     const place = req.body;
     const objectSchema = Joi.object({
-        location: Joi.required(),
-        name: Joi.required(),
-        description: Joi.required(),
+        location: Joi.object().required(),
+        name: Joi.string().required(),
+        description: Joi.string().required(),
         tags: Joi.array().required()
     });
     return Joi.validate<PinPlaceRequest>(place, objectSchema, DEFAULT_OPTIONS);

@@ -2,6 +2,11 @@ run db server:
 ```cmd
 pg_ctl -D /usr/local/var/postgres start
 ```
+**you should enable PostGIS:**
+go to psql, connect to your database and run:
+```cmd
+CREATE EXTENSION postgis;
+``` 
 
 **create user:**
 ```cmd

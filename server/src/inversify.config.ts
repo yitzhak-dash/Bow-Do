@@ -9,6 +9,7 @@ import { DbConnector, IDbConnector } from './helpers/db-connector';
 import { IParserFactory, ParserFactory } from './helpers/parser';
 import { PlacesController } from './controllers/places.constroller';
 import { IPlacesService, PlacesService } from './services/places.service';
+import { LocationController } from './controllers/location.controller';
 
 export function createContainer(): Container {
     const container = new Container();
@@ -20,5 +21,6 @@ export function createContainer(): Container {
     // controllers
     container.bind<interfaces.Controller>(TYPE.Controller).to(WishListController).whenTargetNamed('WishListController');
     container.bind<interfaces.Controller>(TYPE.Controller).to(PlacesController).whenTargetNamed('PlacesController');
+    container.bind<interfaces.Controller>(TYPE.Controller).to(LocationController).whenTargetNamed('LocationController');
     return container;
 }

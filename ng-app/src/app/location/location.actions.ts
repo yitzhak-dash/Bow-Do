@@ -46,7 +46,7 @@ export class LocationActions {
   });
 
   locationSent = (location: ICurrentLocation): LocationAction => ({
-    type: LocationActions.SEND_LOCATION,
+    type: LocationActions.SEND_LOCATION_COMPLETED,
     payload: location,
     meta: null
   });

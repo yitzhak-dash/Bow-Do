@@ -4,7 +4,6 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/interval';
 import { Subscription } from 'rxjs/Subscription';
 import { LocationActions } from './location/location.actions';
-//
 
 @Component({
   selector: 'app-root',
