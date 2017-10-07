@@ -41,7 +41,9 @@ export class PlacesService implements IPlacesService {
         return this.dbConnector.getConnection()
             .getRepository(Place)
             .createQueryBuilder('place')
-            .where(`ST_DWithin(geometry(location), ST_MakePoint(${lat},${long})::geography, ${radius})`,)
+            .addSelect(`st_distance(geometry(place.location),ST_MakePoint(${lat},${long})::geography)`, 'distance')
+            .where(`ST_DWithin(geometry(place.location), ST_MakePoint(${lat},${long})::geography, ${radius})`,)
+            .orderBy('distance')
             .getMany();
     }
 

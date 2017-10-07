@@ -32,7 +32,7 @@ export class LocationController implements interfaces.Controller {
          * The results places should be sorted by distance
          */
         const currentLocation = req.body;
-        const result = await this.service.getPlaces(currentLocation.location, 5000);
+        const result = await this.service.getPlaces(currentLocation.location, 100);
         res.send(200, {
             model: result
         });
