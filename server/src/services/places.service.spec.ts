@@ -29,23 +29,3 @@ describe('places service', () => {
         const res = expect(places).not.empty;
     });
 });
-
-
-describe.only('test !!!', () => {
-
-
-    it('should do something', () => {
-        const module = (() => {
-            const privateFoo = () => {
-                console.log('privateFoo');
-            };
-            const exported = {
-                publicFoo: () => {
-                    privateFoo();
-                }
-            };
-            return exported;
-        })();
-
-    });
-});
