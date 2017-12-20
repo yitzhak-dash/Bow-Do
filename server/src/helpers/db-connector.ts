@@ -4,6 +4,7 @@ import * as config from 'config';
 import { getDbModels } from './db-models.provider';
 import { injectable } from 'inversify';
 import { setTimeout } from 'timers';
+import { LoggerOptions } from 'typeorm/logger/LoggerOptions';
 
 @injectable()
 export class DbConnector {
@@ -13,7 +14,7 @@ export class DbConnector {
     constructor() {
     }
 
-    createConnectionOptions = (): ConnectionOptions => {
+    createConnectionOptions = (logging: LoggerOptions = 'all'): ConnectionOptions => {
         return {
             type: this.connectionConfig.type,
             host: this.connectionConfig.host,
@@ -23,16 +24,16 @@ export class DbConnector {
             database: this.connectionConfig.database,
             entities: getDbModels(),
             autoSchemaSync: true,
-            logging: 'all'
+            logging
         };
     };
 
-    init = async (): Promise<boolean> => {
+    init = async (logging: LoggerOptions = 'all'): Promise<boolean> => {
         if (this.connection) {
             throw new Error('Can not recreate connection');
         }
         try {
-            this.connection = await createConnection(this.createConnectionOptions());
+            this.connection = await createConnection(this.createConnectionOptions(logging));
             return this.connection.isConnected;
         } catch (err) {
             console.log(err);
@@ -58,7 +59,7 @@ export class DbConnector {
 }
 
 export interface IDbConnector {
-    init();
+    init(logging: LoggerOptions);
 
     getConnection(): Connection;
 }

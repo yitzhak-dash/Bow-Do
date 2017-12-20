@@ -35,16 +35,23 @@ export class PlacesService implements IPlacesService {
         }
     }
 
-    getPlaces(location: GeoJSON.Point, radius: number): Promise<Place[]> {
+    async getPlaces(location: GeoJSON.Point, radius: number): Promise<Place[]> {
         const lat = location.coordinates[0];
         const long = location.coordinates[1];
-        return this.dbConnector.getConnection()
+        const res = await this.dbConnector.getConnection()
             .getRepository(Place)
             .createQueryBuilder('place')
             .addSelect(`st_distance(geometry(place.location),ST_MakePoint(${lat},${long})::geography)`, 'distance')
             .where(`ST_DWithin(geometry(place.location), ST_MakePoint(${lat},${long})::geography, ${radius})`,)
             .orderBy('distance')
-            .getMany();
+            .getRawAndEntities();
+        // update entities
+        res.entities.forEach((entity, ind) => {
+            entity.distance = res.raw[ind].distance;
+            entity.placeLocation = {lat: res.raw[ind].place_location.x, long: res.raw[ind].place_location.y};
+        });
+
+        return res.entities;
     }
 
     filterPlaces(places: Place[]) {

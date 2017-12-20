@@ -73,7 +73,7 @@ function configCORS() {
     });
 }
 
-Promise.all([connector.init()])
+Promise.all([connector.init('all')])
     .then(() => {
         server.listen(4300, function () {
             console.log('%s listening at %s', server.name, server.url);
