@@ -26,13 +26,12 @@ describe('places service', () => {
     it('should find places', async () => {
         const target = container.get<IPlacesService>(TYPES.IPlaceService);
         const places = await target.getPlaces(createPoint(32.085299899999995, 34.781767599999995), 1000000);
-        expect(places).not.to.be.empty;
+        const res = expect(places).not.empty;
     });
 });
 
 
 describe.only('test !!!', () => {
-
 
 
     it('should do something', () => {

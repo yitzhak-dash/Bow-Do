@@ -42,7 +42,7 @@ export class PlacesService implements IPlacesService {
             .getRepository(Place)
             .createQueryBuilder('place')
             .addSelect(`st_distance(geometry(place.location),ST_MakePoint(${lat},${long})::geography)`, 'distance')
-            .where(`ST_DWithin(geometry(place.location), ST_MakePoint(${lat},${long})::geography, ${radius})`,)
+            .where(`ST_DWithin(geometry(place.location), ST_MakePoint(${lat},${long})::geography, ${radius})`)
             .orderBy('distance')
             .getRawAndEntities();
         // update entities
