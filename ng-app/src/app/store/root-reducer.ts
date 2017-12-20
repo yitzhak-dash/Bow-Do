@@ -4,7 +4,7 @@ import { routerReducer } from '@angular-redux/router';
 //
 import { wishesReducer } from '../wish-list/reducer';
 import { pinPlaceReducer } from '../pin-place/reducer';
-import { locationReducer } from '../common/location.reducer';
+import { locationReducer } from '../location/location.reducer';
 
 
 // Define the global store shape by combining our application's

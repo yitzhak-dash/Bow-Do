@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, RequestOptions, Headers } from '@angular/http';
 //
-import { of } from 'rxjs/observable/of';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/delay';
 import { Observable } from 'rxjs/Observable';
@@ -13,10 +12,7 @@ export class ShoppingListService {
 
   private readonly baseUrl = 'http://localhost:4300/api/wish';
 
-  count: number;
-
   constructor(private http: Http) {
-    this.count = 0;
   }
 
   private getHeaders(): RequestOptions {

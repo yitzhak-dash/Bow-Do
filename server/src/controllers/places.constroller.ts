@@ -26,7 +26,6 @@ export class PlacesController implements interfaces.Controller {
      * @apiParam {String} description Place.
      * @apiParam {Object} location Place.
      *
-     * @apiSuccess {String} ???.
      */
     @Post('/places')
     async addPlace(req: Request, res: Response, next: Next) {

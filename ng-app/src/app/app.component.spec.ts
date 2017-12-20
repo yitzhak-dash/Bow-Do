@@ -3,8 +3,8 @@ import { Router, RouterModule, RouterOutlet } from '@angular/router';
 //
 import { AppComponent } from './app.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
-import { LocationActions } from './common/location.actions';
 import { RouterTestingModule } from '@angular/router/testing';
+import { LocationActions } from './location/location.actions';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {

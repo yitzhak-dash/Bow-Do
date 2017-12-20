@@ -1,6 +1,6 @@
 import { WISH_LIST_INIT_STATE, IWishListState } from '../wish-list/model';
 import { IPlace, PIN_PLACE_INIT_STATE } from '../pin-place/model';
-import { CURRENT_LOCATION_INIT_STATE, ICurrentLocation } from '../common/location.model';
+import { CURRENT_LOCATION_INIT_STATE, ICurrentLocation } from '../location/location.model';
 
 export interface IAppState {
   routes?: any;

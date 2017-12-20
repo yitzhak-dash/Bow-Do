@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import { expect } from 'chai';
 //
 import { WishItemRequest } from './request-body.validator';

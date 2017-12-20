@@ -1,4 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { SimpleColumnType } from 'typeorm/driver/types/ColumnTypes';
 
 @Entity('places')
 export class Place {
@@ -8,6 +9,10 @@ export class Place {
     @Column('point')
     location: string;
 
+    // humanized property.
+    placeLocation: { lat: number, long: number };
+
+    distance: number;
 
     address?: {
         city: string;

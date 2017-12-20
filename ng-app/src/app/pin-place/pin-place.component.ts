@@ -7,8 +7,8 @@ import { IPlace } from './model';
 import { PinPlaceActions } from './actions';
 import { IAppState } from '../store/root-state.model';
 import { Observable } from 'rxjs/Observable';
-import { LocationActions } from '../common/location.actions';
-import { ICurrentLocation } from '../common/location.model';
+import { LocationActions } from '../location/location.actions';
+import { ICurrentLocation } from '../location/location.model';
 
 // TODO: remove submit by enter
 // TODO: load tags from the server

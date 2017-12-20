@@ -23,9 +23,10 @@ import { PinPlaceActions } from './pin-place/actions';
 import { PinPlaceEpic } from './pin-place/epics';
 import { PinPlaceService } from './pin-place/service';
 import { Locator } from './services/locator';
-import { LocationEpic } from './common/location.epic';
-import { LocationActions } from './common/location.actions';
 import { WishItemListComponent } from './wish-list/wish-item-list/wish-item-list.component';
+import { LocationEpic } from './location/location.epic';
+import { LocationActions } from './location/location.actions';
+import { LocationService } from './location/location.service';
 
 @NgModule({
   imports: [
@@ -49,6 +50,7 @@ import { WishItemListComponent } from './wish-list/wish-item-list/wish-item-list
     Locator,
     LocationEpic,
     LocationActions,
+    LocationService,
     WishListEpic,
     WishListActions,
     ShoppingListService,
