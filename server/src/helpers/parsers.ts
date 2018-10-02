@@ -15,8 +15,7 @@ export const parseAddWishItemRequest: ParserFn = (obj: WishItemRequest): WishIte
 
 export const parseAddPlaceRequest: ParserFn = (obj: PinPlaceRequest): Place => {
     return {
-        ...new Place(),
-        location: `${obj.location.coordinates[0]},${obj.location.coordinates[1]}`,
+        ...{} as Place,
         name: obj.name,
         description: obj.description || '',
         tags: obj.tags || [],

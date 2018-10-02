@@ -3,7 +3,6 @@ import { Place } from '../models/place.model';
 
 export function getDbModels(): any[] {
     return [
-        WishItem,
-        Place
+        WishItem
     ];
 }

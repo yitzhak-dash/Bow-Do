@@ -10,6 +10,7 @@ import { IParserFactory, ParserFactory } from './helpers/parser';
 import { PlacesController } from './controllers/places.constroller';
 import { IPlacesService, PlacesService } from './services/places.service';
 import { LocationController } from './controllers/location.controller';
+import { ElasticsearchService, IElasticsearchService } from './db/elasticsearch.service';
 
 export function createContainer(): Container {
     const container = new Container();
@@ -18,6 +19,7 @@ export function createContainer(): Container {
     container.bind<IPlacesService>(TYPES.IPlaceService).to(PlacesService);
     container.bind<IParserFactory>(TYPES.IParserFactory).to(ParserFactory).inSingletonScope();
     container.bind<IDbConnector>(TYPES.IDbConnector).to(DbConnector).inSingletonScope();
+    container.bind<IElasticsearchService>(TYPES.IElasticsearchService).to(ElasticsearchService).inSingletonScope();
     // controllers
     container.bind<interfaces.Controller>(TYPE.Controller).to(WishListController).whenTargetNamed('WishListController');
     container.bind<interfaces.Controller>(TYPE.Controller).to(PlacesController).whenTargetNamed('PlacesController');

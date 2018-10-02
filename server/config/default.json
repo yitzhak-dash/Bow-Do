@@ -9,5 +9,9 @@
     "username": "postgres",
     "password": "123",
     "database": "bowdo_db"
+  },
+  "elastic": {
+    "host": "localhost:9200",
+    "index": "bowdo-db"
   }
 }
