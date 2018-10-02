@@ -19,33 +19,17 @@ describe('places service', () => {
 
     beforeEach(async () => {
         container = createContainer();
-        const dbConnector = container.get<IDbConnector>(TYPES.IDbConnector);
-        await dbConnector.init(false);
+        // const dbConnector = container.get<IDbConnector>(TYPES.IDbConnector);
+        // await dbConnector.init(false);
+    });
+
+    it('should ping', async () => {
+
     });
 
     it('should find places', async () => {
         const target = container.get<IPlacesService>(TYPES.IPlaceService);
-        const places = await target.getPlaces(createPoint(32.085299899999995, 34.781767599999995), 1000000);
+        const places = await target.getPlaces(createPoint(32.085299899999995, 34.781767599999995), 5);
         const res = expect(places).not.empty;
-    });
-});
-
-
-describe.only('test !!!', () => {
-
-
-    it('should do something', () => {
-        const module = (() => {
-            const privateFoo = () => {
-                console.log('privateFoo');
-            };
-            const exported = {
-                publicFoo: () => {
-                    privateFoo();
-                }
-            };
-            return exported;
-        })();
-
     });
 });

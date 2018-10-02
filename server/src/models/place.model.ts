@@ -1,34 +1,41 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { SimpleColumnType } from 'typeorm/driver/types/ColumnTypes';
 
-@Entity('places')
-export class Place {
-    @PrimaryGeneratedColumn()
-    id: number;
-
-    @Column('point')
-    location: string;
+export interface Place {
+    id: string;
 
     // humanized property.
     placeLocation: { lat: number, long: number };
 
-    distance: number;
+    distance?: any;
 
-    address?: {
-        city: string;
-        zip?: string;
-        state?: string;
-        country: string;
-        lines?: string[];
-    };
+    address?: string;
+
     placedIn?: string;
 
-    @Column()
     name?: string;
 
-    @Column()
     description?: string;
 
-    @Column('simple-array')
     tags?: string[];
 }
+
+export interface EsPlace {
+    id: string;
+    name: string;
+    location: {
+        coordinates: {
+            lat: number;
+            lon: number;
+        },
+        address: string;
+        mapId: string;
+    };
+    openHours: {
+        'day': string;
+        'hours': string[];
+    }[];
+    categories: string[];
+}
+
+export type DistanceUnits = 'km' | 'm' ;
